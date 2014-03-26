@@ -254,11 +254,6 @@ map <leader>s :%s/^\s\+$//c<CR>
 " Move tabs left and right easily.
 map <D-[> :call MoveTabLeft()<CR>
 map <D-]> :call MoveTabRight()<CR>
-
-" Easy Command-up and Command-down increment/decrement of integer under the cursor.
-noremap <D-Up> <C-a>
-noremap <D-Down> <C-x>
-
 function MoveTabLeft()
   let tabnum = tabpagenr()
 
@@ -266,12 +261,15 @@ function MoveTabLeft()
     execute "tabm " . (tabnum - 2)
   endif
 endfunction
-
 function MoveTabRight()
   let tabnum = tabpagenr()
 
   execute "tabm " . tabnum
 endfunction
+
+" Easy Command-up and Command-down increment/decrement of integer under the cursor.
+noremap <D-Up> <C-a>
+noremap <D-Down> <C-x>
 
 " K is a generally useless command for me. Therefore, use it to split the
 " current line before the cursor!

@@ -196,7 +196,7 @@ let g:CommandTAcceptSelectionMap='<S-CR>'
 " Remap Command-T shortcut for opening files in a horizontal split.
 let g:CommandTAcceptSelectionSplitMap='<C-h>'
 
-" Remap Command-T shortcut for opening files in a horizontal split.
+" Remap Command-T shortcut for opening files in a vertical split.
 let g:CommandTAcceptSelectionVSplitMap='<C-v>'
 
 " When enter is pressed, Command-T should open files in a new tab.

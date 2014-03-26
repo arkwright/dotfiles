@@ -34,16 +34,17 @@ set guifont=Monaco:h12
 " Requires htmljinja plugin.
 au BufRead,BufNewFile *.twig set filetype=htmljinja
 
-set encoding=utf-8        " Necessary to show Unicode glyphs
-set history=            " Keep 50 lines of command line history
-set undolevels=200        " Keep 200 undo levels in history
-set ruler                 " Show the cursor position all the time
-set showcmd               " Display incomplete commands
-set incsearch             " Do incremental searching
-set ignorecase            " Searches should be case-insensitive by default
-set wildignore+=*.svn     " Prevent vim and its plugins from ever displaying or working with SVN files.
-set cursorline            " Turn on highlighting of current line.
-set clipboard=unnamed     " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with yankring.
+set encoding=utf-8          " Necessary to show Unicode glyphs
+set history=                " Keep 50 lines of command line history
+set undolevels=200          " Keep 200 undo levels in history
+set ruler                   " Show the cursor position all the time
+set showcmd                 " Display incomplete commands
+set incsearch               " Do incremental searching
+set ignorecase              " Searches should be case-insensitive by default
+set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying or working with SVN files.
+set cursorline              " Turn on highlighting of current line.
+set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with yankring.
+set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
 
 set lines=62 columns=197 " Default lines and columns for work iMac and home monitor. Ensures that Vim window is the correct size on startup.
 

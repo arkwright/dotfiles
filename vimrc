@@ -35,7 +35,7 @@ set guifont=Monaco:h12
 au BufRead,BufNewFile *.twig set filetype=htmljinja
 
 set encoding=utf-8          " Necessary to show Unicode glyphs
-set history=                " Keep 50 lines of command line history
+set history=50              " Keep 50 lines of command line history
 set undolevels=200          " Keep 200 undo levels in history
 set ruler                   " Show the cursor position all the time
 set showcmd                 " Display incomplete commands

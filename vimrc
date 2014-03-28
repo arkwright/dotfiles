@@ -281,6 +281,11 @@ noremap K i<CR><Esc>
 nnoremap gp `[v`]
 let g:yankring_paste_using_g = 0
 
+" Change default yankring cycle backwards/forwards through pasted text shortcut from
+" Ctrl+p to Command+p, and from Ctrl+n to Command+Shift+p.
+let g:yankring_replace_n_pkey = '<D-p>'
+let g:yankring_replace_n_nkey = '<D-P>'
+
 " Treat H and L keys as fast incremental cursor up/down.
 noremap H 10k0
 noremap L 10j0

@@ -142,7 +142,8 @@ vnoremap // :TComment<CR>
 
 " Make it easy to edit these files.
 command CHEAT execute ":e ~/Dropbox/cheatsheet.txt"
-command VIMRC execute ":e ~/.vimrc"
+command VIMRC execute ":e /usr/local/etc/nginx/nginx.conf"
+command NGINXCONF execute ":e ~/.vimrc"
 command SOMEDAYMAYBE execute ":e ~/Dropbox/somedaymaybe.txt"
 command SYSTEM execute ":e ~/Dropbox/system.txt"
 command TODO execute ":e ~/Dropbox/todo.txt"

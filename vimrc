@@ -163,9 +163,13 @@ map <Leader>. :set hlsearch!<CR>
 
 " Make it easy to escape from insert mode and save in one step, and I also prefer my cursor to stay in place when exiting insert mode.
 imap jk <Esc>:w<CR>l
-imap jK <Esc>:w<CR>l
-imap Jk <Esc>:w<CR>l
-imap JK <Esc>:w<CR>l
+" Disabling these because whenever I activate caps lock in insert mode, I end
+" up forgetting to turn it off. I then type JK to exit insert mode, but caps
+" lock is still enabled, so my Vim normal mode commands are now uppercase
+" variants, which causes a huge clusterfuck during subsequent typing.
+" imap jK <Esc>:w<CR>l
+" imap Jk <Esc>:w<CR>l
+" imap JK <Esc>:w<CR>l
 
 " Make it easy to save. Just press s!
 noremap s <Esc>:w<CR>

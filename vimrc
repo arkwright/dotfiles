@@ -141,13 +141,13 @@ noremap  // :TComment<CR>
 vnoremap // :TComment<CR>
 
 " Make it easy to edit these files.
-command CHEAT execute ":e ~/Dropbox/cheatsheet.txt"
+command CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
 command VIMRC execute ":e ~/.vimrc"
 command NGINXCONF execute ":e /usr/local/etc/nginx/nginx.conf"
-command SOMEDAYMAYBE execute ":e ~/Dropbox/somedaymaybe.txt"
-command SYSTEM execute ":e ~/Dropbox/system.txt"
-command TODO execute ":e ~/Dropbox/todo.txt"
-command NOTEPAD execute ":e ~/notepad.txt"
+command SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
+command SYSTEM execute ":e ~/projects/textfiles/system.txt"
+command TODO execute ":e ~/projects/textfiles/todo.txt"
+command NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
 
 " :W should invoke :w, because I always type :W by accident!
 command W execute ":w"
@@ -309,6 +309,14 @@ let g:user_zen_expandabbr_key = '<c-z>'
 
 " To fix colors in vim-gitgutter plugin.
 highlight clear SignColumn
+
+" ag.vim plugin uses the H key as a shortcut within the quickfix window to open
+" the selected file silently in a new horizontal split. This conflicts with my
+" preferred use of H as a means of moving the cursor up 10 lines. Since the
+" ag.vim plugin does not support shortcut remapping, I have commented out line
+" 81 of ~/.vim/bundle/ag/autoload/ag.vim to disable that shortcut.
+" A pull request is pending which will introduce shortcut remapping:
+" https://github.com/rking/ag.vim/pull/49
 
 
 

@@ -46,7 +46,7 @@ set cursorline              " Turn on highlighting of current line.
 set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with yankring.
 set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
 
-set lines=62 columns=197 " Default lines and columns for work iMac and home monitor. Ensures that Vim window is the correct size on startup.
+set lines=62 columns=197 " Default lines and columns for laptop monitor. Ensures that Vim window is the correct size on startup.
 
 " Disable code folding entirely. I hate that feature!
 set foldminlines=99999
@@ -147,7 +147,6 @@ command NGINXCONF execute ":e /usr/local/etc/nginx/nginx.conf"
 command SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command TODO execute ":e ~/projects/textfiles/todo.txt"
-command WORK execute ":e ~/projects/textfiles/work.txt"
 command NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
 
 " :W should invoke :w, because I always type :W by accident!
@@ -158,6 +157,14 @@ command WRITE execute ":set wrap|:set linebreak"
 
 " Code mode for reverting to coding after writing. Disable line wrapping.
 command CODE execute ":set nowrap|:set nolinebreak"
+
+" Work mode sets up Vim for use at home.
+" Vim window is resized to fit laptop monitor.
+command HOME execute ":set lines=62 columns=197"
+
+" Work mode sets up Vim for use at work.
+" Vim window is resized to fit external monitor.
+command WORK execute ":set lines=88 columns=289"
 
 " Pressing <Leader>. will clear the current search highlighting.
 map <Leader>. :set hlsearch!<CR>

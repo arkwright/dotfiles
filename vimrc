@@ -147,6 +147,7 @@ command NGINXCONF execute ":e /usr/local/etc/nginx/nginx.conf"
 command SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command TODO execute ":e ~/projects/textfiles/todo.txt"
+command WORK execute ":e ~/projects/textfiles/work.txt"
 command NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
 
 " :W should invoke :w, because I always type :W by accident!

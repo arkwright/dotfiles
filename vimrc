@@ -88,8 +88,8 @@ set expandtab            " Always expand tabs to spaces.
 :set nowrap              " Disable word-wrap for long lines of text.
 
 " F5 toggles NERDTree
-map  <F5> :NERDTreeToggle ~/vim_project_link<CR>
-imap <F5> <Esc>:NERDTreeToggle ~/vim_project_link<CR>
+map  <F5> :NERDTreeToggle<CR>
+imap <F5> <Esc>:NERDTreeToggle<CR>
 
 " NERDTree defaults to showing hidden files.
 let NERDTreeShowHidden=1

@@ -220,9 +220,6 @@ let g:CommandTAcceptSelectionTabMap='<CR>'
 " Fix VCSCommand mappings. They conflict with my enjoyable <leader>c mapping.
 let VCSCommandMapPrefix = '<leader>\'
 
-" Set the current working directory to whatever project I'm currently working on.
-:cd ~/vim_project_link
-
 " Use :CC to flush Command-T's cache (so that it can detect new files).
 command CC execute ":CommandTFlush"
 

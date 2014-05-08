@@ -324,6 +324,7 @@ highlight clear SignColumn
 " A pull request is pending which will introduce shortcut remapping:
 " https://github.com/rking/ag.vim/pull/49
 
+" Whiplash plugin configuration.
 let g:WhiplashProjectsDir = "~/projects/"
 let g:WhiplashConfigDir = "~/projects/dotfiles/whiplash-config/"
 " let g:WhiplashCommandName = "Project"

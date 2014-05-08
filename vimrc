@@ -329,6 +329,9 @@ let g:WhiplashProjectsDir = "~/projects/"
 let g:WhiplashConfigDir = "~/projects/dotfiles/whiplash-config/"
 " let g:WhiplashCommandName = "Project"
 
+" Default to mobilefe project when loading Vim.
+autocmd VimEnter * Whiplash mobilefe
+
 
 
 

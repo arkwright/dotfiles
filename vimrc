@@ -316,6 +316,11 @@ let g:user_zen_expandabbr_key = '<c-z>'
 " To fix colors in vim-gitgutter plugin.
 highlight clear SignColumn
 
+" Easy Ag searching for the word under the cursor by pressing -. Just press [Enter] to execute the search.
+" Restricting search via file type is easy. After pressing -, just type, e.g., '-G css' to search through
+" CSS files. Searches open in a new tab so that the file the search term is copied from is not hidden.
+map - yiw:tabnew<CR>:Ag <c-r>"
+
 " ag.vim plugin uses the H key as a shortcut within the quickfix window to open
 " the selected file silently in a new horizontal split. This conflicts with my
 " preferred use of H as a means of moving the cursor up 10 lines. Since the

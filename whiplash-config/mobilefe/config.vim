@@ -9,3 +9,5 @@ set wildignore+=app/bower_components
 set wildignore+=app/bower_components/**
 set wildignore+=node_modules/
 set wildignore+=node_modules/**
+set wildignore+=www/
+set wildignore+=www/**

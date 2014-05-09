@@ -4,5 +4,3 @@
 " directory to be the directory of the project you are switching to.
 set wildignore=
 WhiplashCD
-NERDTreeCWD
-CC

@@ -51,8 +51,10 @@ set foldminlines=99999
 
 " Display relative line numbers in all buffers, rather than absolute ones.
 " Makes it easier to jump to an exact line, e.g., 17k, 26j.
+set nonumber
 set relativenumber
-au BufReadPost * set relativenumber
+autocmd BufReadPost * set nonumber
+autocmd BufReadPost * set relativenumber
 
 :let html_no_rendering=1 " Disable underlining of tabs in HTML documents.
 
@@ -170,15 +172,21 @@ WORK
 " Pressing <Leader>. will clear the current search highlighting.
 map <Leader>. :set hlsearch!<CR>
 
-" Make it easy to escape from insert mode and save in one step, and I also prefer my cursor to stay in place when exiting insert mode.
-imap jk <Esc>:w<CR>l
+" Make it easy to escape from insert mode and save in one step,
+" and I also prefer my cursor to stay in place when exiting insert mode.
+" This command used to be defined in this way: inoremap jk <Esc>:w<CR>l
+" I had to change it because the 'l' motion at the end was breaking my macros.
+" More specifically, 'j' motions were not respected in macros if they followed
+" my 'jk' mapping.
+inoremap jk <Esc>`^:w<CR>
+
 " Disabling these because whenever I activate caps lock in insert mode, I end
 " up forgetting to turn it off. I then type JK to exit insert mode, but caps
 " lock is still enabled, so my Vim normal mode commands are now uppercase
 " variants, which causes a huge clusterfuck during subsequent typing.
-" imap jK <Esc>:w<CR>l
-" imap Jk <Esc>:w<CR>l
-" imap JK <Esc>:w<CR>l
+" inoremap jK <Esc>`^:w<CR>
+" inoremap Jk <Esc>`^:w<CR>
+" inoremap JK <Esc>`^:w<CR>
 
 " Make it easy to save. Just press s!
 noremap s <Esc>:w<CR>
@@ -335,7 +343,7 @@ let g:WhiplashConfigDir = "~/projects/dotfiles/whiplash-config/"
 " let g:WhiplashCommandName = "Project"
 
 " Default to mobilefe project when loading Vim.
-autocmd VimEnter * Whiplash mobilefe
+autocmd VimEnter * Whiplash vim-whiplash
 
 
 

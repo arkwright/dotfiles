@@ -90,8 +90,8 @@ set expandtab            " Always expand tabs to spaces.
 :set nowrap              " Disable word-wrap for long lines of text.
 
 " F5 toggles NERDTree
-map  <F5> :NERDTreeToggle<CR>
-imap <F5> <Esc>:NERDTreeToggle<CR>
+noremap  <F5> :NERDTreeToggle<CR>
+inoremap <F5> <Esc>:NERDTreeToggle<CR>
 
 " NERDTree defaults to showing hidden files.
 let NERDTreeShowHidden=1
@@ -114,9 +114,6 @@ let NERDTreeDirArrows=1
 " For me, searching backwards in NERDTree is by far the more common use case
 " for ?.
 let NERDTreeMapHelp='<Leader>?'
-
-" Tab creates 2 spaces, instead of a tab.
-imap <TAB> <SPACE><SPACE>
 
 " Easy redo by pressing U, to compliment u, which is Vim's default undo.
 " Vim's default redo is Ctrl+r, which is a pain in the ass to reach.
@@ -170,7 +167,7 @@ command WORK execute ":set lines=88 columns=289"
 WORK
 
 " Pressing <Leader>. will clear the current search highlighting.
-map <Leader>. :set hlsearch!<CR>
+noremap <Leader>. :set hlsearch!<CR>
 
 " Make it easy to escape from insert mode and save in one step,
 " and I also prefer my cursor to stay in place when exiting insert mode.
@@ -193,17 +190,17 @@ noremap s <Esc>:w<CR>
 
 " Bind Tab to Ctrl+N to make word autocompletion easier. Now it works like
 " Bash path name autocompletion.
-imap <Tab> <C-n>
+inoremap <Tab> <C-n>
 
 " When pressing # or *, enable search highlighting if it is currently
 " disabled! I always turn it off for convenience and then forget to turn it
 " back on again! Also, prevent auto-skipping ahead to the next instance of the word;
 " that shit is just annoying.
-map # #:set hlsearch<CR>N
-map * *:set hlsearch<CR>N
+noremap # #:set hlsearch<CR>N
+noremap * *:set hlsearch<CR>N
 
 " Invoke Command-T with <Leader>t.
-map <Leader>t :CommandT<Esc>
+noremap <Leader>t :CommandT<Esc>
 
 " Increase number of files the Command-T will index.
 " If you're wondering why Command-T won't find certain files, make this number bigger.
@@ -222,7 +219,7 @@ let g:CommandTAcceptSelectionSplitMap='<C-h>'
 " Remap Command-T shortcut for opening files in a vertical split.
 let g:CommandTAcceptSelectionVSplitMap='<C-v>'
 
-" When enter is pressed, Command-T should open files in a new tab.
+" When enter is pressed, Command-T should open files in a new tab.let
 let g:CommandTAcceptSelectionTabMap='<CR>'
 
 " Fix VCSCommand mappings. They conflict with my enjoyable <leader>c mapping.
@@ -232,48 +229,48 @@ let VCSCommandMapPrefix = '<leader>\'
 command CC execute ":CommandTFlush"
 
 " PHP syntax checking bound to <leader>php
-map <leader>php :w !php -l %<CR>
+noremap <leader>php :w !php -l %<CR>
 
 " JS synax checking bound to <leader>js
-map <leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
+noremap <leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
 
 " Align selected lines on = signs.
-map <leader>a= :Align =<CR>
+noremap <leader>a= :Align =<CR>
 
 " Align selected lines on => PHP array key/value arrows.
-map <leader>a=> :Align =><CR>
+noremap <leader>a=> :Align =><CR>
 
 " Align selected lines on { and } signs (good for lining up CSS).
-map <leader>acss :Align { }<CR>
+noremap <leader>acss :Align { }<CR>
 
 " Align selected lines on colons.
-map <leader>a: :Align :<CR>
+noremap <leader>a: :Align :<CR>
 
 " Easy VCSVimDiff diffing.
-map <Leader>dd :VCSVimDiff<CR>
+noremap <Leader>dd :VCSVimDiff<CR>
 
 " Easy vimdiff getting, putting, updating and navigation.
-map <Leader>dg :diffget<CR>
-map <Leader>dp :diffput<CR>
-map <Leader>du :diffupdate<CR>
-map <Leader>dn ]czz
-map <Leader>dN [czz
+noremap <Leader>dg :diffget<CR>
+noremap <Leader>dp :diffput<CR>
+noremap <Leader>du :diffupdate<CR>
+noremap <Leader>dn ]czz
+noremap <Leader>dN [czz
 
 " An easier way to move the cursor between split windows.
-map <leader>w <C-w><C-w>
+noremap <leader>w <C-w><C-w>
 
 " An easier way to change letter case.
-map <leader>c ~
+noremap <leader>c ~
 
 " Removes all lines containing only whitespace from the current buffer. Asks
 " for confirmation for each match. (Vim's { and } commands will not stop on
 " lines that contain whitespace, so it is useful to clear pointless whitespace
 " from all files.)
-map <leader>s :%s/^\s\+$//c<CR>
+noremap <leader>s :%s/^\s\+$//c<CR>
 
 " Move tabs left and right easily.
-map <D-[> :call MoveTabLeft()<CR>
-map <D-]> :call MoveTabRight()<CR>
+noremap <D-[> :call MoveTabLeft()<CR>
+noremap <D-]> :call MoveTabRight()<CR>
 function MoveTabLeft()
   let tabnum = tabpagenr()
 
@@ -286,14 +283,6 @@ function MoveTabRight()
 
   execute "tabm " . tabnum
 endfunction
-
-" Easy Command-up and Command-down increment/decrement of integer under the cursor.
-noremap <D-Up> <C-a>
-noremap <D-Down> <C-x>
-
-" K is a generally useless command for me. Therefore, use it to split the
-" current line before the cursor!
-noremap K i<CR><Esc>
 
 " Easy selection of the previously pasted text.
 " (We have to prevent YankRing from clobbering this mapping.)
@@ -327,7 +316,7 @@ highlight clear SignColumn
 " Easy Ag searching for the word under the cursor by pressing -. Just press [Enter] to execute the search.
 " Restricting search via file type is easy. After pressing -, just type, e.g., '-G css' to search through
 " CSS files. Searches open in a new tab so that the file the search term is copied from is not hidden.
-map - yiw:tabnew<CR>:Ag <c-r>"
+noremap _ yiw:tabnew<CR>:Ag <c-r>"
 
 " ag.vim plugin uses the H key as a shortcut within the quickfix window to open
 " the selected file silently in a new horizontal split. This conflicts with my

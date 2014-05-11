@@ -11,3 +11,5 @@ set wildignore+=node_modules/
 set wildignore+=node_modules/**
 set wildignore+=www/
 set wildignore+=www/**
+
+WhiplashCopyFile .agignore

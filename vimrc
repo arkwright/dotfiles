@@ -45,6 +45,7 @@ set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying o
 set cursorline              " Turn on highlighting of current line.
 set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with yankring.
 set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
+set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
 
 " Disable code folding entirely. I hate that feature!
 set foldminlines=99999
@@ -114,6 +115,11 @@ let NERDTreeDirArrows=1
 " For me, searching backwards in NERDTree is by far the more common use case
 " for ?.
 let NERDTreeMapHelp='<Leader>?'
+
+" Vim 7.4 has a defect which causes relative line numbers to display
+" incorrectly when undoing a line deletion. This can be easily fixed
+" by moving the cursor after undoing.
+noremap u ukj
 
 " Easy redo by pressing U, to compliment u, which is Vim's default undo.
 " Vim's default redo is Ctrl+r, which is a pain in the ass to reach.
@@ -327,9 +333,9 @@ noremap _ yiw:tabnew<CR>:Ag <c-r>"
 " https://github.com/rking/ag.vim/pull/49
 
 " Whiplash plugin configuration.
-let g:WhiplashProjectsDir = "~/projects/"
-let g:WhiplashConfigDir = "~/projects/dotfiles/whiplash-config/"
-" let g:WhiplashCommandName = "Project"
+let g:WhiplashProjectsDir = '~/projects/'
+" let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
+" let g:WhiplashCommandName = 'Project'
 
 " Default to mobilefe project when loading Vim.
 autocmd VimEnter * Whiplash vim-whiplash

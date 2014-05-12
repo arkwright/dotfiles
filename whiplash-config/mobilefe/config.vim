@@ -13,3 +13,4 @@ set wildignore+=www/
 set wildignore+=www/**
 
 WhiplashCopyFile .agignore
+WhiplashCopyFile Gruntfile.js

@@ -378,6 +378,7 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: 'http://mobile.smgdigitaldev.com',
+		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobiledev.smgdigitaldev.com"
@@ -390,7 +391,8 @@ module.exports = function (grunt) {
               constants: {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
-                  CQURL: 'http://www.dev-devleopment.smgdigitaldev.com',
+                  CQURL: '',
+		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
@@ -404,6 +406,7 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
+		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobile-dev.smgdigitaldev.com"
@@ -417,6 +420,7 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
+		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobile-stage.smgdigitaldev.com"
@@ -430,6 +434,7 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: 'https://mobi.thestar.com',
                   CQURL: 'http://mobi.thestar.com',
+		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobi.thestar.com"
@@ -511,7 +516,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('server', function (target) {
     if (target === 'dist') {
-      return grunt.task.run(['build', 'connect:dist:keepalive']);
+      return grunt.task.run(['build-local', 'connect:dist:keepalive']);
     }
 
     grunt.task.run([
@@ -521,7 +526,6 @@ module.exports = function (grunt) {
       'autoprefixer',
       'connect:livereload',
       'watch'
-
     ]);
   });
 

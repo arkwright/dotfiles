@@ -181,7 +181,7 @@ noremap <Leader>. :set hlsearch!<CR>
 " I had to change it because the 'l' motion at the end was breaking my macros.
 " More specifically, 'j' motions were not respected in macros if they followed
 " my 'jk' mapping.
-inoremap jk <Esc>`^:w<CR>
+inoremap jk <Esc>`^
 
 " Disabling these because whenever I activate caps lock in insert mode, I end
 " up forgetting to turn it off. I then type JK to exit insert mode, but caps

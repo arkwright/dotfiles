@@ -131,6 +131,9 @@ noremap U <C-r>
 " performs an action opposite to semicolon. Solution: comma semicolon.
 noremap <leader>; ,
 
+" Make it easier to enter visual block mode.
+noremap <leader>v <C-v>
+
 " Enables easy line indenting by pressing > or <, instead of >> or <<.
 nnoremap > >>
 nnoremap < <<

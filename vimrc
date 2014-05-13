@@ -52,14 +52,14 @@ set foldminlines=99999
 
 " Display relative line numbers in all buffers, rather than absolute ones.
 " Makes it easier to jump to an exact line, e.g., 17k, 26j.
-set nonumber
-set relativenumber
-autocmd BufReadPost * set nonumber
 autocmd BufReadPost * set relativenumber
+autocmd BufReadPost * set nonumber
+set relativenumber
+set nonumber
 
-:let html_no_rendering=1 " Disable underlining of tabs in HTML documents.
+let html_no_rendering=1 " Disable underlining of tabs in HTML documents.
 
-:let mapleader = ","     " Set the all-important <Leader> key
+let mapleader = ","     " Set the all-important <Leader> key
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -84,11 +84,11 @@ if has("autocmd")
 endif 
 
 set autoindent
-:set number              " Turn on line numbers
-set guioptions-=T        " Turn off the toolbar at the top of MacVim
-set shiftwidth=2         " Number of spaces to use for each level of auto indent.
-set expandtab            " Always expand tabs to spaces.
-:set nowrap              " Disable word-wrap for long lines of text.
+set number        " Turn on line numbers
+set guioptions-=T " Turn off the toolbar at the top of MacVim
+set shiftwidth=2  " Number of spaces to use for each level of auto indent.
+set expandtab     " Always expand tabs to spaces.
+set nowrap        " Disable word-wrap for long lines of text.
 
 " F5 toggles NERDTree
 noremap  <F5> :NERDTreeToggle<CR>
@@ -132,42 +132,42 @@ noremap U <C-r>
 noremap <leader>; ,
 
 " Enables easy line indenting by pressing > or <, instead of >> or <<.
-:nnoremap > >>
-:nnoremap < <<
+nnoremap > >>
+nnoremap < <<
 
 " Preserves selection after (un-)indenting selected lines.
-:vnoremap > >gv
-:vnoremap < <gv
+vnoremap > >gv
+vnoremap < <gv
 
 " Easier single and multi-line commenting with TComment plugin.
 noremap  // :TComment<CR>
 vnoremap // :TComment<CR>
 
 " Make it easy to edit these files.
-command CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
-command VIMRC execute ":e ~/.vimrc"
-command NGINXCONF execute ":e /usr/local/etc/nginx/nginx.conf"
-command SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
-command SYSTEM execute ":e ~/projects/textfiles/system.txt"
-command TODO execute ":e ~/projects/textfiles/todo.txt"
-command NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
+command! CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
+command! VIMRC execute ":e ~/.vimrc"
+command! NGINXCONF execute ":e /usr/local/etc/nginx/nginx.conf"
+command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
+command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
+command! TODO execute ":e ~/projects/textfiles/todo.txt"
+command! NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
 
 " :W should invoke :w, because I always type :W by accident!
-command W execute ":w"
+command! W execute ":w"
 
-" Write mode for easier writing. Wrap lines automatically.
-command WRITE execute ":set wrap|:set linebreak"
+" Write mode for easier writing.
+command! WRITE execute ':Goyo'
 
-" Code mode for reverting to coding after writing. Disable line wrapping.
-command CODE execute ":set nowrap|:set nolinebreak"
+" Code mode for reverting to coding after writing.
+command! CODE execute  ':Goyo'
 
 " Work mode sets up Vim for use at home.
 " Vim window is resized to fit laptop monitor.
-command HOME execute ":set lines=62 columns=203"
+command! HOME execute ":set lines=62 columns=203"
 
 " Work mode sets up Vim for use at work.
 " Vim window is resized to fit external monitor.
-command WORK execute ":set lines=88 columns=289"
+command! WORK execute ":set lines=88 columns=289"
 
 " Default to WORK environment.
 WORK
@@ -232,7 +232,7 @@ let g:CommandTAcceptSelectionTabMap='<CR>'
 let VCSCommandMapPrefix = '<leader>\'
 
 " Use :CC to flush Command-T's cache (so that it can detect new files).
-command CC execute ":CommandTFlush"
+command! CC execute ":CommandTFlush"
 
 " PHP syntax checking bound to <leader>php
 noremap <leader>php :w !php -l %<CR>
@@ -277,14 +277,14 @@ noremap <leader>s :%s/^\s\+$//c<CR>
 " Move tabs left and right easily.
 noremap <D-[> :call MoveTabLeft()<CR>
 noremap <D-]> :call MoveTabRight()<CR>
-function MoveTabLeft()
+function! MoveTabLeft()
   let tabnum = tabpagenr()
 
   if (tabnum != 1)
     execute "tabm " . (tabnum - 2)
   endif
 endfunction
-function MoveTabRight()
+function! MoveTabRight()
   let tabnum = tabpagenr()
 
   execute "tabm " . tabnum
@@ -306,12 +306,6 @@ noremap L 10j0
 
 " Gundo plugin mapping.
 nnoremap <leader>u :GundoToggle<CR>
-
-" A function similar to PHP's trim().
-" Removes leading and trailing whitespace from a string.
-function! Trim(input_string)
-    return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
-endfunction
 
 " Invoke Zencoding plugin with Ctrl+z.
 let g:user_zen_expandabbr_key = '<c-z>'
@@ -338,124 +332,29 @@ let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashCommandName = 'Project'
 
 " Default to mobilefe project when loading Vim.
-autocmd VimEnter * Whiplash vim-whiplash
+autocmd VimEnter * Whiplash mobilefe
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-" " Enhance cib so that it works like ci', i.e., it will skip ahead to the next
-" " set of parentheses on the line, unless currently inside a set of parentheses.
-" noremap cib :call SuperCib()<CR>
-" 
-" function SuperCib()
-"   let currentLine = getline(".")
-"   let cursorIndex = col(".") - 1
-"   let firstOpeningParenIndex = stridx(currentLine, "(")
-"   let lastClosingParenIndex  = strridx(currentLine, ")")
-" 
-"   if firstOpeningParenIndex > cursorIndex
-"     normal f(di)
-"     startinsert
-"     return
-"   endif
-" 
-"   if lastClosingParenIndex < cursorIndex
-"     normal F)di)
-"     startinsert
-"     return
-"   endif
-" 
-"   normal di)
-"   startinsert
-"   return
-" endfunction
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-" Experimentation
-"
-" map <Leader>na :call GetNextActions2()<CR>
-" 
-" function GetNextActions()
-"   let next_actions = []
-"   let all_lines = getline(0, "$")
-"   let num_lines = len(all_lines)
-"   let i = 1
-" 
-"   for line in all_lines
-"     let line = Trim(line)
-"     let linestart = strpart(line, 0, 2)
-" 
-"     if linestart == "->"
-"       let action = { "bufnr": bufnr("%"), "lnum": i, "text": strpart(line, 3) }
-"       let next_actions = next_actions + [action]
-"     endif
-" 
-"     let i = i + 1
-"   endfor
-" 
-"   let result = setqflist(next_actions, "r")
-" 
-"   execute "cw"
-" endfunction
-" 
-" function GetNextActions2()
-"   let next_actions = []
-"   let all_lines = getline(0, "$")
-"   let num_lines = len(all_lines)
-"   let i = 1
-" 
-"   for line in all_lines
-"     let line = Trim(line)
-"     let linestart = strpart(line, 0, 2)
-" 
-"     if linestart == "->"
-"       let action = strpart(line, 3)
-"       let next_actions = next_actions + [action]
-"     endif
-" 
-"     let i = i + 1
-"   endfor
-" 
-"   " Position cursor at beginning of document for subsequent search
-"   call cursor(1, 0)
-" 
-"   " Get the line number where 'NEXT ACTIONS' is first found. Accept a match at
-"   " the cursor position Do not move the cursor.
-"   let next_actions_line = search("NEXT ACTIONS", "cn")
-" 
-"   if next_actions_line > 0
-"     append(next_actions_line, "test")
-"   endif
-" 
-"   " echo next_actions
-" endfunction
+" Goyo plugin configuration.
+" https://github.com/junegunn/goyo.vim
+let g:goyo_width = 80
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+function! s:GoyoBeforeCallback()
+  set wrap
+  set linebreak
+  set norelativenumber
+  set textwidth=80
+  set formatoptions=tca
+  noremap j gj
+  noremap k gk
+endfunction
+function! s:GoyoAfterCallback()
+  set nowrap
+  set nolinebreak
+  set relativenumber
+  set textwidth=78
+  set formatoptions=croql
+  unmap j
+  unmap k
+endfunction
+let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]

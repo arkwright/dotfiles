@@ -11,6 +11,8 @@ set wildignore+=node_modules/
 set wildignore+=node_modules/**
 set wildignore+=www/
 set wildignore+=www/**
+set wildignore+=dist/
+set wildignore+=dist/**
 
 WhiplashCopyFile .agignore
 WhiplashCopyFile Gruntfile.js

@@ -424,6 +424,30 @@ module.exports = function (grunt) {
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobi.thestar.com"
               }
+          },
+	  ios: {
+              dest: '<%= yeoman.app %>/config/config.js',
+              wrap: '"use strict";\n\n <%= __ngModule %>',
+              name: 'config',
+              constants: {
+                  APIURL: 'http://mobile-dev.smgdigitaldev.com',
+                  CQURL: 'http://mobile-dev.smgdigitaldev.com',
+		  ADINDEX: "2",
+		  COMSCOREID: "3005674",
+		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
+              }
+          },
+	  android: {
+              dest: '<%= yeoman.app %>/config/config.js',
+              wrap: '"use strict";\n\n <%= __ngModule %>',
+              name: 'config',
+              constants: {
+                  APIURL: 'http://mobile-dev.smgdigitaldev.com',
+                  CQURL: 'http://mobile-dev.smgdigitaldev.com',
+		  ADINDEX: "1",
+		  COMSCOREID: "3005674",
+		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
+              }
           }
       },
 // Grunt-S3 stuff
@@ -495,8 +519,19 @@ module.exports = function (grunt) {
                   {expand: true, cwd: 'secret_garden/', src: ['*.key'], dest: 'secret/'}
               ]
           }
+      },
+      cordova_cli: {
+        options: {
+          // Task-specific options go here.
+          cmd: 'build'
+        },
+        ios: {
+         platforms: ['ios']
+        },
+        android: {
+         platforms: ['android']
+        }
       }
-
   });
 
   grunt.registerTask('server', function (target) {
@@ -558,8 +593,9 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
-    'ngconstant:local',
+    'ngconstant:local'
   ]);
+
    grunt.registerTask('build-stage', [
     'clean:dist',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
@@ -579,6 +615,7 @@ module.exports = function (grunt) {
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
     'ngconstant:local'
   ]);
+
   grunt.registerTask('build-production', [
     'clean:dist',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
@@ -598,14 +635,14 @@ module.exports = function (grunt) {
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
     'ngconstant:local'
   ]);
-  grunt.registerTask('build-native', [
+
+  grunt.registerTask('build-ios', [
     'clean:dist',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
-    'ngconstant:integration',
+    'ngconstant:ios',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'preprocess:js',
     'processhtml:native',
     'concat',
     'copy:dist',
@@ -616,7 +653,29 @@ module.exports = function (grunt) {
     'rev',
     'usemin',
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
-    'ngconstant:local'
+    'ngconstant:local',
+    'cordova-cli:ios'
+  ]);
+
+   grunt.registerTask('build-android', [
+    'clean:dist',
+    // First ngconstant task modifies app/config/config.js with values destined for the build.
+    'ngconstant:android',
+    'useminPrepare',
+    'concurrent:dist',
+    'autoprefixer',
+    'processhtml:native',
+    'concat',
+    'copy:dist',
+    'cdnify',
+    'ngmin',
+    'cssmin',
+    'uglify',
+    'rev',
+    'usemin',
+    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    'ngconstant:local',
+    'cordova-cli:android'
   ]);
 
   grunt.registerTask('default', [
@@ -624,8 +683,10 @@ module.exports = function (grunt) {
     'test',
     'build-int'
   ]);
+
   grunt.loadNpmTasks('grunt-ng-constant');
   grunt.loadNpmTasks('grunt-aws-s3');
   grunt.loadNpmTasks('grunt-bump');
   grunt.loadNpmTasks('grunt-processhtml');
+  grunt.loadNpmTasks('grunt-cordova-cli');
 };

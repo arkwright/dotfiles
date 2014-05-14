@@ -274,9 +274,6 @@ noremap <leader>w <C-w><C-w>
 " An easier way to change letter case.
 noremap <leader>c ~
 
-" An easier way to center the window on the current line.
-noremap <CR> zz
-
 " Removes all lines containing only whitespace from the current buffer. Asks
 " for confirmation for each match. (Vim's { and } commands will not stop on
 " lines that contain whitespace, so it is useful to clear pointless whitespace

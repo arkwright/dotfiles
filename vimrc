@@ -362,3 +362,17 @@ function! s:GoyoAfterCallback()
   unmap k
 endfunction
 let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
+
+" JavaScript function text object.
+" Inspired by: https://gist.github.com/stoeffel/dfd86fd956b38ef35e69
+" function! SelectJavaScriptFunction()
+"   normal! ]}%?function<CR>v
+" endfunction
+" vnoremap af ]}%?function<CR>vf{%
+" " vnoremap af :<C-U>silent! call SelectJavaScriptFunction()<CR>
+" " vnoremap af :<C-U>silent! :call SelectJavaScriptFunction()<CR>
+" augroup JavaScriptTextObjects
+"   autocmd!
+" "   autocmd FileType javascript :vnoremap af :<C-U>silent! :call s:SelectJavaScriptFunction()<CR>
+" "   " autocmd FileType javascript :onoremap af :silent! :call s:SelectJavaScriptFunction()<CR>
+" augroup END

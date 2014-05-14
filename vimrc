@@ -46,16 +46,11 @@ set cursorline              " Turn on highlighting of current line.
 set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with yankring.
 set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
 set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
+set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
+set nonumber                " Never use absolute line numbers.
 
 " Disable code folding entirely. I hate that feature!
 set foldminlines=99999
-
-" Display relative line numbers in all buffers, rather than absolute ones.
-" Makes it easier to jump to an exact line, e.g., 17k, 26j.
-autocmd BufReadPost * set relativenumber
-autocmd BufReadPost * set nonumber
-set relativenumber
-set nonumber
 
 let html_no_rendering=1 " Disable underlining of tabs in HTML documents.
 
@@ -338,7 +333,10 @@ let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashCommandName = 'Project'
 
 " Default to mobilefe project when loading Vim.
-autocmd VimEnter * Whiplash mobilefe
+augroup VimEnter
+  autocmd!
+  autocmd VimEnter * Whiplash mobilefe
+augroup END
 
 " Goyo plugin configuration.
 " https://github.com/junegunn/goyo.vim

@@ -133,6 +133,9 @@ noremap <leader>; ,
 
 " Make it easier to enter visual block mode.
 noremap <leader>v <C-v>
+" Make it impossible to enter visual block mode in the old way. (To retrain
+" muscle memory.)
+noremap <C-v> <nop>
 
 " Enables easy line indenting by pressing > or <, instead of >> or <<.
 nnoremap > >>
@@ -270,6 +273,9 @@ noremap <leader>w <C-w><C-w>
 
 " An easier way to change letter case.
 noremap <leader>c ~
+
+" An easier way to center the window on the current line.
+noremap <CR> zz
 
 " Removes all lines containing only whitespace from the current buffer. Asks
 " for confirmation for each match. (Vim's { and } commands will not stop on

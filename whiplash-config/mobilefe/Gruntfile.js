@@ -369,23 +369,8 @@ module.exports = function (grunt) {
               space: '  '
           },
 
-          // targets
-          development: {
-              dest: '<%= yeoman.app %>/config/config.js',
-              wrap: '"use strict";\n\n <%= __ngModule %>',
-              name: 'config',
-              constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
-                  CQURL: 'http://mobile.smgdigitaldev.com',
-		  ADINDEX: "0",
-                  DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobiledev.smgdigitaldev.com"
-              }
-          },
           local: {
-              dest: '<%= yeoman.dist %>/config/config.js',
+              dest: '<%= yeoman.app %>/config/config.js',
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
@@ -395,11 +380,11 @@ module.exports = function (grunt) {
 		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
 		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
+		  COMSCORESITE: ""
               }
           },
           integration: {
-              dest: '<%= yeoman.dist %>/config/config.js',
+              dest: '<%= yeoman.app %>/config/config.js',
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
@@ -413,7 +398,7 @@ module.exports = function (grunt) {
               }
           },
           staging: {
-              dest: '<%= yeoman.dist %>/config/config.js',
+              dest: '<%= yeoman.app %>/config/config.js',
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
@@ -427,7 +412,7 @@ module.exports = function (grunt) {
               }
           },
           production: {
-              dest: '<%= yeoman.dist %>/config/config.js',
+              dest: '<%= yeoman.app %>/config/config.js',
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
@@ -521,7 +506,6 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'ngconstant:development',
       'concurrent:server',
       'autoprefixer',
       'connect:livereload',
@@ -539,6 +523,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-local', [
     'clean:dist',
+    // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:local',
     'useminPrepare',
     'concurrent:dist',
@@ -549,12 +534,16 @@ module.exports = function (grunt) {
     'cdnify',
     'ngmin',
     'cssmin',
+    'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    'ngconstant:local'
   ]);
 
   grunt.registerTask('build-int', [
     'clean:dist',
+    // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:integration',
     'useminPrepare',
     'concurrent:dist',
@@ -567,10 +556,13 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    'ngconstant:local',
   ]);
    grunt.registerTask('build-stage', [
     'clean:dist',
+    // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:staging',
     'useminPrepare',
     'concurrent:dist',
@@ -583,10 +575,13 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    'ngconstant:local'
   ]);
   grunt.registerTask('build-production', [
     'clean:dist',
+    // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:production',
     'useminPrepare',
     'concurrent:dist',
@@ -599,10 +594,13 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    'ngconstant:local'
   ]);
   grunt.registerTask('build-native', [
     'clean:dist',
+    // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:integration',
     'useminPrepare',
     'concurrent:dist',
@@ -616,7 +614,9 @@ module.exports = function (grunt) {
     'cssmin',
     'uglify',
     'rev',
-    'usemin'
+    'usemin',
+    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    'ngconstant:local'
   ]);
 
   grunt.registerTask('default', [

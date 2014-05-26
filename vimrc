@@ -49,6 +49,11 @@ set virtualedit=block       " Enable selection of empty columns when using visua
 set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
 set nonumber                " Never use absolute line numbers.
 
+augroup nonumber
+  autocmd!
+  autocmd BufRead,BufNewFile * setlocal nonumber
+augroup END
+
 " Disable code folding entirely. I hate that feature!
 set foldminlines=99999
 
@@ -113,8 +118,8 @@ let NERDTreeMapHelp='<Leader>?'
 
 " Vim 7.4 has a defect which causes relative line numbers to display
 " incorrectly when undoing a line deletion. This can be easily fixed
-" by moving the cursor after undoing.
-noremap u ukj
+" by forcing Vim to clear and redraw the screen (<C-L>).
+noremap u u<C-L>
 
 " Easy redo by pressing U, to compliment u, which is Vim's default undo.
 " Vim's default redo is Ctrl+r, which is a pain in the ass to reach.
@@ -168,7 +173,7 @@ command! HOME execute ":set lines=62 columns=203"
 
 " Work mode sets up Vim for use at work.
 " Vim window is resized to fit external monitor.
-command! WORK execute ":set lines=88 columns=289"
+command! WORK execute ":set lines=88 columns=363"
 
 " Default to WORK environment.
 WORK
@@ -267,7 +272,8 @@ noremap <Leader>dN [czz
 noremap <leader>w <C-w><C-w>
 
 " An easier way to change letter case.
-noremap <leader>c ~
+" After changing case, move cursor left to stay on the character being changed.
+noremap <leader>c ~h
 
 " Removes all lines containing only whitespace from the current buffer. Asks
 " for confirmation for each match. (Vim's { and } commands will not stop on
@@ -314,10 +320,13 @@ let g:user_zen_expandabbr_key = '<c-z>'
 " To fix colors in vim-gitgutter plugin.
 highlight clear SignColumn
 
-" Easy Ag searching for the word under the cursor by pressing -. Just press [Enter] to execute the search.
-" Restricting search via file type is easy. After pressing -, just type, e.g., '-G css' to search through
-" CSS files. Searches open in a new tab so that the file the search term is copied from is not hidden.
-noremap _ yiw:tabnew<CR>:Ag <c-r>"
+" Easy Ag searching for the word under the cursor, or the current visual
+" selection, by pressing _. Just press [Enter] to execute the search.
+" Restricting search via file type is easy. After pressing -, just type, e.g.,
+" '-G css' to search through CSS files. Searches open in a new tab so that the
+" file the search term is copied from is not hidden.
+nnoremap _ yiw:tabnew<CR>:Ag <c-r>"
+vnoremap _ y:tabnew<CR>:Ag <c-r>"
 
 " ag.vim plugin uses the H key as a shortcut within the quickfix window to open
 " the selected file silently in a new horizontal split. This conflicts with my
@@ -333,7 +342,7 @@ let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashCommandName = 'Project'
 
 " Default to mobilefe project when loading Vim.
-augroup VimEnter
+augroup vim_enter
   autocmd!
   autocmd VimEnter * Whiplash mobilefe
 augroup END
@@ -363,16 +372,16 @@ function! s:GoyoAfterCallback()
 endfunction
 let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
 
-" JavaScript function text object.
-" Inspired by: https://gist.github.com/stoeffel/dfd86fd956b38ef35e69
-" function! SelectJavaScriptFunction()
-"   normal! ]}%?function<CR>v
+" " JavaScript function text object.
+" " Inspired by: https://gist.github.com/stoeffel/dfd86fd956b38ef35e69
+" function! s:SelectJavaScriptFunction()
+"   execute "normal! ]}%?function\<CR>v/{\<CR>%"
 " endfunction
-" vnoremap af ]}%?function<CR>vf{%
-" " vnoremap af :<C-U>silent! call SelectJavaScriptFunction()<CR>
-" " vnoremap af :<C-U>silent! :call SelectJavaScriptFunction()<CR>
-" augroup JavaScriptTextObjects
+" " vnoremap af :<C-U>:call <SID>SelectJavaScriptFunction()<CR>
+" " onoremap af :call <SID>SelectJavaScriptFunction()<CR>
+" 
+" augroup javascript_text_objects
 "   autocmd!
-" "   autocmd FileType javascript :vnoremap af :<C-U>silent! :call s:SelectJavaScriptFunction()<CR>
-" "   " autocmd FileType javascript :onoremap af :silent! :call s:SelectJavaScriptFunction()<CR>
+"   autocmd FileType javascript :vnoremap af :<C-U>silent! :call <SID>SelectJavaScriptFunction()<CR>
+"   autocmd FileType javascript :onoremap af :silent! :call <SID>SelectJavaScriptFunction()<CR>
 " augroup END

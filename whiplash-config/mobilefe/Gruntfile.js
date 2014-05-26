@@ -467,7 +467,7 @@ module.exports = function (grunt) {
               },
               files: [
                   {expand: true, cwd: 'dist/', src: ['**', '!**/*.html'], action: 'upload'},
-                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: '300'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300'}},
                   {dest: '**', cwd: 'backup/integration/', action: 'download'}
               ]
           },
@@ -478,7 +478,7 @@ module.exports = function (grunt) {
               },
               files: [
                   {expand: true, cwd: 'dist/', src: ['**', '!**/*.html'], action: 'upload'},
-                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: '300'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300'}},
                   {dest: '**', cwd: 'backup/staging/', action: 'download'}
               ]
           },

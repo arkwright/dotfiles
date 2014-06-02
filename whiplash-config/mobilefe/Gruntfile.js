@@ -12,11 +12,130 @@ module.exports = function (grunt) {
   require('time-grunt')(grunt);
 
   grunt.initConfig({
+
+  // reads app name and version etc.
+  pkg: grunt.file.readJSON('package.json'),
+
+
+  /**
+  * Constants for the Gruntfile so we can easily change the path for our environments.
+  */
+  BASE_PATH: '',
+  DEVELOPMENT_PATH: 'src/',
+  PRODUCTION_PATH: 'web/',
+
+  /**
+   * A code block that will be added to our minified code files.
+   * Gets the name and appVersion and other info from the above loaded 'package.json' file.
+   * @example <%= banner.join("\\n") %>
+   */
+  banner: [
+           '/*',
+           '* Project: <%= pkg.name %>',
+           '* Version: <%= pkg.appVersion %> (<%= grunt.template.today("yyyy-mm-dd") %>)',
+           '* Development By: <%= pkg.developedBy %>',
+           '* Copyright(c): <%= grunt.template.today("yyyy") %>',
+           '*/'
+  ],
+
+  /**
+  * The different constant names that will be use to build our html files.
+  * @example <!-- @if NODE_ENV == 'DEVELOPMENT' -->
+  */
+  env: {
+      web: {
+        NODE_ENV : 'WEB',
+        CORDOVA : 'FALSE'
+      },
+      ios : {
+        NODE_ENV : 'IOS',
+        CORDOVA : 'TRUE'
+      },
+      android : {
+        NODE_ENV : 'ANDROID',
+        CORDOVA : 'TRUE'
+      }
+  },
+
+    /**
+    * Allows us to pass in variables to files that have place holders so we can similar files with different data.
+    * This plugin works with the 'env' plugin above.
+    * @example <!-- @echo appVersion --> or <!-- @echo filePath -->
+    */
+    preprocess : {
+        // Task to create the index.html file that will be used during development.
+        // Passes the app version and creates the /index.html
+        web : {
+            src : '<%= yeoman.app %>/config.html',
+            dest : '<%= yeoman.app %>/index.html',
+            options : {
+                context : {
+                    // appVersion : '<%= pkg.appVersion %>',
+                    filePath: ''
+                }
+            }
+        },
+        // Task to create the index.html file that will be used in production.
+        // Passes the app version and creates the /index.html
+        ios : {
+            src : '<%= yeoman.app %>/config.html',
+            dest : '<%= yeoman.app %>/index.html',
+            options : {
+                context : {
+                    // appVersion : '<%= pkg.appVersion %>',
+                    filePath: ''
+                }
+            }
+        }
+    },
+
+    /**
+     * Prepends the banner above to the minified files.
+     */
+    usebanner: {
+        dist: {
+            options: {
+                position: 'top',
+                banner: '<%= banner.join("\\n") %>',
+                linebreak: true
+            },
+            files: {
+                src: [
+                    '<%= PRODUCTION_PATH %>' + 'assets/scripts/scripts.js',
+                    '<%= PRODUCTION_PATH %>' + 'assets/styles/main.css'
+                ]
+            }
+        }
+    },
+
+    /**
+    * The useminPrepare part of the usemin plugin looks at the html file and checks for a build:js or build:css code block.
+    * It will take those files found in the code block(s) and concat them together and then runs uglify for js and/or cssmin for css files.
+    * useminPrepare requires grunt-contrib-uglify, grunt-contrib-concat, and grunt-contrib-cssmin plugins to be installed. Which is listed in the package.json file.
+    *
+    * The usemin part will remove the code block(s) and replace that area with the single file path in the html file.
+    */
+    useminPrepare: {
+    html: '<%= yeoman.app %>/index.html',
+      options: {
+        dest: '<%= yeoman.dist %>'
+      }
+    },
+    usemin: {
+      html: ['<%= yeoman.dist %>/{,*/}*.html'],
+      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      options: {
+        dirs: ['<%= yeoman.dist %>']
+      }
+    },
+
+    // yoman framework magic
     yeoman: {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
       dist: 'dist'
     },
+
     watch: {
       coffee: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.coffee'],
@@ -47,6 +166,7 @@ module.exports = function (grunt) {
         ]
       }
     },
+
     autoprefixer: {
       options: ['last 1 version'],
       dist: {
@@ -58,8 +178,10 @@ module.exports = function (grunt) {
         }]
       }
     },
+
     processhtml: {
       options: {
+          strip: true,
           process: true,
           commentMarker: 'process'
       },
@@ -68,23 +190,18 @@ module.exports = function (grunt) {
               'dist/index.html': ['app/index.html']
           }
       },
-      native: {
+      // ios: {
+      //     files: {
+      //         'dist/index.html': ['app/index.html']
+      //     }
+      // },
+      android: {
           files: {
-              'www/index.html': ['app/index.html']
+              'dist/index.html': ['app/index.html']
           }
       }
     },
-    preprocess: {
-      options: {
-        inline: true,
-        context: {
-            DEBUG: false
-        }
-      },
-      js: {
-        src: 'app/scripts/*.js'
-      }
-    },
+
     connect: {
       options: {
         port: 9000,
@@ -129,6 +246,18 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      dist_not_gz: {
+        files: [
+         { expand: true, cwd: "dist/", src: ['**/*.html', '**/*.css', '**/*.js']}
+        ]
+      },
+      www: {
+        files: [{
+          expand: true,
+          cwd: 'www/',
+          src: '**'
+        }]
+      },
       server: '.tmp'
     },
     jshint: {
@@ -167,7 +296,7 @@ module.exports = function (grunt) {
     compass: {
       options: {
         sassDir: '<%= yeoman.app %>/styles',
-        cssDir: '.tmp/styles',
+        cssDir: '<%= yeoman.app %>/styles',
         generatedImagesDir: '.tmp/images/generated',
         imagesDir: '<%= yeoman.app %>/images',
         javascriptsDir: '<%= yeoman.app %>/scripts',
@@ -196,24 +325,12 @@ module.exports = function (grunt) {
         files: {
           src: [
             '<%= yeoman.dist %>/scripts/{,*/}*.js',
+            '<%= yeoman.dist %>/scripts/{,*/,*/}*.js',
             '<%= yeoman.dist %>/styles/{,*/}*.css',
             '<%= yeoman.dist %>/images/*.{png,jpg,jpeg,gif,webp,svg}',
-           '<%= yeoman.dist %>/fonts/*'
+            '<%= yeoman.dist %>/fonts/*'
           ]
         }
-      }
-    },
-    useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
-      options: {
-        dest: '<%= yeoman.dist %>'
-      }
-    },
-    usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
-      options: {
-        dirs: ['<%= yeoman.dist %>']
       }
     },
     imagemin: {
@@ -250,7 +367,7 @@ module.exports = function (grunt) {
       // }
     },
 
-    htmlmin: {
+   htmlmin: {
       dist: {
         options: {
           /*removeCommentsFromCDATA: true,
@@ -302,6 +419,14 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      dist_to_www: {
+        files: [{
+          expand: true,
+          cwd: 'dist/',
+          src: [ '**' ],
+          dest: 'www/'
+        }]
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.app %>/styles',
@@ -350,7 +475,6 @@ module.exports = function (grunt) {
         }]
       }
     },
-    pkg: grunt.file.readJSON('package.json'),
     uglify: {
       dist: {
         files: {
@@ -377,10 +501,10 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
-		  ADINDEX: "0",
+		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: ""
+		              COMSCOREID: "3005674",
+		              COMSCORESITE: ""
               }
           },
           integration: {
@@ -426,30 +550,56 @@ module.exports = function (grunt) {
               }
           },
 	  ios: {
-              dest: '<%= yeoman.app %>/config/config.js',
-              wrap: '"use strict";\n\n <%= __ngModule %>',
-              name: 'config',
-              constants: {
-                  APIURL: 'http://mobile-dev.smgdigitaldev.com',
-                  CQURL: 'http://mobile-dev.smgdigitaldev.com',
-		  ADINDEX: "2",
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
-              }
-          },
+        dest: '<%= yeoman.app %>/config/config.js',
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        name: 'config',
+        constants: {
+          APIURL: 'http://mobile-dev.smgdigitaldev.com',
+          CQURL: 'http://mobile-dev.smgdigitaldev.com',
+          ADINDEX: "2",
+          DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+          COMSCOREID: "3005674",
+          COMSCORESITE: "http://mobile.smgdigitaldev.com"
+        }
+    },
 	  android: {
-              dest: '<%= yeoman.app %>/config/config.js',
-              wrap: '"use strict";\n\n <%= __ngModule %>',
-              name: 'config',
-              constants: {
-                  APIURL: 'http://mobile-dev.smgdigitaldev.com',
-                  CQURL: 'http://mobile-dev.smgdigitaldev.com',
-		  ADINDEX: "1",
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
-              }
-          }
+        dest: '<%= yeoman.app %>/config/config.js',
+        wrap: '"use strict";\n\n <%= __ngModule %>',
+        name: 'config',
+        constants: {
+          APIURL: 'http://mobile-dev.smgdigitaldev.com',
+          CQURL: 'http://mobile-dev.smgdigitaldev.com',
+          ADINDEX: "1",
+          DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+    		  COMSCOREID: "3005674",
+    		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
+        }
+      }
+    },
+
+      compress: {
+        dist: {
+          options: {
+            mode: 'gzip'
+          },
+          files: [
+             { expand: true, cwd: "dist/", src: ['**/*.html'], dest: 'dist/', ext: '.htmlgz', extDot: 'last'},
+             { expand: true, cwd: "dist/", src: ['**/*.css'], dest: 'dist/', ext: '.cssgz', extDot: 'last'},
+             { expand: true, cwd: "dist/", src: ['**/*.js'], dest: 'dist/', ext: '.jsgz', extDot: 'last'} 
+          ]
+        }
       },
+
+      rename: {
+        dist_gz: {
+          files: [
+             { expand: true, cwd: "dist/", src: ['**/*.htmlgz'], dest: 'dist/', ext: '.html', extDot: 'last'},
+             { expand: true, cwd: "dist/", src: ['**/*.cssgz'], dest: 'dist/', ext: '.css', extDot: 'last'},
+             { expand: true, cwd: "dist/", src: ['**/*.jsgz'], dest: 'dist/', ext: '.js', extDot: 'last'} 
+          ]
+        }
+      },
+
 // Grunt-S3 stuff
       aws: grunt.file.readJSON('aws-key.json'), // Read the file
 
@@ -466,8 +616,10 @@ module.exports = function (grunt) {
                   differential: true // Only uploads the files that have changed
               },
               files: [
-                  {expand: true, cwd: 'dist/', src: ['**', '!**/*.html'], action: 'upload'},
-                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300'}},
+                  {expand: true, cwd: 'dist/', src: ['**', '!**/*.html', '!**/*.css', '!**/*.js'], action: 'upload'},
+                  {expand: true, cwd: 'dist/', src: ['**/*.css'], action: 'upload', params: {ContentEncoding: 'gzip', ContentType: 'text/css'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.js'], action: 'upload', params: {ContentEncoding: 'gzip', ContentType: 'application/x-javascript'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300', ContentEncoding: 'gzip', ContentType: 'text/html'}},
                   {dest: '**', cwd: 'backup/integration/', action: 'download'}
               ]
           },
@@ -477,8 +629,10 @@ module.exports = function (grunt) {
                   differential: true // Only uploads the files that have changed
               },
               files: [
-                  {expand: true, cwd: 'dist/', src: ['**', '!**/*.html'], action: 'upload'},
-                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300'}},
+                  {expand: true, cwd: 'dist/', src: ['**', '!**/*.html', '!**/*.css', '!**/*.js'], action: 'upload'},
+                  {expand: true, cwd: 'dist/', src: ['**/*.css'], action: 'upload', params: {ContentEncoding: 'gzip', ContentType: 'text/css'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.js'], action: 'upload', params: {ContentEncoding: 'gzip', ContentType: 'application/x-javascript'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300', ContentEncoding: 'gzip', ContentType: 'text/html'}},
                   {dest: '**', cwd: 'backup/staging/', action: 'download'}
               ]
           },
@@ -488,7 +642,10 @@ module.exports = function (grunt) {
                   differential: true // Only uploads the files that have changed
               },
               files: [
-                  {expand: true, cwd: 'dist/', src: ['**'], action: 'upload'},
+                  {expand: true, cwd: 'dist/', src: ['**', '!**/*.html', '!**/*.css', '!**/*.js'], action: 'upload'},
+                  {expand: true, cwd: 'dist/', src: ['**/*.css'], action: 'upload', params: {ContentEncoding: 'gzip', ContentType: 'text/css'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.js'], action: 'upload', params: {ContentEncoding: 'gzip', ContentType: 'application/x-javascript'}},
+                  {expand: true, cwd: 'dist/', src: ['**/*.html'], action: 'upload', params: {CacheControl: 'max-age=300', ContentEncoding: 'gzip', ContentType: 'text/html'}},
                   {dest: '**', cwd: 'backup/prod/', action: 'download'}
               ]
           },
@@ -540,6 +697,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
+      'env:web',
+      'preprocess',
       'clean:server',
       'concurrent:server',
       'autoprefixer',
@@ -557,23 +716,20 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build-local', [
+    'env:web',
+    'preprocess',
     'clean:dist',
-    // First ngconstant task modifies app/config/config.js with values destined for the build.
-    'ngconstant:local',
-    'useminPrepare',
-    'concurrent:dist',
-    'processhtml:dist',
-    'autoprefixer',
-    'concat',
     'copy:dist',
-    'cdnify',
+    'ngconstant:local', // First ngconstant task modifies app/config/config.js with values destined for the build.
+    'useminPrepare', 'concat', 'cssmin', 'uglify',
     'ngmin',
-    'cssmin',
-    'uglify',
+    'concurrent:dist',
+    'autoprefixer',
+    'cdnify',
     'rev',
-    'usemin',
-    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
-    'ngconstant:local'
+    'ngconstant:local', // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    // 'processhtml:dist'
+    'usemin'
   ]);
 
   grunt.registerTask('build-int', [
@@ -583,99 +739,125 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'processhtml:dist',
-    'concat',
+    'concat', // Is this used any more?
     'copy:dist',
+    'processhtml:dist',
     'cdnify',
     'ngmin',
     'cssmin',
     'uglify',
     'rev',
     'usemin',
+    // 'compress' task can't handle compressing a file and writing the
+    // compressed version to the same file path, so we have to do it in three
+    // steps: compress to a 'gz' extension, remove non-gz versions, rename 'gz'
+    // versions to desired file name.
+    'compress:dist',
+    'clean:dist_not_gz',
+    'rename:dist_gz',
+
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
     'ngconstant:local'
   ]);
 
    grunt.registerTask('build-stage', [
+    'env:web',
+    'preprocess',
     'clean:dist',
-    // First ngconstant task modifies app/config/config.js with values destined for the build.
-    'ngconstant:staging',
-    'useminPrepare',
+    'copy:dist',
+    'ngconstant:staging',// First ngconstant task modifies app/config/config.js with values destined for the build.
+    'useminPrepare', 'concat', 'uglify', 'cssmin',
+    'ngmin',
     'concurrent:dist',
     'autoprefixer',
-    'processhtml:dist',
-    'concat',
-    'copy:dist',
     'cdnify',
-    'ngmin',
-    'cssmin',
-    'uglify',
+    'processhtml:dist',
     'rev',
     'usemin',
-    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
-    'ngconstant:local'
+
+    // 'compress' task can't handle compressing a file and writing the
+    // compressed version to the same file path, so we have to do it in three
+    // steps: compress to a 'gz' extension, remove non-gz versions, rename 'gz'
+    // versions to desired file name.
+    'compress:dist',
+    'clean:dist_not_gz',
+    'rename:dist_gz',
+
+    'ngconstant:local'// Second ngconstant task resets app/config/config.js with values appropriate for development environment.
   ]);
 
   grunt.registerTask('build-production', [
+    'env:web',
+    'preprocess',
     'clean:dist',
-    // First ngconstant task modifies app/config/config.js with values destined for the build.
-    'ngconstant:production',
-    'useminPrepare',
+    'copy:dist',
+    'ngconstant:production', // First ngconstant task modifies app/config/config.js with values destined for the build.
+    'useminPrepare', 'concat', 'cssmin', 'uglify',
+    'ngmin',
     'concurrent:dist',
     'autoprefixer',
     'processhtml:dist',
-    'concat',
-    'copy:dist',
     'cdnify',
-    'ngmin',
-    'cssmin',
-    'uglify',
     'rev',
     'usemin',
+
+    // 'compress' task can't handle compressing a file and writing the
+    // compressed version to the same file path, so we have to do it in three
+    // steps: compress to a 'gz' extension, remove non-gz versions, rename 'gz'
+    // versions to desired file name.
+    'compress:dist',
+    'clean:dist_not_gz',
+    'rename:dist_gz',
+
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
     'ngconstant:local'
   ]);
 
   grunt.registerTask('build-ios', [
+    // log env obj
+    // grunt.log.writeln(grunt.config.get().env.ios.NODE_ENV),
+    'env:ios',
+    'preprocess',
     'clean:dist',
-    // First ngconstant task modifies app/config/config.js with values destined for the build.
-    'ngconstant:ios',
-    'useminPrepare',
-    'concurrent:dist',
-    'autoprefixer',
-    'processhtml:native',
-    'concat',
-    'copy:dist',
-    'cdnify',
+    'clean:www',
+    'ngconstant:ios', // First ngconstant task modifies app/config/config.js with values destined for the build.
+    'useminPrepare', 'concat', 'cssmin', 'uglify',
+    // 'htmlmin',
     'ngmin',
-    'cssmin',
-    'uglify',
+    'copy:dist',
+    'concurrent:dist',
+    'usebanner',
+    'autoprefixer',
+    'cdnify',
     'rev',
     'usemin',
-    // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
+    // 'processhtml:ios',
+    'copy:dist_to_www', // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
     'ngconstant:local',
-    'cordova-cli:ios'
+    // 'usebanner',
   ]);
 
    grunt.registerTask('build-android', [
     'clean:dist',
+    'clean:www',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:android',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'processhtml:native',
-    'concat',
+    'concat', // Is this used any more?
     'copy:dist',
+    'processhtml:android',
     'cdnify',
     'ngmin',
     'cssmin',
     'uglify',
     'rev',
     'usemin',
+    'copy:dist_to_www',
     // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
-    'ngconstant:local',
-    'cordova-cli:android'
+    'ngconstant:local'
+    // 'cordova-cli:android' // Does not work.
   ]);
 
   grunt.registerTask('default', [
@@ -684,9 +866,13 @@ module.exports = function (grunt) {
     'build-int'
   ]);
 
-  grunt.loadNpmTasks('grunt-ng-constant');
-  grunt.loadNpmTasks('grunt-aws-s3');
-  grunt.loadNpmTasks('grunt-bump');
-  grunt.loadNpmTasks('grunt-processhtml');
-  grunt.loadNpmTasks('grunt-cordova-cli');
+  var packageJson = require('./package.json');
+
+  if (packageJson.devDependencies) {
+    for (var plugin in packageJson.devDependencies) {
+      if (plugin.substring(0, 7)  === 'grunt-') {
+        grunt.loadNpmTasks(plugin);
+      }
+    }
+  }
 };

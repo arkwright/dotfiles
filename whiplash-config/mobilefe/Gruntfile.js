@@ -401,8 +401,9 @@ module.exports = function (grunt) {
             '.htaccess',
             'bower_components/**/*',
             'images/{,*/}*.{gif,webp}',
-              'images/temp_toolbar.png',
-              'template/**/*'
+            'images/temp_toolbar.png',
+            'template/**/*',
+            'res/**'
           ]
         }, {
             expand:true,
@@ -833,7 +834,7 @@ module.exports = function (grunt) {
     'usemin',
     // 'processhtml:ios',
     'copy:dist_to_www', // Second ngconstant task resets app/config/config.js with values appropriate for development environment.
-    'ngconstant:local',
+    'ngconstant:local'
     // 'usebanner',
   ]);
 

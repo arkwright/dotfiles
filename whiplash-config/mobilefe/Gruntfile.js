@@ -402,8 +402,7 @@ module.exports = function (grunt) {
             'bower_components/**/*',
             'images/{,*/}*.{gif,webp}',
             'images/temp_toolbar.png',
-            'template/**/*',
-            'res/**'
+            'template/**/*'
           ]
         }, {
             expand:true,

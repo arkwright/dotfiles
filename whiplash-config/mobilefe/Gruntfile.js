@@ -503,6 +503,7 @@ module.exports = function (grunt) {
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+                  ENABLEMOBILEREDIRECT: false,
 		              COMSCOREID: "3005674",
 		              COMSCORESITE: ""
               }
@@ -516,7 +517,8 @@ module.exports = function (grunt) {
                   APIURL: '',
                   CQURL: '',
 		  ADINDEX: "0",
-                  DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+        DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+        ENABLEMOBILEREDIRECT: true,
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobile-dev.smgdigitaldev.com"
               }
@@ -530,7 +532,8 @@ module.exports = function (grunt) {
                   APIURL: '',
                   CQURL: '',
 		  ADINDEX: "0",
-                  DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
+        DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
+        ENABLEMOBILEREDIRECT: true,
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobile-stage.smgdigitaldev.com"
               }
@@ -545,6 +548,7 @@ module.exports = function (grunt) {
                   CQURL: 'http://mobi.thestar.com',
 		  ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
+                  ENABLEMOBILEREDIRECT: true,
 		  COMSCOREID: "3005674",
 		  COMSCORESITE: "http://mobi.thestar.com"
               }
@@ -558,6 +562,7 @@ module.exports = function (grunt) {
           CQURL: 'http://mobile-dev.smgdigitaldev.com',
           ADINDEX: "2",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+          ENABLEMOBILEREDIRECT: false,
           COMSCOREID: "3005674",
           COMSCORESITE: "http://mobile.smgdigitaldev.com"
         }
@@ -571,6 +576,7 @@ module.exports = function (grunt) {
           CQURL: 'http://mobile-dev.smgdigitaldev.com',
           ADINDEX: "1",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+          ENABLEMOBILEREDIRECT: false,
     		  COMSCOREID: "3005674",
     		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
         }

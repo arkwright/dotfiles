@@ -854,7 +854,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    //'concat', // Is this used any more?
+    'concat',
     'copy:dist',
     'processhtml:android',
     'cdnify',

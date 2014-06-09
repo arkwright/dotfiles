@@ -341,7 +341,7 @@ let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
 " let g:WhiplashCommandName = 'Project'
 
-" Default to mobilefe project when loading Vim.
+" Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
   autocmd VimEnter * Whiplash mobilefe
@@ -385,3 +385,18 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 "   autocmd FileType javascript :vnoremap af :<C-U>silent! :call <SID>SelectJavaScriptFunction()<CR>
 "   autocmd FileType javascript :onoremap af :silent! :call <SID>SelectJavaScriptFunction()<CR>
 " augroup END
+
+" Fix put functionality so that it does not overwrite the unnamed register
+" when in visual mode.
+" function! s:Shotput2(cmd)
+"   let l:old = getreg('"')
+"   execute "normal " . a:cmd
+"   call setreg('"', l:old)
+" endfunction
+" let g:yankring_paste_n_bkey = ''
+" let g:yankring_paste_n_akey = ''
+" let g:yankring_paste_v_key  = ''
+" let g:yankring_paste_v_bkey = ''
+" let g:yankring_paste_v_akey = ''
+" vnoremap p :call <SID>Shotput2('p')<CR>
+" vnoremap P :call <SID>Shotput2('P')<CR>

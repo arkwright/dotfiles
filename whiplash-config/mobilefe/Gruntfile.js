@@ -153,6 +153,10 @@ module.exports = function (grunt) {
         files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
         tasks: ['copy:styles', 'autoprefixer']
       },
+      confightml: {
+        files: ['<%= yeoman.app %>/config.html'],
+        tasks: ['preprocess:web']
+      },
       livereload: {
         options: {
           livereload: '<%= connect.options.livereload %>'
@@ -516,11 +520,11 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
-		  ADINDEX: "0",
-        DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
-        ENABLEMOBILEREDIRECT: true,
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobile-dev.smgdigitaldev.com"
+		              ADINDEX: "0",
+                  DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
+                  ENABLEMOBILEREDIRECT: true,
+          		    COMSCOREID: "3005674",
+          		    COMSCORESITE: "http://mobile-dev.smgdigitaldev.com"
               }
           },
           staging: {
@@ -531,11 +535,11 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
-		  ADINDEX: "0",
-        DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
-        ENABLEMOBILEREDIRECT: true,
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobile-stage.smgdigitaldev.com"
+		              ADINDEX: "0",
+                  DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
+                  ENABLEMOBILEREDIRECT: true,
+		              COMSCOREID: "3005674",
+		              COMSCORESITE: "http://mobile-stage.smgdigitaldev.com"
               }
           },
           production: {
@@ -546,11 +550,11 @@ module.exports = function (grunt) {
                   // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: 'https://mobi.thestar.com',
                   CQURL: 'http://mobi.thestar.com',
-		  ADINDEX: "0",
+		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
                   ENABLEMOBILEREDIRECT: true,
-		  COMSCOREID: "3005674",
-		  COMSCORESITE: "http://mobi.thestar.com"
+		              COMSCOREID: "3005674",
+		              COMSCORESITE: "http://mobi.thestar.com"
               }
           },
 	  ios: {
@@ -558,8 +562,8 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'http://mobile-dev.smgdigitaldev.com',
-          CQURL: 'http://mobile-dev.smgdigitaldev.com',
+          APIURL: 'https://mobi.thestar.com',
+          CQURL: 'http://mobi.thestar.com',
           ADINDEX: "2",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
@@ -572,8 +576,8 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'http://mobile-dev.smgdigitaldev.com',
-          CQURL: 'http://mobile-dev.smgdigitaldev.com',
+          APIURL: 'https://mobi.thestar.com',
+          CQURL: 'http://mobi.thestar.com',
           ADINDEX: "1",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
@@ -739,19 +743,18 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('build-int', [
+    'env:web',
+    'preprocess',
     'clean:dist',
+    'copy:dist',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:integration',
-    'useminPrepare',
+    'useminPrepare', 'concat', 'uglify', 'cssmin',
+    'ngmin',
     'concurrent:dist',
     'autoprefixer',
-    'concat', // Is this used any more?
-    'copy:dist',
-    'processhtml:dist',
     'cdnify',
-    'ngmin',
-    'cssmin',
-    'uglify',
+    'processhtml:dist',
     'rev',
     'usemin',
     // 'compress' task can't handle compressing a file and writing the
@@ -851,7 +854,7 @@ module.exports = function (grunt) {
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',
-    'concat', // Is this used any more?
+    //'concat', // Is this used any more?
     'copy:dist',
     'processhtml:android',
     'cdnify',

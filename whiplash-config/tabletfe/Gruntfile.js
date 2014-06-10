@@ -502,7 +502,7 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
+                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
                   APIURL: '',
                   CQURL: '',
 		              ADINDEX: "0",
@@ -517,14 +517,14 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
+                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
                   APIURL: '',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
                   ENABLEMOBILEREDIRECT: true,
           		    COMSCOREID: "3005674",
-          		    COMSCORESITE: "http://mobile-dev.smgdigitaldev.com"
+          		    COMSCORESITE: "http://tablet-dev.smgdigitaldev.com"
               }
           },
           staging: {
@@ -532,14 +532,14 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
+                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
                   APIURL: '',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
                   ENABLEMOBILEREDIRECT: true,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: "http://mobile-stage.smgdigitaldev.com"
+		              COMSCORESITE: "http://tablet-stage.smgdigitaldev.com"
               }
           },
           production: {
@@ -547,14 +547,14 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: 'https://mobi.thestar.com',
-                  CQURL: 'http://mobi.thestar.com',
+                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
+                  APIURL: 'https://tablet.thestar.com',
+                  CQURL: 'http://tablet.thestar.com',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
                   ENABLEMOBILEREDIRECT: true,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: "http://mobi.thestar.com"
+		              COMSCORESITE: "http://tablet.thestar.com"
               }
           },
 	  ios: {
@@ -562,13 +562,13 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://mobi.thestar.com',
-          CQURL: 'http://mobi.thestar.com',
+          APIURL: 'https://tablet.thestar.com',
+          CQURL: 'http://tablet.thestar.com',
           ADINDEX: "2",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
           COMSCOREID: "3005674",
-          COMSCORESITE: "http://mobile.smgdigitaldev.com"
+          COMSCORESITE: "http://tablet.smgdigitaldev.com"
         }
     },
 	  android: {
@@ -576,13 +576,13 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://mobi.thestar.com',
-          CQURL: 'http://mobi.thestar.com',
+          APIURL: 'https://tablet.thestar.com',
+          CQURL: 'http://tablet.thestar.com',
           ADINDEX: "1",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
     		  COMSCOREID: "3005674",
-    		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
+    		  COMSCORESITE: "http://tablet.smgdigitaldev.com"
         }
       }
     },
@@ -622,7 +622,7 @@ module.exports = function (grunt) {
           },
           integration: {
               options: {
-                  bucket: 'mobile-dev.smgdigitaldev.com',
+                  bucket: 'tablet-dev.smgdigitaldev.com',
                   differential: true // Only uploads the files that have changed
               },
               files: [
@@ -635,7 +635,7 @@ module.exports = function (grunt) {
           },
           staging: {
               options: {
-                  bucket: 'mobile-stage.smgdigitaldev.com',
+                  bucket: 'tablet-stage.smgdigitaldev.com',
                   differential: true // Only uploads the files that have changed
               },
               files: [
@@ -648,7 +648,7 @@ module.exports = function (grunt) {
           },
           production: {
               options: {
-                  bucket: 'mobile.thestar.com',
+                  bucket: 'tablet.thestar.com',
                   differential: true // Only uploads the files that have changed
               },
               files: [
@@ -661,7 +661,7 @@ module.exports = function (grunt) {
           },
           clean_production: {
               options: {
-                  bucket: 'mobilefe',
+                  bucket: 'tabletfe',
                   debug: true // Doesn't actually delete but shows log
               },
               files: [
@@ -670,7 +670,7 @@ module.exports = function (grunt) {
           },
           download_production: {
               options: {
-                  bucket: 'mobilefe'
+                  bucket: 'tabletfe'
               },
               files: [
                   {dest: 'app/', cwd: 'backup/', action: 'download'}
@@ -679,7 +679,7 @@ module.exports = function (grunt) {
           },
           secret: {
               options: {
-                  bucket: 'mobilefe',
+                  bucket: 'tabletfe',
                   access: 'private'
               },
               files: [

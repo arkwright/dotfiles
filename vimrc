@@ -344,7 +344,7 @@ let g:WhiplashProjectsDir = '~/projects/'
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
-  autocmd VimEnter * Whiplash mobilefe
+  autocmd VimEnter * Whiplash tabletfe
 augroup END
 
 " Goyo plugin configuration.

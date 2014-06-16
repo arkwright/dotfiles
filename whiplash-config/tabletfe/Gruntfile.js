@@ -208,14 +208,14 @@ module.exports = function (grunt) {
 
     connect: {
       options: {
-        port: 9000,
+        port: 9001,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
-        livereload: 35729
+        livereload: 35728
       },
       livereload: {
         options: {
-          open: true,
+          // open: true, //no more auto open we know how to type in a url thanks.
           base: [
             '.tmp',
             '<%= yeoman.app %>'
@@ -382,7 +382,7 @@ module.exports = function (grunt) {
           removeRedundantAttributes: true,
           useShortDoctype: true,
           removeEmptyAttributes: true,
-          removeOptionalTags: true*/
+          removeOptionalTags: true */
         },
         files: [{
           expand: true,
@@ -493,6 +493,11 @@ module.exports = function (grunt) {
        }
     },
      ngconstant: {
+        /*
+         * CQURL - All calls for the CQ stuffs (mobile cq url)
+         * APIURL - For all mystar calls
+         * DESKTOPCQURL - Used for redirecting to the desktop site mainly. 
+         */
           options: {
               space: '  '
           },
@@ -502,7 +507,7 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
+                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
 		              ADINDEX: "0",
@@ -517,7 +522,7 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
+                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
 		              ADINDEX: "0",
@@ -533,6 +538,7 @@ module.exports = function (grunt) {
               name: 'config',
               constants: {
                   // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
+                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
                   APIURL: '',
                   CQURL: '',
 		              ADINDEX: "0",
@@ -548,13 +554,13 @@ module.exports = function (grunt) {
               name: 'config',
               constants: {
                   // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
-                  APIURL: 'https://tablet.thestar.com',
-                  CQURL: 'http://tablet.thestar.com',
+                  APIURL: 'https://t.thestar.com',
+                  CQURL: 'http://t.thestar.com',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
                   ENABLEMOBILEREDIRECT: true,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: "http://tablet.thestar.com"
+		              COMSCORESITE: "http://t.thestar.com"
               }
           },
 	  ios: {
@@ -562,8 +568,8 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://tablet.thestar.com',
-          CQURL: 'http://tablet.thestar.com',
+          APIURL: 'https://t.thestar.com',
+          CQURL: 'http://t.thestar.com',
           ADINDEX: "2",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
@@ -576,8 +582,8 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://tablet.thestar.com',
-          CQURL: 'http://tablet.thestar.com',
+          APIURL: 'https://t.thestar.com',
+          CQURL: 'http://t.thestar.com',
           ADINDEX: "1",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,

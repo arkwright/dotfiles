@@ -347,6 +347,16 @@ augroup vim_enter
   autocmd VimEnter * Whiplash tabletfe
 augroup END
 
+" Allow up/down movements and <CR> in quickfix window to preview
+" the file under the cursor, instead of jumping to it immediately.
+" <C-w>p jumps to the previous (last accessed) window.
+augroup quickfix_preview
+  autocmd!
+  autocmd BufWinEnter quickfix nnoremap <buffer> <CR> <CR>zz<C-w>p
+  autocmd BufWinEnter quickfix nnoremap <buffer> j j<CR>zz<C-w>p 
+  autocmd BufWinEnter quickfix nnoremap <buffer> k k<CR>zz<C-w>p
+augroup END
+
 " Goyo plugin configuration.
 " https://github.com/junegunn/goyo.vim
 let g:goyo_width = 80

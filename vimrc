@@ -341,6 +341,15 @@ let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
 " let g:WhiplashCommandName = 'Project'
 
+" Syntastic plugin configuration.
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+
+" Make Syntastic easier to use with a simple toggle command.
+" Closes location list automatically when Syntastic is toggled off.
+command! Lint execute "lcl | SyntasticToggleMode"
+
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!

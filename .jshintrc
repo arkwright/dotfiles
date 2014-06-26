@@ -1,5 +1,6 @@
 {
   "-W041"         : false,
+  "-W117"         : false,
   "asi"           : false,
   "bitwise"       : false,
   "boss"          : true,

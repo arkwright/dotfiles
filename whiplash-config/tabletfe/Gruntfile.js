@@ -450,12 +450,11 @@ module.exports = function (grunt) {
         'copy:styles'
       ],
       dist: [
-        'coffee',
-        'compass:dist',
+        // we do not use coffee 'coffee',
         'copy:styles',
         'imagemin',
         'svgmin',
-        'htmlmin'
+        // we do not use htmlmin 'htmlmin'
       ]
     },
     karma: {
@@ -488,7 +487,7 @@ module.exports = function (grunt) {
         }
       },
        options: {
-	   banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %> */\n',
+	   banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd HH:MM:ss") %> */\n',
            mangle: false
        }
     },
@@ -714,7 +713,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'env:web',
-      'preprocess',
+      'preprocess:web',
       'clean:server',
       'concurrent:server',
       'autoprefixer',
@@ -733,8 +732,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-local', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     'ngconstant:local', // First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'cssmin', 'uglify',
@@ -747,11 +747,16 @@ module.exports = function (grunt) {
     // 'processhtml:dist'
     'usemin'
   ]);
+  
+  grunt.registerMultiTask('echo', 'Echo back input', function(){
+        grunt.log.writeln(this.data);
+  });
 
   grunt.registerTask('build-int', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:integration',
@@ -777,8 +782,9 @@ module.exports = function (grunt) {
 
    grunt.registerTask('build-stage', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     'ngconstant:staging',// First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'uglify', 'cssmin',
@@ -803,8 +809,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-production', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     'ngconstant:production', // First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'cssmin', 'uglify',
@@ -832,8 +839,9 @@ module.exports = function (grunt) {
     // log env obj
     // grunt.log.writeln(grunt.config.get().env.ios.NODE_ENV),
     'env:ios',
-    'preprocess',
+    'preprocess:ios',
     'clean:dist',
+    'compass:dist',
     'clean:www',
     'ngconstant:ios', // First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'cssmin', 'uglify',
@@ -853,7 +861,10 @@ module.exports = function (grunt) {
   ]);
 
    grunt.registerTask('build-android', [
+    'env:android',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'clean:www',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:android',

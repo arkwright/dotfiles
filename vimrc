@@ -345,7 +345,14 @@ let g:WhiplashProjectsDir = '~/projects/'
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
-let g:syntastic_mode_map = { 'mode': 'passive' } " :SyntasticToggleMode toggles Syntastic OFF the first time is is called, unless we force Syntastic ot default to 'passive' mode.
+" :SyntasticToggleMode toggles Syntastic OFF the first time is is called, unless we force Syntastic ot default to 'passive' mode.
+let g:syntastic_mode_map = { 'mode': 'passive' }
+" Tell Syntastic to ignore `tidy` HTML syntax checker messages which contain any of the following strings.
+let g:syntastic_html_tidy_quiet_messages = { 'regex': [
+\'proprietary attribute',
+\'is not recognized!',
+\'discarding unexpected'
+\] }
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_javascript_jshint_args = "--config ~/.jshintrc" "js_hint_options_are_here:  http://www.jshint.com/docs/options/
 

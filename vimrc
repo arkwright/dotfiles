@@ -345,8 +345,8 @@ let g:WhiplashProjectsDir = '~/projects/'
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_mode_map = { 'mode': 'passive' } " :SyntasticToggleMode toggles Syntastic OFF the first time is is called, unless we force Syntastic ot default to 'passive' mode.
 let g:syntastic_javascript_jshint_args = "--config ~/.jshintrc" "js_hint_options_are_here:  http://www.jshint.com/docs/options/
-
 
 " Make Syntastic easier to use with a simple toggle command.
 " Closes location list automatically when Syntastic is toggled off.

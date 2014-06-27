@@ -422,23 +422,3 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 " let g:yankring_paste_v_akey = ''
 " vnoremap p :call <SID>Shotput2('p')<CR>
 " vnoremap P :call <SID>Shotput2('P')<CR>
-
-
-" Experimental, interactive Git diffing of working file against any previous version of that
-" file, using quickfix window. j/k in quickfix window refreshes diff automatically.
-function! Gexplore()
-  vsplit
-  diffthis
-  execute "normal \<c-w>\<c-w>"
-  Glog
-  cwindow
-  execute "normal! \<c-w>p"
-  diffthis
-  execute "normal! \<c-w>p"
-
-  nnoremap <buffer> <CR> <CR>:diffthis<CR><c-w><c-w><c-w><c-w>:diffthis<CR><c-w><c-w>gg]czz<c-w><c-w>
-  nnoremap <buffer> j j<CR>:diffthis<CR><c-w><c-w><c-w><c-w>:diffthis<CR><c-w><c-w>gg]czz<c-w><c-w>
-  nnoremap <buffer> k k<CR>:diffthis<CR><c-w><c-w><c-w><c-w>:diffthis<CR><c-w><c-w>gg]czz<c-w><c-w>
-endfunction
-
-execute "command! Gexplore :call Gexplore()"

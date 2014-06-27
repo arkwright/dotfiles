@@ -353,6 +353,10 @@ let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 \'is not recognized!',
 \'discarding unexpected'
 \] }
+" Increase the default number of errors that tidy will display, because 6 is
+" just not enough for an AngularJS file riddled with invalid elements and
+" attributes.
+let g:syntastic_html_tidy_args = '--show-errors 1000'
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_javascript_jshint_args = "--config ~/.jshintrc" "js_hint_options_are_here:  http://www.jshint.com/docs/options/
 

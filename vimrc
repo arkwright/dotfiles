@@ -268,9 +268,6 @@ noremap <Leader>du :diffupdate<CR>
 noremap <Leader>dn ]czz
 noremap <Leader>dN [czz
 
-" An easier way to move the cursor between split windows.
-noremap <leader>w <C-w><C-w>
-
 " An easier way to change letter case.
 " After changing case, move cursor left to stay on the character being changed.
 noremap <leader>c ~h
@@ -307,9 +304,16 @@ let g:yankring_paste_using_g = 0
 let g:yankring_replace_n_pkey = '<D-p>'
 let g:yankring_replace_n_nkey = '<D-P>'
 
-" Treat H and L keys as fast incremental cursor up/down.
-noremap H 10k0
-noremap L 10j0
+" Treat J and K keys as fast incremental cursor up/down.
+noremap K 5k
+noremap J 5j
+
+" Easy movement between splits.
+nnoremap <leader>w <c-w><c-w>
+nnoremap gh <c-w>h
+nnoremap gj <c-w>j
+nnoremap gk <c-w>k
+nnoremap gl <c-w>l
 
 " Gundo plugin mapping.
 nnoremap <leader>u :GundoToggle<CR>

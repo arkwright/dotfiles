@@ -14,17 +14,18 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " Use my preferred color scheme.
-colorscheme slate
+set background=light
+colorscheme solarized
 
 " Set desired diff colors.
-highlight DiffAdd guibg=DarkGreen
-highlight DiffChange guibg=DarkBlue
-highlight DiffText guibg=Orange
-highlight DiffDelete guibg=DarkRed
+" highlight DiffAdd guibg=DarkGreen
+" highlight DiffChange guibg=DarkBlue
+" highlight DiffText guibg=Orange
+" highlight DiffDelete guibg=DarkRed
 
 " Current line color
-hi CursorLine   guibg=gray18
-hi CursorColumn guibg=gray18
+" hi CursorLine   guibg=gray18
+" hi CursorColumn guibg=gray18
 
 " Set the default font
 set guifont=Monaco:h12
@@ -133,6 +134,7 @@ noremap <leader>; ,
 
 " Make it easier to enter visual block mode.
 noremap <leader>v <C-v>
+
 " Make it impossible to enter visual block mode in the old way. (To retrain
 " muscle memory.)
 noremap <C-v> <nop>
@@ -241,10 +243,10 @@ let VCSCommandMapPrefix = '<leader>\'
 command! CC execute ":CommandTFlush"
 
 " PHP syntax checking bound to <leader>php
-noremap <leader>php :w !php -l %<CR>
+noremap <leader><leader>php :w !php -l %<CR>
 
-" JS synax checking bound to <leader>js
-noremap <leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
+" JS synax checking bound to <leader><leader>js
+noremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
 
 " Align selected lines on = signs.
 noremap <leader>a= :Align =<CR>
@@ -305,8 +307,10 @@ let g:yankring_replace_n_pkey = '<D-p>'
 let g:yankring_replace_n_nkey = '<D-P>'
 
 " Treat J and K keys as fast incremental cursor up/down.
-noremap K 5k
-noremap J 5j
+nnoremap K 5k
+vnoremap K 5k
+nnoremap J 5j
+vnoremap J 5j
 
 " Easy movement between splits.
 nnoremap <leader>w <c-w><c-w>
@@ -314,6 +318,10 @@ nnoremap gh <c-w>h
 nnoremap gj <c-w>j
 nnoremap gk <c-w>k
 nnoremap gl <c-w>l
+
+" Easy joining of lines.
+nnoremap <leader>j J
+vnoremap <leader>j J
 
 " Gundo plugin mapping.
 nnoremap <leader>u :GundoToggle<CR>

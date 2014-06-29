@@ -308,10 +308,11 @@ let g:yankring_replace_n_pkey = '<D-p>'
 let g:yankring_replace_n_nkey = '<D-P>'
 
 " Treat J and K keys as fast incremental cursor up/down.
+" But not in visual mode, because I keep typing VJ when I want Vj.
 nnoremap K 5k
-vnoremap K 5k
+vnoremap K <nop>
 nnoremap J 5j
-vnoremap J 5j
+vnoremap J <nop>
 
 " Easy movement between splits.
 nnoremap <leader>w <c-w><c-w>
@@ -361,9 +362,14 @@ augroup vim_enter
 augroup END
 
 " Manhunt plugin configuration.
-" let g:manhunt_default_mode = 'working'
 " let g:manhunt_command_name = 'Manhunt'
-let g:manhunt_diff_align = 'top'
+" let g:manhunt_default_mode = 'working'
+" let g:manhunt_diff_align   = 'center'
+" let g:manhunt_key_next_diff = 'n'
+" let g:manhunt_key_previous_diff = 'N'
+" let g:manhunt_key_select_next_version = 'j'
+" let g:manhunt_key_select_previous_version = 'k'
+" let g:manhunt_key_select_version = '<CR>'
 
 " Syntastic plugin configuration.
 let g:syntastic_aggregate_errors = 1

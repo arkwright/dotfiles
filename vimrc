@@ -14,7 +14,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " Use my preferred color scheme.
-set background=light
+set background=dark
 colorscheme solarized
 
 " Set desired diff colors.
@@ -358,6 +358,10 @@ augroup vim_enter
   autocmd!
   autocmd VimEnter * Whiplash tabletfe
 augroup END
+
+" Manhunt plugin configuration.
+" let g:manhunt_default_mode = 'working'
+" let g:manhunt_command_name = 'Manhunt'
 
 " Syntastic plugin configuration.
 let g:syntastic_aggregate_errors = 1

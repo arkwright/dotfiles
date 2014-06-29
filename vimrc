@@ -14,7 +14,7 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " Use my preferred color scheme.
-set background=dark
+set background=light
 colorscheme solarized
 
 " Set desired diff colors.
@@ -205,6 +205,7 @@ noremap s <Esc>:w<CR>
 " Bind Tab to Ctrl+N to make word autocompletion easier. Now it works like
 " Bash path name autocompletion.
 inoremap <Tab> <C-n>
+inoremap <S-Tab> <C-p>
 
 " When pressing # or *, enable search highlighting if it is currently
 " disabled! I always turn it off for convenience and then forget to turn it
@@ -362,6 +363,7 @@ augroup END
 " Manhunt plugin configuration.
 " let g:manhunt_default_mode = 'working'
 " let g:manhunt_command_name = 'Manhunt'
+let g:manhunt_diff_align = 'top'
 
 " Syntastic plugin configuration.
 let g:syntastic_aggregate_errors = 1

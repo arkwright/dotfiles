@@ -225,7 +225,7 @@ let g:CommandTMaxFiles=50000
 let g:CommandTMatchWindowReverse = 1
 
 " Remap the standard Command-T file open command.
-let g:CommandTAcceptSelectionMap='<S-CR>'
+let g:CommandTAcceptSelectionMap='<C-CR>'
 
 " Remap Command-T shortcut for opening files in a horizontal split.
 let g:CommandTAcceptSelectionSplitMap='<C-h>'
@@ -353,6 +353,12 @@ let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
 " let g:WhiplashCommandName = 'Project'
 
+" Default Whiplash project when loading Vim.
+augroup vim_enter
+  autocmd!
+  autocmd VimEnter * Whiplash tabletfe
+augroup END
+
 " Syntastic plugin configuration.
 let g:syntastic_aggregate_errors = 1
 let g:syntastic_always_populate_loc_list = 1
@@ -376,12 +382,6 @@ let g:syntastic_javascript_jshint_args = "--config ~/.jshintrc" "js_hint_options
 " Closes location list automatically when Syntastic is toggled off.
 command! Lint execute "lcl | SyntasticToggleMode"
 nnoremap <leader>l :Lint<CR>
-
-" Default Whiplash project when loading Vim.
-augroup vim_enter
-  autocmd!
-  autocmd VimEnter * Whiplash tabletfe
-augroup END
 
 " Allow up/down movements and <CR> in quickfix window to preview
 " the file under the cursor, instead of jumping to it immediately.

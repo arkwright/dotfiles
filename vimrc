@@ -13,6 +13,9 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" Set the default font
+set guifont=Monaco:h14
+
 " Use my preferred color scheme.
 set background=dark
 colorscheme solarized
@@ -25,17 +28,14 @@ highlight DiffDelete guibg=#3e0201
 
 " To make vim-gitgutter plugin compatible with Solarized colorscheme.
 highlight clear SignColumn
-highlight GitGutterAdd guibg=#073642 guifg=#859900
-highlight GitGutterChange guibg=#073642 guifg=#657b83
-highlight GitGutterDelete guibg=#073642 guifg=#dc322f
-highlight GitGutterChangeDelete guibg=#073642 guifg=#dc322f
+highlight GitGutterAdd guibg=#002b36 guifg=#859900
+highlight GitGutterChange guibg=#002b36 guifg=#657b83
+highlight GitGutterDelete guibg=#002b36 guifg=#dc322f
+highlight GitGutterChangeDelete guibg=#002b36 guifg=#dc322f
 
 " Current line color
 " hi CursorLine   guibg=gray18
 " hi CursorColumn guibg=gray18
-
-" Set the default font
-set guifont=Monaco:h14
 
 " Symfony 2's Twig templating framework is a port of Python's Jinja.
 " So we can use Vim jinja syntax highlighting.
@@ -59,14 +59,19 @@ set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) a
 set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
 set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
 set nonumber                " Never use absolute line numbers.
+set foldminlines=99999      " Disable code folding entirely. I hate that feature!
 
+" Never display absolute line numbers!
 augroup nonumber
   autocmd!
   autocmd BufRead,BufNewFile * setlocal nonumber
 augroup END
 
-" Disable code folding entirely. I hate that feature!
-set foldminlines=99999
+" Never display fold column!
+augroup foldcolumn
+  autocmd!
+  autocmd BufEnter * setlocal foldcolumn=0
+augroup END
 
 let html_no_rendering=1 " Disable underlining of tabs in HTML documents.
 

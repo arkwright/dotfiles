@@ -14,26 +14,36 @@ if &t_Co > 2 || has("gui_running")
 endif
 
 " Use my preferred color scheme.
-set background=light
+set background=dark
 colorscheme solarized
 
-" Set desired diff colors.
-" highlight DiffAdd guibg=DarkGreen
-" highlight DiffChange guibg=DarkBlue
-" highlight DiffText guibg=Orange
-" highlight DiffDelete guibg=DarkRed
+" Set desired diff colors for Solarized colorscheme.
+highlight DiffAdd guibg=#094901
+highlight DiffChange guibg=#073642
+highlight DiffText guifg=#369be2 guibg=#195565
+highlight DiffDelete guibg=#3e0201
+
+" To make vim-gitgutter plugin compatible with Solarized colorscheme.
+highlight clear SignColumn
+highlight GitGutterAdd guibg=#073642 guifg=#859900
+highlight GitGutterChange guibg=#073642 guifg=#657b83
+highlight GitGutterDelete guibg=#073642 guifg=#dc322f
+highlight GitGutterChangeDelete guibg=#073642 guifg=#dc322f
 
 " Current line color
 " hi CursorLine   guibg=gray18
 " hi CursorColumn guibg=gray18
 
 " Set the default font
-set guifont=Monaco:h12
+set guifont=Monaco:h14
 
 " Symfony 2's Twig templating framework is a port of Python's Jinja.
 " So we can use Vim jinja syntax highlighting.
 " Requires htmljinja plugin.
-au BufRead,BufNewFile *.twig set filetype=htmljinja
+augroup jinja
+  autocmd!
+  autocmd BufRead,BufNewFile *.twig set filetype=htmljinja
+augroup END
 
 set encoding=utf-8          " Necessary to show Unicode glyphs
 set history=50              " Keep 50 lines of command line history
@@ -66,15 +76,6 @@ let mapleader = ","     " Set the all-important <Leader> key
 if has('mouse')
   set mouse=a
 endif
-
-" Set desired syntax highlighting colors.
-highlight PreProc guibg=Grey15
-
-" Set desired diff syntax highlighting colors.
-highlight DiffAdd guibg=DarkGreen
-highlight DiffChange guibg=OrangeRed
-highlight DiffText guibg=Orange
-highlight DiffDelete guibg=DarkRed
 
 if has("autocmd")
   " Enable file type detection.
@@ -153,8 +154,7 @@ vnoremap // :TComment<CR>
 
 " Make it easy to edit these files.
 command! CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
-command! VIMRC execute ":e ~/.vimrc"
-command! NGINXCONF execute ":e /usr/local/etc/nginx/nginx.conf"
+command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
 command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command! TODO execute ":e ~/projects/textfiles/todo.txt"
@@ -261,9 +261,6 @@ noremap <leader>acss :Align { }<CR>
 " Align selected lines on colons.
 noremap <leader>a: :Align :<CR>
 
-" Easy VCSVimDiff diffing.
-noremap <Leader>dd :VCSVimDiff<CR>
-
 " Easy vimdiff getting, putting, updating and navigation.
 noremap <Leader>dg :diffget<CR>
 noremap <Leader>dp :diffput<CR>
@@ -331,9 +328,6 @@ nnoremap <leader>u :GundoToggle<CR>
 " Invoke Zencoding plugin with Ctrl+z.
 let g:user_zen_expandabbr_key = '<c-z>'
 
-" To fix colors in vim-gitgutter plugin.
-highlight clear SignColumn
-
 " Easy Ag searching for the word under the cursor, or the current visual
 " selection, by pressing _. Just press [Enter] to execute the search.
 " Restricting search via file type is easy. After pressing -, just type, e.g.,
@@ -370,6 +364,9 @@ augroup END
 " let g:manhunt_key_select_next_version = 'j'
 " let g:manhunt_key_select_previous_version = 'k'
 " let g:manhunt_key_select_version = '<CR>'
+
+" Easy diffing with Manhunt.
+noremap <Leader>dd :Manhunt<CR>
 
 " Syntastic plugin configuration.
 let g:syntastic_aggregate_errors = 1

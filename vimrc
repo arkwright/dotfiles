@@ -196,6 +196,12 @@ noremap <Leader>. :set hlsearch!<CR>
 " my 'jk' mapping.
 inoremap jk <Esc>`^
 
+" Also make it easy to escape from command-line mode.
+" <C-c> must be used in place of <Esc> for this mapping because Vim treats
+" <Esc> in command-line mode as if it were <CR>
+" As per: http://vim.wikia.com/wiki/Avoid_the_escape_key
+cnoremap jk <C-c>
+
 " Disabling these because whenever I activate caps lock in insert mode, I end
 " up forgetting to turn it off. I then type JK to exit insert mode, but caps
 " lock is still enabled, so my Vim normal mode commands are now uppercase
@@ -383,7 +389,9 @@ let g:syntastic_mode_map = { 'mode': 'passive' }
 let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 \'proprietary attribute',
 \'is not recognized!',
-\'discarding unexpected'
+\'discarding unexpected',
+\'<form> lacks "action" attribute',
+\'<input> attribute .\{-\} lacks value',
 \] }
 " Increase the default number of errors that tidy will display, because 6 is
 " just not enough for an AngularJS file riddled with invalid elements and

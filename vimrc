@@ -372,8 +372,10 @@ augroup END
 " let g:manhunt_diff_align   = 'center'
 " let g:manhunt_key_next_diff = 'n'
 " let g:manhunt_key_previous_diff = 'N'
+" let g:manhunt_key_select_left_version = 'L'
 " let g:manhunt_key_select_next_version = 'j'
 " let g:manhunt_key_select_previous_version = 'k'
+" let g:manhunt_key_select_right_version = 'R'
 " let g:manhunt_key_select_version = '<CR>'
 
 " Easy diffing with Manhunt.

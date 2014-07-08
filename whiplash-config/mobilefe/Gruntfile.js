@@ -215,7 +215,7 @@ module.exports = function (grunt) {
       },
       livereload: {
         options: {
-          open: true,
+          // open: true, //no more auto open we know how to type in a url thanks.
           base: [
             '.tmp',
             '<%= yeoman.app %>'
@@ -451,7 +451,6 @@ module.exports = function (grunt) {
       ],
       dist: [
         'coffee',
-        'compass:dist',
         'copy:styles',
         'imagemin',
         'svgmin',
@@ -493,6 +492,12 @@ module.exports = function (grunt) {
        }
     },
      ngconstant: {
+        /*
+         * CQURL - All calls for the CQ stuffs (mobile cq url)
+         * APIPROTOCOL, APIHOST - For all mystar calls
+         * APIURL - deprecated as a constant, now exists as the ApiUrl service, which uses the above two API- constants. --fv
+         * DESKTOPCQURL - Used for redirecting to the desktop site mainly. 
+         */
           options: {
               space: '  '
           },
@@ -502,8 +507,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'http://',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
@@ -517,8 +523,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'http://',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
@@ -532,8 +539,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'http://',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
@@ -547,14 +555,15 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: 'https://mobi.thestar.com',
-                  CQURL: 'http://mobi.thestar.com',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'https://',
+                  CQURL: 'http://m.thestar.com',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
                   ENABLEMOBILEREDIRECT: true,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: "http://mobi.thestar.com"
+		              COMSCORESITE: "http://m.thestar.com"
               }
           },
 	  ios: {
@@ -562,13 +571,14 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://mobi.thestar.com',
-          CQURL: 'http://mobi.thestar.com',
+          APIHOST: 'm.thestar.com',
+          APIPROTOCOL: 'https://',
+          CQURL: 'http://m.thestar.com',
           ADINDEX: "2",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
           COMSCOREID: "3005674",
-          COMSCORESITE: "http://mobile.smgdigitaldev.com"
+          COMSCORESITE: "http://m.thestar.com"
         }
     },
 	  android: {
@@ -576,13 +586,14 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://mobi.thestar.com',
-          CQURL: 'http://mobi.thestar.com',
+          APIHOST: 'm.thestar.com',
+          APIPROTOCOL: 'https://',
+          CQURL: 'http://m.thestar.com',
           ADINDEX: "1",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
     		  COMSCOREID: "3005674",
-    		  COMSCORESITE: "http://mobile.smgdigitaldev.com"
+    		  COMSCORESITE: "http://m.thestar.com"
         }
       }
     },
@@ -708,7 +719,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'env:web',
-      'preprocess',
+      'preprocess:web',
       'clean:server',
       'concurrent:server',
       'autoprefixer',
@@ -727,8 +738,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-local', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     'ngconstant:local', // First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'cssmin', 'uglify',
@@ -744,8 +756,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-int', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:integration',
@@ -771,8 +784,9 @@ module.exports = function (grunt) {
 
    grunt.registerTask('build-stage', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     'ngconstant:staging',// First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'uglify', 'cssmin',
@@ -797,8 +811,9 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build-production', [
     'env:web',
-    'preprocess',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'copy:dist',
     'ngconstant:production', // First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'cssmin', 'uglify',
@@ -826,8 +841,9 @@ module.exports = function (grunt) {
     // log env obj
     // grunt.log.writeln(grunt.config.get().env.ios.NODE_ENV),
     'env:ios',
-    'preprocess',
+    'preprocess:ios',
     'clean:dist',
+    'compass:dist',
     'clean:www',
     'ngconstant:ios', // First ngconstant task modifies app/config/config.js with values destined for the build.
     'useminPrepare', 'concat', 'cssmin', 'uglify',
@@ -847,7 +863,10 @@ module.exports = function (grunt) {
   ]);
 
    grunt.registerTask('build-android', [
+    'env:android',
+    'preprocess:web',
     'clean:dist',
+    'compass:dist',
     'clean:www',
     // First ngconstant task modifies app/config/config.js with values destined for the build.
     'ngconstant:android',

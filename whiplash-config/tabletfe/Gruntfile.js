@@ -194,11 +194,11 @@ module.exports = function (grunt) {
               'dist/index.html': ['app/index.html']
           }
       },
-      // ios: {
-      //     files: {
-      //         'dist/index.html': ['app/index.html']
-      //     }
-      // },
+      ios: {
+          files: {
+              'dist/index.html': ['app/index.html']
+          }
+      },
       android: {
           files: {
               'dist/index.html': ['app/index.html']
@@ -373,17 +373,6 @@ module.exports = function (grunt) {
 
    htmlmin: {
       dist: {
-        options: {
-          /*removeCommentsFromCDATA: true,
-          // https://github.com/yeoman/grunt-usemin/issues/44
-          //collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeAttributeQuotes: true,
-          removeRedundantAttributes: true,
-          useShortDoctype: true,
-          removeEmptyAttributes: true,
-          removeOptionalTags: true */
-        },
         files: [{
           expand: true,
           cwd: '<%= yeoman.app %>',
@@ -451,10 +440,10 @@ module.exports = function (grunt) {
       ],
       dist: [
         // we do not use coffee 'coffee',
+        'htmlmin',
         'copy:styles',
         'imagemin',
         'svgmin',
-        // we do not use htmlmin 'htmlmin'
       ]
     },
     karma: {
@@ -494,7 +483,8 @@ module.exports = function (grunt) {
      ngconstant: {
         /*
          * CQURL - All calls for the CQ stuffs (mobile cq url)
-         * APIURL - For all mystar calls
+         * APIPROTOCOL, APIHOST - For all mystar calls
+         * APIURL - deprecated as a constant, now exists as the ApiUrl service, which uses the above two API- constants. --fv
          * DESKTOPCQURL - Used for redirecting to the desktop site mainly. 
          */
           options: {
@@ -506,8 +496,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'http://',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
@@ -521,8 +512,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'http://',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
@@ -536,9 +528,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
-                  // Intentionally left blank. Native app requires an APIURL, and mobile web app does not.
-                  APIURL: '',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'http://',
                   CQURL: '',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
@@ -552,8 +544,9 @@ module.exports = function (grunt) {
               wrap: '"use strict";\n\n <%= __ngModule %>',
               name: 'config',
               constants: {
-                  // Intentionally left blank. Native app requires an APIURL, and tablet web app does not.
-                  APIURL: 'https://t.thestar.com',
+                  // Intentionally left blank. Native app requires an ApiUrl, and mobile web app does not.
+                  APIHOST: '',
+                  APIPROTOCOL: 'https://',
                   CQURL: 'http://t.thestar.com',
 		              ADINDEX: "0",
                   DESKTOPCQURL: 'http://www.thestar.com',
@@ -567,7 +560,8 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://t.thestar.com',
+          APIHOST: 't.thestar.com',
+          APIPROTOCOL: 'https://',
           CQURL: 'http://t.thestar.com',
           ADINDEX: "2",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
@@ -581,7 +575,8 @@ module.exports = function (grunt) {
         wrap: '"use strict";\n\n <%= __ngModule %>',
         name: 'config',
         constants: {
-          APIURL: 'https://t.thestar.com',
+          APIHOST: 't.thestar.com',
+          APIPROTOCOL: 'https://',
           CQURL: 'http://t.thestar.com',
           ADINDEX: "1",
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',

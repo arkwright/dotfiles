@@ -60,6 +60,7 @@ set virtualedit=block       " Enable selection of empty columns when using visua
 set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
 set nonumber                " Never use absolute line numbers.
 set foldminlines=99999      " Disable code folding entirely. I hate that feature!
+set laststatus=2            " Always show the status line, in every window/split.
 
 " Never display absolute line numbers!
 augroup nonumber
@@ -363,7 +364,7 @@ let g:WhiplashProjectsDir = '~/projects/'
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
-  autocmd VimEnter * Whiplash tabletfe
+  autocmd VimEnter * Whiplash vim-manhunt
 augroup END
 
 " Manhunt plugin configuration.

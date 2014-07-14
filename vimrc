@@ -348,6 +348,10 @@ let g:user_zen_expandabbr_key = '<c-z>'
 nnoremap _ yiw:tabnew<CR>:Ag <c-r>"
 vnoremap _ y:tabnew<CR>:Ag <c-r>"
 
+" Disable Ag quickfix and location list mappings.
+let g:ag_apply_lmappings = 0
+let g:ag_apply_qmappings = 0
+
 " ag.vim plugin uses the H key as a shortcut within the quickfix window to open
 " the selected file silently in a new horizontal split. This conflicts with my
 " preferred use of H as a means of moving the cursor up 10 lines. Since the

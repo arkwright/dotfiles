@@ -273,6 +273,9 @@ noremap <leader>acss :Align { }<CR>
 " Align selected lines on colons.
 noremap <leader>a: :Align :<CR>
 
+" Easy way to diff the current two splits.
+command! Diffthese :execute 'normal! :diffthis<CR><C-w>w:diffthis<CR><C-w>w'
+
 " Easy vimdiff getting, putting, updating and navigation.
 noremap <Leader>dg :diffget<CR>
 noremap <Leader>dp :diffput<CR>

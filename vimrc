@@ -186,6 +186,9 @@ command! WORK execute ":set lines=88 columns=363"
 " Default to WORK environment.
 WORK
 
+" Wrap current line in console.log("");
+command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>"
+
 " Pressing <Leader>. will clear the current search highlighting.
 noremap <Leader>. :set hlsearch!<CR>
 

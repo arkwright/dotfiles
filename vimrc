@@ -291,6 +291,8 @@ noremap <Leader>dp :diffput<CR>
 noremap <Leader>du :diffupdate<CR>
 noremap <Leader>dn ]czz
 noremap <Leader>dN [czz
+noremap <Space> ]c
+noremap <S-Space> [c
 
 " An easier way to change letter case.
 " After changing case, move cursor left to stay on the character being changed.

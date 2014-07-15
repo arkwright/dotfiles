@@ -61,6 +61,7 @@ set relativenumber          " Display relative line numbers, rather than absolut
 set nonumber                " Never use absolute line numbers.
 set foldminlines=99999      " Disable code folding entirely. I hate that feature!
 set laststatus=2            " Always show the status line, in every window/split.
+set diffopt+=iwhite         " Ignore whitespace changes when diffing. This prevents excessive diff noise.
 
 " Never display absolute line numbers!
 augroup nonumber
@@ -187,7 +188,7 @@ command! WORK execute ":set lines=88 columns=363"
 WORK
 
 " Wrap current line in console.log("");
-command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>"
+command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>hhh"
 
 " Pressing <Leader>. will clear the current search highlighting.
 noremap <Leader>. :set hlsearch!<CR>

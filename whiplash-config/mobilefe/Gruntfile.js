@@ -515,7 +515,8 @@ module.exports = function (grunt) {
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
                   ENABLEMOBILEREDIRECT: false,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: ""
+		              COMSCORESITE: "",
+                              ENVIRONMENT: "WEB"
               }
           },
           integration: {
@@ -531,7 +532,8 @@ module.exports = function (grunt) {
                   DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
                   ENABLEMOBILEREDIRECT: true,
           		    COMSCOREID: "3005674",
-          		    COMSCORESITE: "http://mobile-dev.smgdigitaldev.com"
+          		    COMSCORESITE: "http://mobile-dev.smgdigitaldev.com",
+                            ENVIRONMENT: "WEB"
               }
           },
           staging: {
@@ -547,7 +549,8 @@ module.exports = function (grunt) {
                   DESKTOPCQURL: 'http://www.stage.smgdigitaldev.com',
                   ENABLEMOBILEREDIRECT: true,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: "http://mobile-stage.smgdigitaldev.com"
+		              COMSCORESITE: "http://mobile-stage.smgdigitaldev.com",
+                              ENVIRONMENT: "WEB"
               }
           },
           production: {
@@ -563,7 +566,8 @@ module.exports = function (grunt) {
                   DESKTOPCQURL: 'http://www.thestar.com',
                   ENABLEMOBILEREDIRECT: true,
 		              COMSCOREID: "3005674",
-		              COMSCORESITE: "http://m.thestar.com"
+		              COMSCORESITE: "http://m.thestar.com",
+                              ENVIRONMENT: "WEB"
               }
           },
 	  ios: {
@@ -578,7 +582,8 @@ module.exports = function (grunt) {
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
           COMSCOREID: "3005674",
-          COMSCORESITE: "http://m.thestar.com"
+          COMSCORESITE: "http://m.thestar.com",
+          ENVIRONMENT: "NATIVE:IOS"
         }
     },
 	  android: {
@@ -593,7 +598,8 @@ module.exports = function (grunt) {
           DESKTOPCQURL: 'http://www.dev-development.smgdigitaldev.com',
           ENABLEMOBILEREDIRECT: false,
     		  COMSCOREID: "3005674",
-    		  COMSCORESITE: "http://m.thestar.com"
+    		  COMSCORESITE: "http://m.thestar.com",
+                  ENVIRONMENT: "NATIVE:ANDROID"
         }
       }
     },

@@ -277,6 +277,11 @@ noremap <leader>acss :Align { }<CR>
 " Align selected lines on colons.
 noremap <leader>a: :Align :<CR>
 
+" Easier replay of previous macro in q register.
+" From: http://hashrocket.com/blog/posts/8-great-vim-mappings
+nnoremap Q @q
+vnoremap Q :normal @q<CR>
+
 " Easy way to diff the current two splits.
 command! Diffthese :execute 'normal! :diffthis<CR><C-w>w:diffthis<CR><C-w>w'
 

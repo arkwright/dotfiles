@@ -15,4 +15,4 @@ set wildignore+=dist/
 set wildignore+=dist/**
 
 WhiplashCopyFile .agignore
-WhiplashCopyFile Gruntfile.js
+" WhiplashCopyFile Gruntfile.js

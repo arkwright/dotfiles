@@ -486,12 +486,12 @@ command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>hhh"
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.
-command! Clearblank g/^\s*$/normal 0D
+command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
 
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.
-command! Delblank g/^\s*$/d
+command! -range=% Delblank <line1>,<line2>:global/^\s*$/d
 
 " Splits the current line or a range of lines by the pattern supplied,
 " To split the current line into new lines at each semicolon:

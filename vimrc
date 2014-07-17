@@ -153,36 +153,6 @@ vnoremap < <gv
 noremap  // :TComment<CR>
 vnoremap // :TComment<CR>
 
-" Make it easy to edit these files.
-command! CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
-command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
-command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
-command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
-command! TODO execute ":e ~/projects/textfiles/todo.txt"
-command! NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
-
-" :W should invoke :w, because I always type :W by accident!
-command! W execute ":w"
-
-" Write mode for easier writing.
-command! WRITE execute ':Goyo'
-
-" Code mode for reverting to coding after writing.
-command! CODE execute  ':Goyo'
-
-" Work mode sets up Vim for use at home.
-" Vim window is resized to fit laptop monitor.
-command! HOME execute ":set lines=62 columns=203"
-
-" Work mode sets up Vim for use at work.
-" Vim window is resized to fit external monitor.
-command! WORK execute ":set lines=88 columns=363"
-
-" Default to WORK environment.
-WORK
-
-" Wrap current line in console.log("");
-command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>hhh"
 
 " Pressing <Leader>. will clear the current search highlighting.
 noremap <Leader>. :set hlsearch!<CR>
@@ -484,7 +454,41 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 " Commands
 " =========================================
 
+" Make it easy to edit these files.
+command! CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
+command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
+command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
+command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
+command! TODO execute ":e ~/projects/textfiles/todo.txt"
+command! NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
+
+" :W should invoke :w, because I always type :W by accident!
+command! W execute ":w"
+
+" Write mode for easier writing.
+command! WRITE execute ':Goyo'
+
+" Code mode for reverting to coding after writing.
+command! CODE execute  ':Goyo'
+
+" Work mode sets up Vim for use at home.
+" Vim window is resized to fit laptop monitor.
+command! HOME execute ":set lines=62 columns=203"
+
+" Work mode sets up Vim for use at work.
+" Vim window is resized to fit external monitor.
+command! WORK execute ":set lines=88 columns=363"
+WORK " Default to WORK environment.
+
+" Wrap current line in console.log("");
+command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>hhh"
+
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.
 command! Delblank g/^\s*$/normal 0D
+
+" Removes unnecessary whitespace from otherwise blank lines in the
+" current file. This is necessary to allow { and } commands to jump
+" intuitively to the beginning/end of paragraphs.
+command! Killblank g/^\s*$/d

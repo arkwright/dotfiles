@@ -292,12 +292,6 @@ noremap <S-Space> [czz
 " After changing case, move cursor left to stay on the character being changed.
 noremap <leader>c ~h
 
-" Removes all lines containing only whitespace from the current buffer. Asks
-" for confirmation for each match. (Vim's { and } commands will not stop on
-" lines that contain whitespace, so it is useful to clear pointless whitespace
-" from all files.)
-noremap <leader>s :%s/^\s\+$//c<CR>
-
 " Move tabs left and right easily.
 noremap <D-[> :call MoveTabLeft()<CR>
 noremap <D-]> :call MoveTabRight()<CR>
@@ -483,3 +477,14 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 " let g:yankring_paste_v_akey = ''
 " vnoremap p :call <SID>Shotput2('p')<CR>
 " vnoremap P :call <SID>Shotput2('P')<CR>
+
+
+
+" =========================================
+" Commands
+" =========================================
+
+" Removes unnecessary whitespace from otherwise blank lines in the
+" current file. This is necessary to allow { and } commands to jump
+" intuitively to the beginning/end of paragraphs.
+command! Delblank g/^\s*$/normal 0D

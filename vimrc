@@ -492,3 +492,8 @@ command! Clearblank g/^\s*$/normal 0D
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.
 command! Delblank g/^\s*$/d
+
+" Splits the current line or a range of lines by the pattern supplied,
+" To split the current line into new lines at each semicolon:
+" :Split ;
+command! -range -nargs=1 Split <line1>,<line2>:substitute/\v<args>/\r/g

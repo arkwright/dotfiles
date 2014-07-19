@@ -63,6 +63,7 @@ set foldminlines=99999      " Disable code folding entirely. I hate that feature
 set laststatus=2            " Always show the status line, in every window/split.
 set diffopt+=iwhite         " Ignore whitespace changes when diffing. This prevents excessive diff noise.
 set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
+set modelines=0             " According to Steve Losh, this prevents certain security exploits: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 
 " Never display absolute line numbers!
 augroup nonumber
@@ -170,6 +171,12 @@ inoremap jk <Esc>`^
 " <Esc> in command-line mode as if it were <CR>
 " As per: http://vim.wikia.com/wiki/Avoid_the_escape_key
 cnoremap jk <C-c>
+
+" Disable traditional escape to train muscle memory.
+cnoremap <Esc> <nop>
+
+" Disable visual mode escape to retrain muscle memory. Use vv instead.
+vnoremap <Esc> <nop>
 
 " Disabling these because whenever I activate caps lock in insert mode, I end
 " up forgetting to turn it off. I then type JK to exit insert mode, but caps
@@ -340,15 +347,15 @@ let g:WhiplashProjectsDir = '~/projects/'
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
-  autocmd VimEnter * Whiplash vim-manhunt
+  autocmd VimEnter * Whiplash vim-irregular
 augroup END
 
 " Manhunt plugin configuration.
 " let g:manhunt_command_name = 'Manhunt'
 " let g:manhunt_default_mode = 'working'
 " let g:manhunt_diff_align   = 'center'
-" let g:manhunt_key_next_diff = 'n'
-" let g:manhunt_key_previous_diff = 'N'
+let g:manhunt_key_next_diff = '<Space>'
+let g:manhunt_key_previous_diff = '<S-Space>'
 " let g:manhunt_key_select_left_version = 'L'
 " let g:manhunt_key_select_next_version = 'j'
 " let g:manhunt_key_select_previous_version = 'k'

@@ -508,3 +508,6 @@ command! -range=% Delblank <line1>,<line2>:global/^\s*$/d
 " To split the current line into new lines at each semicolon:
 " :Split ;
 command! -range -nargs=1 Split <line1>,<line2>:substitute/\v<args>/\r/g
+
+" Reverses the order of all lines in the file, or the selected range.
+command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl

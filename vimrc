@@ -511,3 +511,21 @@ command! -range -nargs=1 Split <line1>,<line2>:substitute/\v<args>/\r/g
 
 " Reverses the order of all lines in the file, or the selected range.
 command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl
+
+" =========================================
+" Mappings
+" =========================================
+
+" Find any URL on the current line, and open it in a web browser.
+" Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
+function! HandleURL()
+  let l:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;]*')
+
+  if l:uri != ""
+    silent exec "!open '" . shellescape(l:uri, 1) . "'"
+  else
+    echo "No URI found in line."
+  endif
+endfunction
+nnoremap gx :call HandleURL()<CR>
+vnoremap gx :call HandleURL()<CR>

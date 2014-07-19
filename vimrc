@@ -138,6 +138,13 @@ noremap u u<C-L>
 " useless since you can just press u a bunch of times.
 noremap U <C-r>
 
+" ^ is a very difficult character to type, and a very useful command in Vim.
+" Rather than trying to train accuracy when aiming for such a difficult
+" target, I prefer using the easier mapping g0 instead. Recall that 0 moves
+" to the first character on the line; g0 now moves to the first *non-blank*
+" character, so it's a good mnemonic.
+noremap g0 ^
+
 " Since leader is mapped to comma, I need a replacement for comma, which
 " performs an action opposite to semicolon. Solution: comma semicolon.
 noremap <leader>; ,
@@ -153,7 +160,6 @@ vnoremap < <gv
 " Easier single and multi-line commenting with TComment plugin.
 noremap  // :TComment<CR>
 vnoremap // :TComment<CR>
-
 
 " Pressing <Leader>. will clear the current search highlighting.
 noremap <Leader>. :set hlsearch!<CR>

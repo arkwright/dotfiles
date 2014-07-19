@@ -164,12 +164,10 @@ vnoremap // :TComment<CR>
 " Pressing <Leader>. will clear the current search highlighting.
 noremap <Leader>. :set hlsearch!<CR>
 
-" Make it easy to escape from insert mode and save in one step,
-" and I also prefer my cursor to stay in place when exiting insert mode.
-" This command used to be defined in this way: inoremap jk <Esc>:w<CR>l
-" I had to change it because the 'l' motion at the end was breaking my macros.
-" More specifically, 'j' motions were not respected in macros if they followed
-" my 'jk' mapping.
+" Make it easy to escape from insert mode and save in one step, and I also
+" prefer my cursor to stay in place when exiting insert mode.  This command
+" used to be defined in this way: inoremap jk <Esc>:w<CR>l I had to change it
+" to `^ from l because the l motion at the end was breaking my macros.
 inoremap jk <Esc>`^
 
 " Also make it easy to escape from command-line mode.
@@ -178,7 +176,7 @@ inoremap jk <Esc>`^
 " As per: http://vim.wikia.com/wiki/Avoid_the_escape_key
 cnoremap jk <C-c>
 
-" Disable traditional escape to train muscle memory.
+" Disable command line mode escape to train muscle memory.
 cnoremap <Esc> <nop>
 
 " Disable visual mode escape to retrain muscle memory. Use vv instead.

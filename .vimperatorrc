@@ -1,0 +1,36 @@
+" IMPORTANT: Vimperator cannot parse comments which occur at the end of a
+" line, e.g.:
+"
+" set something=1 " This comment will break the file.
+
+
+
+" =========================================
+" Settings
+" =========================================
+" Follow hints only when <CR> is pressed.
+set followhints = 1
+
+
+
+" =========================================
+" Mappings
+" =========================================
+
+" Set the all-important <Leader> key
+let mapleader = ','
+
+" Easier scrolling.
+nnoremap J 15j
+nnoremap K 15k
+
+" Pressing <Leader>. will clear the current search highlighting.
+" Also, for Vimperator, hit <Esc>, which will remove focus from the current
+" link. CSS :focus renders an annoying dotted line around focused links.
+noremap <Leader>. :set hlsearch!<CR><Esc>
+
+" Also make it easy to escape from command-line mode.
+" <C-c> must be used in place of <Esc> for this mapping because Vim treats
+" <Esc> in command-line mode as if it were <CR>
+" As per: http://vim.wikia.com/wiki/Avoid_the_escape_key
+cnoremap jk <C-c>

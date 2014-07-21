@@ -5,6 +5,9 @@ call pathogen#helptags()
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Must be called before defining any mappings, or else YankStack mappings will not work.
+call yankstack#setup()
+
 " This must come before any :highlight commands to enable them to work.
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -54,7 +57,7 @@ set incsearch               " Do incremental searching
 set ignorecase              " Searches should be case-insensitive by default
 set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying or working with SVN files.
 set cursorline              " Turn on highlighting of current line.
-set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with yankring.
+set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with YankStack.
 set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
 set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
 set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
@@ -290,14 +293,7 @@ function! MoveTabRight()
 endfunction
 
 " Easy selection of the previously pasted text.
-" (We have to prevent YankRing from clobbering this mapping.)
 nnoremap gp `[v`]
-let g:yankring_paste_using_g = 0
-
-" Change default yankring cycle backwards/forwards through pasted text shortcut from
-" Ctrl+p to Command+p, and from Ctrl+n to Command+Shift+p.
-let g:yankring_replace_n_pkey = '<D-p>'
-let g:yankring_replace_n_nkey = '<D-P>'
 
 " Treat J and K keys as fast incremental cursor up/down.
 " But not in visual mode, because I keep typing VJ when I want Vj.
@@ -430,37 +426,6 @@ function! s:GoyoAfterCallback()
 endfunction
 let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
 
-" " JavaScript function text object.
-" " Inspired by: https://gist.github.com/stoeffel/dfd86fd956b38ef35e69
-" function! s:SelectJavaScriptFunction()
-"   execute "normal! ]}%?function\<CR>v/{\<CR>%"
-" endfunction
-" " vnoremap af :<C-U>:call <SID>SelectJavaScriptFunction()<CR>
-" " onoremap af :call <SID>SelectJavaScriptFunction()<CR>
-" 
-" augroup javascript_text_objects
-"   autocmd!
-"   autocmd FileType javascript :vnoremap af :<C-U>silent! :call <SID>SelectJavaScriptFunction()<CR>
-"   autocmd FileType javascript :onoremap af :silent! :call <SID>SelectJavaScriptFunction()<CR>
-" augroup END
-
-" Fix put functionality so that it does not overwrite the unnamed register
-" when in visual mode.
-" function! s:Shotput2(cmd)
-"   let l:old = getreg('"')
-"   execute "normal " . a:cmd
-"   call setreg('"', l:old)
-" endfunction
-" let g:yankring_paste_n_bkey = ''
-" let g:yankring_paste_n_akey = ''
-" let g:yankring_paste_v_key  = ''
-" let g:yankring_paste_v_bkey = ''
-" let g:yankring_paste_v_akey = ''
-" vnoremap p :call <SID>Shotput2('p')<CR>
-" vnoremap P :call <SID>Shotput2('P')<CR>
-
-
-
 " =========================================
 " Commands
 " =========================================
@@ -529,3 +494,15 @@ function! HandleURL()
 endfunction
 nnoremap gx :call HandleURL()<CR>
 vnoremap gx :call HandleURL()<CR>
+
+" =========================================
+" Yankstack
+" =========================================
+" Disable YankStack default key bindings.
+
+" Disable YankStack default key bindings.
+let g:yankstack_map_keys = 0 
+
+" These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
+nmap <D-p> <Plug>yankstack_substitute_older_paste
+nmap <D-P> <Plug>yankstack_substitute_newer_paste

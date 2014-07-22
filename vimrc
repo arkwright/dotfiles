@@ -81,9 +81,9 @@ augroup foldcolumn
   autocmd BufEnter * setlocal foldcolumn=0
 augroup END
 
-let html_no_rendering=1 " Disable underlining of tabs in HTML documents.
+let html_no_rendering=1    " Disable underlining of tabs in HTML documents.
 
-let mapleader = ","     " Set the all-important <Leader> key
+let mapleader = '<Space>'  " Set the all-important <Leader> key
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
@@ -149,10 +149,6 @@ noremap U <C-r>
 " character, so it's a good mnemonic.
 noremap g0 ^
 
-" Since leader is mapped to comma, I need a replacement for comma, which
-" performs an action opposite to semicolon. Solution: comma semicolon.
-noremap <leader>; ,
-
 " Enables easy line indenting by pressing > or <, instead of >> or <<.
 nnoremap > >>
 nnoremap < <<
@@ -172,13 +168,21 @@ noremap <Leader>. :set hlsearch!<CR>
 " prefer my cursor to stay in place when exiting insert mode.  This command
 " used to be defined in this way: inoremap jk <Esc>:w<CR>l I had to change it
 " to `^ from l because the l motion at the end was breaking my macros.
-inoremap jk <Esc>`^
+" inoremap jk <Esc>`^
 
 " Also make it easy to escape from command-line mode.
 " <C-c> must be used in place of <Esc> for this mapping because Vim treats
 " <Esc> in command-line mode as if it were <CR>
 " As per: http://vim.wikia.com/wiki/Avoid_the_escape_key
-cnoremap jk <C-c>
+" cnoremap jk <C-c>
+
+" I think this might be the winning <Esc> remap.
+" Seems to work everywhere. Does not require much hand movement.
+nnoremap <C-Space> <Esc>
+cnoremap <C-Space> <C-c>
+vnoremap <C-Space> <Esc>
+inoremap <C-Space> <Esc>`^
+let g:CommandTCancelMap = ['<Esc>', '<C-Space>']
 
 " Disable command line mode escape to train muscle memory.
 cnoremap <Esc> <nop>

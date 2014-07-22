@@ -392,6 +392,7 @@ let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 let g:syntastic_html_tidy_args = '--show-errors 1000'
 let g:syntastic_javascript_checkers = ['jshint']
 let g:syntastic_javascript_jshint_args = "--config ~/.jshintrc" "js_hint_options_are_here:  http://www.jshint.com/docs/options/
+let g:syntastic_json_checkers = ['jsonlint']                    " npm install -g jsonlint
 
 " Make Syntastic easier to use with a simple toggle command.
 " Closes location list automatically when Syntastic is toggled off.
@@ -484,6 +485,11 @@ command! -range -nargs=1 Split <line1>,<line2>:substitute/\v<args>/\r/g
 " Reverses the order of all lines in the file, or the selected range.
 command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl
 
+" Pretty-print JSON in the current buffer.
+" Will return an error if the JSON is malformed.
+" From: http://pascalprecht.github.io/2014/07/10/pretty-print-json-in-vim/
+command! JsonPrettyPrint :%!python -m json.tool
+
 " =========================================
 " Mappings
 " =========================================
@@ -503,9 +509,22 @@ nnoremap gx :call HandleURL()<CR>
 vnoremap gx :call HandleURL()<CR>
 
 " =========================================
+" Git Gutter
+" =========================================
+
+" Disable key mappings.
+let g:gitgutter_map_keys = 0
+
+" =========================================
+" vim-json
+" =========================================
+
+" Disable key mappings.
+let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal conceallevel=0)
+
+" =========================================
 " Yankstack
 " =========================================
-" Disable YankStack default key bindings.
 
 " Disable YankStack default key bindings.
 let g:yankstack_map_keys = 0 
@@ -513,10 +532,3 @@ let g:yankstack_map_keys = 0
 " These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
 nmap <D-p> <Plug>yankstack_substitute_older_paste
 nmap <D-P> <Plug>yankstack_substitute_newer_paste
-
-" =========================================
-" Git Gutter
-" =========================================
-
-" Disable key mappings.
-let g:gitgutter_map_keys = 0

@@ -161,8 +161,8 @@ vnoremap < <gv
 noremap  // :TComment<CR>
 vnoremap // :TComment<CR>
 
-" Pressing <Leader>. will clear the current search highlighting.
-noremap <Leader>. :set hlsearch!<CR>
+"hPressing <Leader>. will clear the current search highlighting.
+noremap <Leader><leader> :set hlsearch!<CR>
 
 " Make it easy to escape from insert mode and save in one step, and I also
 " prefer my cursor to stay in place when exiting insert mode.  This command
@@ -181,6 +181,7 @@ noremap <Leader>. :set hlsearch!<CR>
 nnoremap <C-Space> <Esc>
 cnoremap <C-Space> <C-c>
 vnoremap <C-Space> <Esc>
+onoremap <C-Space> <Esc>
 inoremap <C-Space> <Esc>`^
 let g:CommandTCancelMap = ['<Esc>', '<C-Space>']
 
@@ -243,10 +244,10 @@ let VCSCommandMapPrefix = '<leader>\'
 command! CC execute ":CommandTFlush"
 
 " PHP syntax checking bound to <leader>php
-noremap <leader><leader>php :w !php -l %<CR>
+" noremap <leader><leader>php :w !php -l %<CR>
 
 " JS synax checking bound to <leader><leader>js
-noremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
+" noremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
 
 " Align selected lines on = signs.
 noremap <leader>a= :Align =<CR>
@@ -512,3 +513,10 @@ let g:yankstack_map_keys = 0
 " These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
 nmap <D-p> <Plug>yankstack_substitute_older_paste
 nmap <D-P> <Plug>yankstack_substitute_newer_paste
+
+" =========================================
+" Git Gutter
+" =========================================
+
+" Disable key mappings.
+let g:gitgutter_map_keys = 0

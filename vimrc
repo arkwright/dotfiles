@@ -83,7 +83,7 @@ augroup END
 
 let html_no_rendering=1    " Disable underlining of tabs in HTML documents.
 
-let mapleader = '<Space>'  " Set the all-important <Leader> key
+let mapleader = " "  " Set the all-important <Leader> key
 
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')

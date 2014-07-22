@@ -383,6 +383,7 @@ let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 \'discarding unexpected',
 \'<form> lacks "action" attribute',
 \'<input> attribute .\{-\} lacks value',
+\'lacks "src" attribute',
 \] }
 " Increase the default number of errors that tidy will display, because 6 is
 " just not enough for an AngularJS file riddled with invalid elements and

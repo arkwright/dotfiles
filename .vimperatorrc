@@ -25,9 +25,10 @@ nnoremap J 15j
 nnoremap K 15k
 
 " Pressing <Leader>. will clear the current search highlighting.
-" Also, for Vimperator, hit <Esc>, which will remove focus from the current
-" link. CSS :focus renders an annoying dotted line around focused links.
 noremap <Leader>. :set hlsearch!<CR><Esc>
+
+" Make it easy to escape from insert mode.
+inoremap jk <Esc>
 
 " Also make it easy to escape from command-line mode.
 " <C-c> must be used in place of <Esc> for this mapping because Vim treats

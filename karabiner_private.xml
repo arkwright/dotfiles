@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<root>
+  <!-- TAB key changed to act as ESC, for MacVim only -->
+  <appdef>
+    <appname>MACVIM</appname>
+    <equal>org.vim.MacVim</equal>
+  </appdef>
+  <item>
+    <name>Change Tab to Esc in MacVim</name>
+    <identifier>private.macvimdef</identifier>
+    <only>MACVIM</only>
+    <autogen>--KeyToKey-- KeyCode::TAB, KeyCode::ESCAPE</autogen>
+  </item>
+</root>

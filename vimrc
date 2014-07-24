@@ -323,7 +323,7 @@ let g:WhiplashProjectsDir = '~/projects/'
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
-  autocmd VimEnter * Whiplash vim-irregular
+  autocmd VimEnter * Whiplash dotfiles
 augroup END
 
 " Manhunt plugin configuration.

@@ -164,40 +164,10 @@ vnoremap // :TComment<CR>
 "hPressing <Leader>. will clear the current search highlighting.
 noremap <Leader><leader> :set hlsearch!<CR>
 
-" Make it easy to escape from insert mode and save in one step, and I also
-" prefer my cursor to stay in place when exiting insert mode.  This command
+" I prefer my cursor to stay in place when exiting insert mode.  This command
 " used to be defined in this way: inoremap jk <Esc>:w<CR>l I had to change it
 " to `^ from l because the l motion at the end was breaking my macros.
-" inoremap jk <Esc>`^
-
-" Also make it easy to escape from command-line mode.
-" <C-c> must be used in place of <Esc> for this mapping because Vim treats
-" <Esc> in command-line mode as if it were <CR>
-" As per: http://vim.wikia.com/wiki/Avoid_the_escape_key
-" cnoremap jk <C-c>
-
-" I think this might be the winning <Esc> remap.
-" Seems to work everywhere. Does not require much hand movement.
-nnoremap <C-Space> <Esc>
-cnoremap <C-Space> <C-c>
-vnoremap <C-Space> <Esc>
-onoremap <C-Space> <Esc>
-inoremap <C-Space> <Esc>`^
-let g:CommandTCancelMap = ['<Esc>', '<C-Space>']
-
-" Disable command line mode escape to train muscle memory.
-cnoremap <Esc> <nop>
-
-" Disable visual mode escape to retrain muscle memory. Use vv instead.
-vnoremap <Esc> <nop>
-
-" Disabling these because whenever I activate caps lock in insert mode, I end
-" up forgetting to turn it off. I then type JK to exit insert mode, but caps
-" lock is still enabled, so my Vim normal mode commands are now uppercase
-" variants, which causes a huge clusterfuck during subsequent typing.
-" inoremap jK <Esc>`^:w<CR>
-" inoremap Jk <Esc>`^:w<CR>
-" inoremap JK <Esc>`^:w<CR>
+inoremap <Esc> <Esc>`^
 
 " Make it easy to save. Just press s!
 noremap s <Esc>:w<CR>

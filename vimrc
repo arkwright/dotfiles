@@ -409,7 +409,7 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 " =========================================
 
 " Make it easy to edit these files.
-command! CHEAT execute ":e ~/projects/textfiles/cheatsheet.txt"
+command! CHEAT execute ":e ~/projects/dotfiles/textfiles/cheatsheet.txt"
 command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
 command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"

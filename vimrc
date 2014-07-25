@@ -68,6 +68,7 @@ set diffopt+=iwhite         " Ignore whitespace changes when diffing. This preve
 set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
 set modelines=0             " According to Steve Losh, this prevents certain security exploits: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 set lazyredraw              " Prevents the screen from being redrawn while executing macros, registers and other commands that have not been typed.
+set wildmenu                " Enables hints for command completion on the command line.
 
 " Never display absolute line numbers!
 augroup nonumber

@@ -13,4 +13,15 @@
     <identifier>private.esctab</identifier>
     <autogen>--KeyToKey-- KeyCode::ESCAPE, KeyCode::TAB</autogen>
   </item>
+
+  <!-- CONTROL_L+i key changed to act as TAB -->
+  <item>
+    <name>Change CONTROL_L+i to Tab</name>
+    <identifier>private.ctrlitab</identifier>
+    <autogen>
+      __KeyToKey__
+      KeyCode::I, ModifierFlag::CONTROL_L,
+      KeyCode::TAB
+    </autogen>
+  </item>
 </root>

@@ -162,8 +162,8 @@ vnoremap < <gv
 noremap  // :TComment<CR>
 vnoremap // :TComment<CR>
 
-"hPressing <Leader>. will clear the current search highlighting.
-noremap <leader>. :set hlsearch!<CR>
+"Pressing <Leader><leader> will clear the current search highlighting.
+noremap <leader><leader> :set hlsearch!<CR>
 
 " I prefer my cursor to stay in place when exiting insert mode.  This command
 " used to be defined in this way: inoremap jk <Esc>:w<CR>l I had to change it

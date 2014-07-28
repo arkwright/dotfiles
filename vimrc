@@ -251,7 +251,7 @@ noremap <S-Space> [czz
 
 " An easier way to change letter case.
 " In normal mode, after changing case, move cursor left to stay on the character being changed.
-nnoremap <leader>c ~h    
+nnoremap <leader>c ~h
 vnoremap <leader>c ~
 
 " Move tabs left and right easily.

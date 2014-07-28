@@ -249,10 +249,23 @@ To install APC on OSX 10.7:
  Bash
 =====
 
+To execute a command once for every file in the current directory:
+(From: http://stackoverflow.com/questions/10523415/bash-script-to-execute-command-on-all-files-in-directory)
+
+  for file in ./*; do cmdname $file; done
+
 To recursively (-r) zip a folder (and all of its contents), split the resulting archive into multiple 1 GB files (-s 1g),
 and do it all as fast as possible (-0 switch means no compression; -9 would be max compression):
 
   zip -r -s 1g -0 archivename.zip foldername/
+
+To find a file (where . is the starting directory, use / for entire system):
+
+  find . -name "file.txt"
+
+If a directory contains too many files, "ls" or "rm" can take a long time. You can use "find" to delete files faster.
+
+  find . -name "file.txt" -delete
 
 
 
@@ -673,19 +686,3 @@ FOS USER BUNDLE
 To get the group manager (FOS\UserBundle\Entity\GroupManager; the FOS interface to managing Group entities), call this from within a controller:
 
   $this->get('fos_user.group_manager')
-
-
-
-
-
-======
- Unix
-======
-
-To find a file (where . is the starting directory, use / for entire system):
-
-  find . -name "file.txt"
-
-If a directory contains too many files, "ls" or "rm" can take a long time. You can use "find" to delete files faster.
-
-  find . -name "file.txt" -delete

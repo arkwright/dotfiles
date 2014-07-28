@@ -470,7 +470,7 @@ command! JsonPrettyPrint :%!python -m json.tool
 " Find any URL on the current line, and open it in a web browser.
 " Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
 function! HandleURL()
-  let l:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;]*')
+  let l:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;)]*')
 
   if l:uri != ""
     silent exec "!open '" . shellescape(l:uri, 1) . "'"

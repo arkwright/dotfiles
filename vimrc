@@ -250,8 +250,9 @@ noremap <Space> ]czz
 noremap <S-Space> [czz
 
 " An easier way to change letter case.
-" After changing case, move cursor left to stay on the character being changed.
-noremap <leader>c ~h
+" In normal mode, after changing case, move cursor left to stay on the character being changed.
+nnoremap <leader>c ~h    
+vnoremap <leader>c ~
 
 " Move tabs left and right easily.
 noremap <D-[> :call MoveTabLeft()<CR>

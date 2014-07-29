@@ -69,6 +69,8 @@ set diffopt+=filler         " Show filler lines, to keep the text synchronized w
 set modelines=0             " According to Steve Losh, this prevents certain security exploits: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
 set lazyredraw              " Prevents the screen from being redrawn while executing macros, registers and other commands that have not been typed.
 set wildmenu                " Enables hints for command completion on the command line.
+set splitright              " When opening a new split window, prefer the right side.
+set splitbelow              " When opening a new split window, prefer the bottom.
 
 " Never display absolute line numbers!
 augroup nonumber
@@ -462,6 +464,49 @@ command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl
 " Will return an error if the JSON is malformed.
 " From: http://pascalprecht.github.io/2014/07/10/pretty-print-json-in-vim/
 command! JsonPrettyPrint :%!python -m json.tool
+
+"""
+" Make it easy to open or diff a doppleganger file in a similar project.
+"
+" @param    boolean    diff    If true, diff the two files.
+"""
+function! s:Doppleganger(diff)
+  let l:dopplegangers = [['mobilefe', 'tabletfe'], ['mobilenative', 'tabletnative']]
+
+  let l:currentFileName = expand('%:p')
+
+  let l:find    = ''
+  let l:replace = ''
+
+  echom l:currentFileName
+
+  for [first, second] in l:dopplegangers
+    if stridx(l:currentFileName, first) ># -1
+      let l:find    = first
+      let l:replace = second
+      break
+    elseif stridx(l:currentFileName, second) ># -1
+      let l:find    = second
+      let l:replace = first
+      break
+    endif
+  endfor
+
+  if l:find !=# ''   &&   l:replace !=# ''
+    let l:otherFileName = substitute(l:currentFileName, l:find, l:replace, '')
+
+    execute 'vnew ' . l:otherFileName
+
+    if a:diff ==# 1
+      windo diffthis
+      normal! ]czz
+    endif
+
+    execute "normal! \<C-w>\<C-w>"
+  endif
+endfunction
+command! Doppleganger :call s:Doppleganger(0)
+command! DopplegangerDiff :call s:Doppleganger(1)
 
 " =========================================
 " Mappings

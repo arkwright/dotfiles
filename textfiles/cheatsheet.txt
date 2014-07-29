@@ -193,6 +193,10 @@ To search inside file paths matching a regex using Ag:
   :Ag -G regex
   :Ag -G .js      " Searches for JavaScript files.
 
+To find file names matching a regex using Ag:
+
+  :Ag -g \.js$    " Returns all files ending in .js
+
 ===========
  Amazon S3
 ===========

@@ -478,8 +478,6 @@ function! s:Doppleganger(diff)
   let l:find    = ''
   let l:replace = ''
 
-  echom l:currentFileName
-
   for [first, second] in l:dopplegangers
     if stridx(l:currentFileName, first) ># -1
       let l:find    = first

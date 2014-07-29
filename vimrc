@@ -467,6 +467,10 @@ command! JsonPrettyPrint :%!python -m json.tool
 " Mappings
 " =========================================
 
+" Make it easier to open the file under the cursor in new tab.
+nnoremap <leader>gf <C-w>gf
+vnoremap <leader>gf <C-w>gf
+
 " Find any URL on the current line, and open it in a web browser.
 " Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
 function! HandleURL()

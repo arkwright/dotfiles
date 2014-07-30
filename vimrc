@@ -71,6 +71,7 @@ set lazyredraw              " Prevents the screen from being redrawn while execu
 set wildmenu                " Enables hints for command completion on the command line.
 set splitright              " When opening a new split window, prefer the right side.
 set nosplitbelow            " When opening a new split window, prefer the top.
+set noswapfile              " Disable swap files. They're not very useful.
 
 " Never display absolute line numbers!
 augroup nonumber

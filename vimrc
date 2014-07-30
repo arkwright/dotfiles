@@ -70,7 +70,7 @@ set modelines=0             " According to Steve Losh, this prevents certain sec
 set lazyredraw              " Prevents the screen from being redrawn while executing macros, registers and other commands that have not been typed.
 set wildmenu                " Enables hints for command completion on the command line.
 set splitright              " When opening a new split window, prefer the right side.
-set splitbelow              " When opening a new split window, prefer the bottom.
+set nosplitbelow            " When opening a new split window, prefer the top.
 
 " Never display absolute line numbers!
 augroup nonumber

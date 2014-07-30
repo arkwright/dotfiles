@@ -512,17 +512,18 @@ command! DopplegangerDiff :call s:Doppleganger(1)
 """
 function! s:Gitlog()
   let l:numCommits = 100
-  let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --pretty=format:''\%s\%n\%an\%n\%cd\%n\%H'' --name-only --topo-order'
+  let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --name-only --topo-order --pretty=format:''\%n\%s\%n================================================\%nAuthor: \%an\%nDate:   \%ci\%nCommit: \%H\%n------------------------------------------------'''
+  " let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --pretty=format:''Commit: \%s\%n================================================\%nAuthor: \%an\%nDate:   %cd\%ncommit  \%H\%n------------------------------------------------\%n'' --name-only --topo-order'
 
   tabnew
 
   execute 'silent! read !' . l:gitLogCmd
 
   normal! gg
-  normal! dd
+  normal! 2dd
 
   setlocal buftype=nofile
-  setlocal bufhidden=delete
+  setlocal bufhidden=hide
   setlocal nomodifiable
 
   " <CR> opens current file in new tab.

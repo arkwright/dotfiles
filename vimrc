@@ -506,6 +506,29 @@ endfunction
 command! Doppleganger :call s:Doppleganger(0)
 command! DopplegangerDiff :call s:Doppleganger(1)
 
+"""
+" Make it easy to view a git log for the current repo.
+"""
+function! s:Gitlog()
+  let l:numCommits = 100
+  let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --pretty=format:''\%s\%n\%an\%n\%cd\%n\%H'' --name-only --topo-order'
+
+  tabnew
+
+  execute 'silent! read !' . l:gitLogCmd
+
+  normal! gg
+  normal! dd
+
+  setlocal buftype=nofile
+  setlocal bufhidden=delete
+  setlocal nomodifiable
+
+  " <CR> opens current file in new tab.
+  nnoremap <buffer> <CR> <C-w>gf
+endfunction
+command! Gitlog :call s:Gitlog()
+
 " =========================================
 " Mappings
 " =========================================

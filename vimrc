@@ -561,8 +561,14 @@ vnoremap gx :call HandleURL()<CR>
 " Airline
 " =========================================
 
+" Set separators used between segmented areas.
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
+
+" Turn off 'mixed-indent' warnings, because when collaborating with other
+" developers, the indentation is almost never correct. Keep trailing
+" whitespace warnings, though, because those are useful.
+let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
 " =========================================
 " Git Gutter

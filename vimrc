@@ -462,6 +462,9 @@ command! -range -nargs=1 Split <line1>,<line2>:substitute/\v<args>/\r/g
 " Reverses the order of all lines in the file, or the selected range.
 command! -bar -range=% Reverse <line1>,<line2>g/^/m<line1>-1|nohl
 
+" Removes duplicate lines from the range.
+command! -bar -range=% Unique <line1>,<line2>!uniq
+
 " Pretty-print JSON in the current buffer.
 " Will return an error if the JSON is malformed.
 " From: http://pascalprecht.github.io/2014/07/10/pretty-print-json-in-vim/

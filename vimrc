@@ -570,6 +570,9 @@ let g:airline_right_sep = ''
 " whitespace warnings, though, because those are useful.
 let g:airline#extensions#whitespace#checks = [ 'trailing' ]
 
+" Disable gitgutter 'hunks' (total additions, deletions, etc.) appearing in airline.
+let g:airline#extensions#hunks#enabled = 0
+
 " =========================================
 " Git Gutter
 " =========================================

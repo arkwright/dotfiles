@@ -453,6 +453,9 @@ command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
 " intuitively to the beginning/end of paragraphs.
 command! -range=% Delblank <line1>,<line2>:global/^\s*$/d
 
+" Removes unnecessary whitespace from the end of lines in the range.
+command! -range=% Deltrailing <line1>,<line2>substitute/\v\s*$//g | normal! <C-o>
+
 " Splits the current line or a range of lines by the pattern supplied,
 " To split the current line into new lines at each semicolon:
 " :Split ;

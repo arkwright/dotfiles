@@ -448,9 +448,7 @@ command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>hhh"
 " intuitively to the beginning/end of paragraphs.
 command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
 
-" Removes unnecessary whitespace from otherwise blank lines in the
-" current file. This is necessary to allow { and } commands to jump
-" intuitively to the beginning/end of paragraphs.
+" Deletes lines which contain only whitespace.
 command! -range=% Delblank <line1>,<line2>:global/^\s*$/d
 
 " Removes unnecessary whitespace from the end of lines in the range.

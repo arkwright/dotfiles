@@ -100,7 +100,7 @@ if has("autocmd")
   " 'cindent' is on in C files, etc.
   " Also load indent files, to automatically do language-dependent indenting.
   filetype plugin indent on
-endif 
+endif
 
 set autoindent
 set number        " Turn on line numbers
@@ -130,7 +130,7 @@ let NERDTreeDirArrows=1
 
 " By default, NERDTree uses ? as the help key.
 " But ? is the default Vim key for backwards text search.
-" Not good. So I have re-mapped NERDTree help to <Leader>? 
+" Not good. So I have re-mapped NERDTree help to <Leader>?
 " For me, searching backwards in NERDTree is by far the more common use case
 " for ?.
 let NERDTreeMapHelp='<Leader>?'
@@ -380,7 +380,7 @@ nnoremap <leader>l :Lint<CR>
 " augroup quickfix_preview
 "   autocmd!
 "   autocmd BufWinEnter quickfix nnoremap <buffer> <CR> <CR>zz<C-w>p
-"   autocmd BufWinEnter quickfix nnoremap <buffer> j j<CR>zz<C-w>p 
+"   autocmd BufWinEnter quickfix nnoremap <buffer> j j<CR>zz<C-w>p
 "   autocmd BufWinEnter quickfix nnoremap <buffer> k k<CR>zz<C-w>p
 " augroup END
 
@@ -554,6 +554,13 @@ nnoremap gx :call HandleURL()<CR>
 vnoremap gx :call HandleURL()<CR>
 
 " =========================================
+" Airline
+" =========================================
+
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+
+" =========================================
 " Git Gutter
 " =========================================
 
@@ -572,7 +579,7 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 " =========================================
 
 " Disable YankStack default key bindings.
-let g:yankstack_map_keys = 0 
+let g:yankstack_map_keys = 0
 
 " These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
 nmap <D-p> <Plug>yankstack_substitute_older_paste

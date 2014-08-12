@@ -176,6 +176,16 @@ To sort all lines in the buffer and remove duplicates:
 
   :sort u
 
+To run an arbitrary Ex command in a bunch of files (e.g. substitute):
+  1. Clear contents of argument list:
+       :argdelete *
+  2. Add desired files to argument list:
+       :argadd **/*.js   " Will add all .js files in all subdirectories of the current directory.
+  3. Run the command:
+       :silent! argdo! %s/something/otherthing/g | update
+  4. Optionally undo the command (this does not seem to work if `:set hidden` is not in your .vimrc):
+       :silent! argdo! undo | update
+
 ==========================
  Ag (the Silver Searcher)
 ==========================

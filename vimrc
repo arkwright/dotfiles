@@ -72,6 +72,7 @@ set wildmenu                " Enables hints for command completion on the comman
 set splitright              " When opening a new split window, prefer the right side.
 set nosplitbelow            " When opening a new split window, prefer the top.
 set noswapfile              " Disable swap files. They're not very useful.
+set hidden                  " Make a buffer hidden when it is abandoned (no associated window), modified, and unsaved.
 
 " Never display absolute line numbers!
 augroup nonumber
@@ -534,6 +535,18 @@ function! s:Gitlog()
   nnoremap <buffer> <CR> <C-w>gf
 endfunction
 command! Gitlog :call s:Gitlog()
+
+" Populate argument list with all files currently in the quickfix list.
+" From: http://stackoverflow.com/questions/5686206/search-replace-using-quickfix-list-in-vim/5686810#5686810
+function! QuickfixFilenames()
+  " Building a hash ensures we get each buffer only once
+  let buffer_numbers = {}
+  for quickfix_item in getqflist()
+    let buffer_numbers[quickfix_item['bufnr']] = bufname(quickfix_item['bufnr'])
+  endfor
+  return join(values(buffer_numbers))
+endfunction
+command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
 
 " =========================================
 " Mappings

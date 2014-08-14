@@ -564,6 +564,9 @@ vnoremap <leader>gf <C-w>gf
 " Easy access to :only Ex command. I use it all the time.
 nnoremap <leader>o :only<CR>
 
+" Delete all trailing whitespace on the current line.
+nnoremap d<space> :s/\v\s*$//<CR>g_
+
 " Find any URL on the current line, and open it in a web browser.
 " Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
 function! HandleURL()

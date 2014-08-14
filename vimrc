@@ -529,7 +529,6 @@ function! s:Gitlog()
 
   setlocal buftype=nofile
   setlocal bufhidden=hide
-  setlocal nomodifiable
 
   " <CR> opens current file in new tab.
   nnoremap <buffer> <CR> <C-w>gf
@@ -561,6 +560,9 @@ nnoremap Y y$
 " Make it easier to open the file under the cursor in new tab.
 nnoremap <leader>gf <C-w>gf
 vnoremap <leader>gf <C-w>gf
+
+" Easy access to :only Ex command. I use it all the time.
+nnoremap <leader>o :only<CR>
 
 " Find any URL on the current line, and open it in a web browser.
 " Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser

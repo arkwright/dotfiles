@@ -551,12 +551,6 @@ command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
 " Mappings
 " =========================================
 
-" The normal mode Y command behaves inconsistently when compared with C
-" and D commands. Since yy duplicates what Y does by default, remap Y
-" so that it is similar to C and D.
-" See also: http://www.reddit.com/r/vim/comments/2c3ap9/why_is_the_behaviour_of_y_so_different_from_c_and/
-nnoremap Y y$
-
 " Make it easier to open the file under the cursor in new tab.
 nnoremap <leader>gf <C-w>gf
 vnoremap <leader>gf <C-w>gf

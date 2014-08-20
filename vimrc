@@ -576,7 +576,7 @@ vnoremap gx :call HandleURL()<CR>
 nnoremap <leader>ll Iconsole.log(<ESC>A);<ESC>0f(l
 " Wrap current line in console.log('');
 nnoremap <leader>l' Iconsole.log('<ESC>A');<ESC>0f(ll
-" Wrap current line in console.log('');
+" Wrap current line in console.log("");
 nnoremap <leader>l" Iconsole.log("<ESC>A");<ESC>0f(ll
 " If visual selection, wrap in console.log() and place on new line beneath.
 vnoremap <leader>ll "zyoconsole.log(<C-r>z);<ESC>F(l

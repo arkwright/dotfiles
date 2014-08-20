@@ -373,7 +373,7 @@ let g:syntastic_json_checkers = ['jsonlint']                    " npm install -g
 " Make Syntastic easier to use with a simple toggle command.
 " Closes location list automatically when Syntastic is toggled off.
 command! Lint execute "lcl | SyntasticToggleMode"
-nnoremap <leader>l :Lint<CR>
+nnoremap <leader>L :Lint<CR>
 
 " Allow up/down movements and <CR> in quickfix window to preview
 " the file under the cursor, instead of jumping to it immediately.
@@ -440,9 +440,6 @@ command! HOME execute ":set lines=62 columns=203"
 " Vim window is resized to fit external monitor.
 command! WORK execute ":set lines=88 columns=363"
 WORK " Default to WORK environment.
-
-" Wrap current line in console.log("");
-command! Log execute "normal! Iconsole.log(\"\<ESC>A\");\<ESC>hhh"
 
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
@@ -574,6 +571,19 @@ function! HandleURL()
 endfunction
 nnoremap gx :call HandleURL()<CR>
 vnoremap gx :call HandleURL()<CR>
+
+" Wrap current line in console.log();
+nnoremap <leader>ll Iconsole.log(<ESC>A);<ESC>0f(l
+" Wrap current line in console.log('');
+nnoremap <leader>l' Iconsole.log('<ESC>A');<ESC>0f(ll
+" Wrap current line in console.log('');
+nnoremap <leader>l" Iconsole.log("<ESC>A");<ESC>0f(ll
+" If visual selection, wrap in console.log() and place on new line beneath.
+vnoremap <leader>ll "zyoconsole.log(<C-r>z);<ESC>F(l
+" If visual selection, wrap in console.log('') and place on new line beneath.
+vnoremap <leader>l' "zyoconsole.log('<C-r>z');<ESC>F(ll
+" If visual selection, wrap in console.log("") and place on new line beneath.
+vnoremap <leader>l" "zyoconsole.log("<C-r>z");<ESC>F(ll
 
 " =========================================
 " Airline

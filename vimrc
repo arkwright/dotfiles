@@ -552,6 +552,9 @@ command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
 " Mappings
 " =========================================
 
+" Faster closing of current file/tab.
+nnoremap <leader>w :q<CR>
+
 " Make it easier to open the file under the cursor in new tab.
 nnoremap <leader>gf <C-w>gf
 vnoremap <leader>gf <C-w>gf
@@ -637,5 +640,3 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 let g:yankstack_map_keys = 0
 
 " These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
-nmap <D-p> <Plug>yankstack_substitute_older_paste
-nmap <D-P> <Plug>yankstack_substitute_newer_paste

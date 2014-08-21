@@ -175,7 +175,11 @@ noremap <leader><leader> :set hlsearch!<CR>
 inoremap <Esc> <Esc>`^
 
 " Make it easy to save. Just press s!
-noremap s <Esc>:w<CR>
+nnoremap s <Esc>:w<CR>
+
+" Make it easy to use Tim Pope's surround plugin from visual mode.
+" This must use map, rather than noremap, in order to work.
+vmap s S
 
 " Bind Tab to Ctrl+N to make word autocompletion easier. Now it works like
 " Bash path name autocompletion.
@@ -558,6 +562,9 @@ nnoremap <leader>o :only<CR>
 " Delete all trailing whitespace on the current line.
 nnoremap d<space> :s/\v\s*$//<CR>g_
 
+" Faster, easier centering of the current line.
+nnoremap <leader>z zz
+
 " Find any URL on the current line, and open it in a web browser.
 " Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
 function! HandleURL()
@@ -579,11 +586,11 @@ nnoremap <leader>l' Iconsole.log('<ESC>A');<ESC>0f(ll
 " Wrap current line in console.log("");
 nnoremap <leader>l" Iconsole.log("<ESC>A");<ESC>0f(ll
 " If visual selection, wrap in console.log() and place on new line beneath.
-vnoremap <leader>ll "zyoconsole.log(<C-r>z);<ESC>F(l
+vnoremap <leader>ll "zyo<CR>console.log(<C-r>z);<ESC>F(l
 " If visual selection, wrap in console.log('') and place on new line beneath.
-vnoremap <leader>l' "zyoconsole.log('<C-r>z');<ESC>F(ll
+vnoremap <leader>l' "zyo<CR>console.log('<C-r>z');<ESC>F(ll
 " If visual selection, wrap in console.log("") and place on new line beneath.
-vnoremap <leader>l" "zyoconsole.log("<C-r>z");<ESC>F(ll
+vnoremap <leader>l" "zyo<CR>console.log("<C-r>z");<ESC>F(ll
 
 " =========================================
 " Airline
@@ -607,6 +614,13 @@ let g:airline#extensions#hunks#enabled = 0
 
 " Disable key mappings.
 let g:gitgutter_map_keys = 0
+
+" =========================================
+" vim-javascript
+" =========================================
+
+" Disables JSDoc syntax highlighting.
+let g:javascript_ignore_javaScriptdoc = 1
 
 " =========================================
 " vim-json

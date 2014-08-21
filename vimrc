@@ -640,3 +640,5 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 let g:yankstack_map_keys = 0
 
 " These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
+nmap <D-p> <Plug>yankstack_substitute_older_paste
+nmap <D-P> <Plug>yankstack_substitute_newer_paste

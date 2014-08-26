@@ -518,8 +518,7 @@ command! DopplegangerDiff :call s:Doppleganger(1)
 """
 function! s:Gitlog()
   let l:numCommits = 100
-  let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --name-only --topo-order --pretty=format:''\%n\%s\%n================================================\%nAuthor: \%an\%nDate:   \%ci\%nCommit: \%H\%n------------------------------------------------'''
-  " let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --pretty=format:''Commit: \%s\%n================================================\%nAuthor: \%an\%nDate:   %cd\%ncommit  \%H\%n------------------------------------------------\%n'' --name-only --topo-order'
+  let l:gitLogCmd  = 'git log -n ' . l:numCommits . ' --name-only --pretty=format:''\%n\%s\%n================================================\%nAuthor: \%an\%nDate:   \%ci\%nCommit: \%H\%n------------------------------------------------'''
 
   tabnew
 

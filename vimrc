@@ -104,6 +104,7 @@ if has("autocmd")
 endif
 
 set autoindent
+set smartindent
 set number        " Turn on line numbers
 set guioptions-=T " Turn off the toolbar at the top of MacVim
 set shiftwidth=2  " Number of spaces to use for each level of auto indent.

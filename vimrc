@@ -640,6 +640,22 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 " let g:radar_command_name = 'Ra'
 
 " =========================================
+" Snipmate
+" =========================================
+
+" A string inserted when no match for a trigger is found.
+" Set it to the empty string to prevent anything from being inserted.
+let g:snipMate['no_match_completion_feedkeys_chars'] = ''
+
+" Trigger snippet or move to next snippet placeholder.
+imap jk <Plug>snipMateNextOrTrigger
+smap jk <Plug>snipMateNextOrTrigger
+
+" Jump to the previous tab stop, if it exists. Use in both insert and select modes.
+imap kj <Plug>snipMateBack
+smap kj <Plug>snipMateBack
+
+" =========================================
 " Yankstack
 " =========================================
 

@@ -112,8 +112,7 @@ set expandtab     " Always expand tabs to spaces.
 set nowrap        " Disable word-wrap for long lines of text.
 
 " F5 toggles NERDTree
-noremap  <F5> :NERDTreeToggle<CR>
-inoremap <F5> <Esc>:NERDTreeToggle<CR>
+nnoremap <F5> :NERDTreeToggle<CR>
 
 " NERDTree defaults to showing hidden files.
 let NERDTreeShowHidden=1
@@ -140,35 +139,38 @@ let NERDTreeMapHelp='<Leader>?'
 " Vim 7.4 has a defect which causes relative line numbers to display
 " incorrectly when undoing a line deletion. This can be easily fixed
 " by forcing Vim to clear and redraw the screen (<C-L>).
-noremap u u<C-L>
+nnoremap u u<C-L>
+xnoremap u u<c-l>
 
-" Easy redo by pressing U, to compliment u, which is Vim's default undo.
-" Vim's default redo is Ctrl+r, which is a pain in the ass to reach.
+" easy redo by pressing u, to compliment u, which is vim's default undo.
+" vim's default redo is ctrl+r, which is a pain in the ass to reach.
 " Vim's default U -- undo all changes on this single line -- is basically
 " useless since you can just press u a bunch of times.
-noremap U <C-r>
+nnoremap U <C-r>
 
 " ^ is a very difficult character to type, and a very useful command in Vim.
 " Rather than trying to train accuracy when aiming for such a difficult
 " target, I prefer using the easier mapping g0 instead. Recall that 0 moves
 " to the first character on the line; g0 now moves to the first *non-blank*
 " character, so it's a good mnemonic.
-noremap g0 ^
+nnoremap g0 ^
+xnoremap g0 ^
 
 " Enables easy line indenting by pressing > or <, instead of >> or <<.
 nnoremap > >>
 nnoremap < <<
 
 " Preserves selection after (un-)indenting selected lines.
-vnoremap > >gv
-vnoremap < <gv
+xnoremap > >gv
+xnoremap < <gv
 
 " Easier single and multi-line commenting with TComment plugin.
-noremap  // :TComment<CR>
-vnoremap // :TComment<CR>
+nnoremap // :TComment<CR>
+xnoremap // :TComment<CR>
 
 "Pressing <Leader><leader> will clear the current search highlighting.
-noremap <leader><leader> :set hlsearch!<CR>
+nnoremap <leader><leader> :set hlsearch!<CR>
+xnoremap <leader><leader> :<C-u>set hlsearch!<CR>gv
 
 " I prefer my cursor to stay in place when exiting insert mode.  This command
 " used to be defined in this way: inoremap jk <Esc>:w<CR>l I had to change it

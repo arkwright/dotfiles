@@ -182,7 +182,7 @@ nnoremap s <Esc>:w<CR>
 
 " Make it easy to use Tim Pope's surround plugin from visual mode.
 " This must use map, rather than noremap, in order to work.
-vmap s S
+xmap s S
 
 " Bind Tab to Ctrl+N to make word autocompletion easier. Now it works like
 " Bash path name autocompletion.
@@ -193,11 +193,13 @@ inoremap <S-Tab> <C-p>
 " disabled! I always turn it off for convenience and then forget to turn it
 " back on again! Also, prevent auto-skipping ahead to the next instance of the word;
 " that shit is just annoying.
-noremap # #:set hlsearch<CR>N
-noremap * *:set hlsearch<CR>N
+nnoremap # #:set hlsearch<CR>N
+nnoremap * *:set hlsearch<CR>N
+xnoremap # #:<C-u>set hlsearch<CR>N
+xnoremap * *:<C-u>set hlsearch<CR>
 
 " Invoke Command-T with <Leader>t.
-noremap <Leader>t :CommandT<Esc>
+nnoremap <Leader>t :CommandT<Esc>
 
 " Increase number of files the Command-T will index.
 " If you're wondering why Command-T won't find certain files, make this number bigger.
@@ -226,48 +228,42 @@ let VCSCommandMapPrefix = '<leader>\'
 command! CC execute ":CommandTFlush"
 
 " PHP syntax checking bound to <leader>php
-" noremap <leader><leader>php :w !php -l %<CR>
+" nnoremap <leader><leader>php :w !php -l %<CR>
 
 " JS synax checking bound to <leader><leader>js
-" noremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
+" nnoremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
 
 " Align selected lines on = signs.
-noremap <leader>a= :Align =<CR>
+xnoremap <leader>a= :Align =<CR>
 
 " Align selected lines on => PHP array key/value arrows.
-noremap <leader>a=> :Align =><CR>
+xnoremap <leader>a=> :Align =><CR>
 
 " Align selected lines on { and } signs (good for lining up CSS).
-noremap <leader>acss :Align { }<CR>
+xnoremap <leader>acss :Align { }<CR>
 
 " Align selected lines on colons.
-noremap <leader>a: :Align :<CR>
+xnoremap <leader>a: :Align :<CR>
 
 " Easier replay of previous macro in q register.
 " From: http://hashrocket.com/blog/posts/8-great-vim-mappings
 nnoremap Q @q
-vnoremap Q :normal @q<CR>
+xnoremap Q :normal @q<CR>
 
 " Easy way to diff the current two splits.
 command! Diffthese :execute 'normal! :diffthis<CR><C-w>w:diffthis<CR><C-w>w'
 
 " Easy vimdiff getting, putting, updating and navigation.
-noremap <Leader>dg :diffget<CR>
-noremap <Leader>dp :diffput<CR>
-noremap <Leader>du :diffupdate<CR>
-noremap <Leader>dn ]czz
-noremap <Leader>dN [czz
-noremap <Space> ]czz
-noremap <S-Space> [czz
+nnoremap <Leader>du :diffupdate<CR>
 
 " An easier way to change letter case.
 " In normal mode, after changing case, move cursor left to stay on the character being changed.
 nnoremap <leader>c ~h
-vnoremap <leader>c ~
+xnoremap <leader>c ~
 
 " Move tabs left and right easily.
-noremap <D-[> :call MoveTabLeft()<CR>
-noremap <D-]> :call MoveTabRight()<CR>
+nnoremap <D-[> :<C-u>call MoveTabLeft()<CR>
+nnoremap <D-]> :<C-u>call MoveTabRight()<CR>
 function! MoveTabLeft()
   let tabnum = tabpagenr()
 
@@ -300,21 +296,21 @@ nnoremap gl <c-w>l
 
 " Easy joining of lines.
 nnoremap <leader>j J
-vnoremap <leader>j J
+xnoremap <leader>j J
 
 " Gundo plugin mapping.
 nnoremap <leader>u :GundoToggle<CR>
-
-" Invoke Zencoding plugin with Ctrl+z.
-let g:user_zen_expandabbr_key = '<c-z>'
 
 " Easy Ag searching for the word under the cursor, or the current visual
 " selection, by pressing _. Just press [Enter] to execute the search.
 " Restricting search via file type is easy. After pressing -, just type, e.g.,
 " '-G css' to search through CSS files. Searches open in a new tab so that the
-" file the search term is copied from is not hidden.
-nnoremap _ yiw:tabnew<CR>:Ag <c-r>"
-vnoremap _ y:tabnew<CR>:Ag <c-r>"
+" file the search term is copied from is not hidden.  The :<C-u> for the
+" normal mode mapping is necessary to force Vim to open the new tab and render
+" its empty buffer before entering command-line mode with the pre-filled :Ag
+" command.
+nnoremap _ yiw:<C-u>tabnew<CR>:Ag <c-r>"
+xnoremap _ y:<C-u>tabnew<CR>:Ag <c-r>"
 
 " Disable Ag quickfix and location list mappings.
 let g:ag_apply_lmappings = 0
@@ -352,7 +348,7 @@ let g:manhunt_key_previous_diff = '[c'
 " let g:manhunt_key_select_version = '<CR>'
 
 " Easy diffing with Manhunt.
-noremap <Leader>dd :Manhunt<CR>
+nnoremap <Leader>dd :Manhunt<CR>
 
 " Syntastic plugin configuration.
 let g:syntastic_aggregate_errors = 1
@@ -403,8 +399,10 @@ function! s:GoyoBeforeCallback()
   set norelativenumber
   set textwidth=80
   set formatoptions=tca
-  noremap j gj
-  noremap k gk
+  nnoremap j gj
+  xnoremap j gj
+  nnoremap k gk
+  xnoremap k gk
 endfunction
 function! s:GoyoAfterCallback()
   set nowrap
@@ -412,8 +410,10 @@ function! s:GoyoAfterCallback()
   set relativenumber
   set textwidth=78
   set formatoptions=croql
-  unmap j
-  unmap k
+  nunmap j
+  xunmap j
+  nunmap k
+  xunmap k
 endfunction
 let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
 
@@ -559,7 +559,7 @@ nnoremap <leader>w :q<CR>
 
 " Make it easier to open the file under the cursor in new tab.
 nnoremap <leader>gf <C-w>gf
-vnoremap <leader>gf <C-w>gf
+xnoremap <leader>gf <C-w>gf
 
 " Easy access to :only Ex command. I use it all the time.
 nnoremap <leader>o :only<CR>
@@ -582,7 +582,7 @@ function! HandleURL()
   endif
 endfunction
 nnoremap gx :call HandleURL()<CR>
-vnoremap gx :call HandleURL()<CR>
+xnoremap gx :call HandleURL()<CR>
 
 " Wrap current line in console.log();
 nnoremap <leader>ll Iconsole.log(<ESC>A);<ESC>0f(l
@@ -591,11 +591,14 @@ nnoremap <leader>l' Iconsole.log('<ESC>A');<ESC>0f(ll
 " Wrap current line in console.log("");
 nnoremap <leader>l" Iconsole.log("<ESC>A");<ESC>0f(ll
 " If visual selection, wrap in console.log() and place on new line beneath.
-vnoremap <leader>ll "zyo<CR>console.log(<C-r>z);<ESC>F(l
+xnoremap <leader>ll "zyo<CR>console.log(<C-r>z);<ESC>F(l
 " If visual selection, wrap in console.log('') and place on new line beneath.
-vnoremap <leader>l' "zyo<CR>console.log('<C-r>z');<ESC>F(ll
+xnoremap <leader>l' "zyo<CR>console.log('<C-r>z');<ESC>F(ll
 " If visual selection, wrap in console.log("") and place on new line beneath.
-vnoremap <leader>l" "zyo<CR>console.log("<C-r>z");<ESC>F(ll
+xnoremap <leader>l" "zyo<CR>console.log("<C-r>z");<ESC>F(ll
+
+" Make backspace actually work as backspace in select mode.
+snoremap <BS> a<BS>
 
 " =========================================
 " Airline

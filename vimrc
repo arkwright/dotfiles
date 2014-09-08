@@ -294,9 +294,11 @@ nnoremap gj <c-w>j
 nnoremap gk <c-w>k
 nnoremap gl <c-w>l
 
-" Easy joining of lines.
+" Easy joining of lines, with and without added spaces.
 nnoremap <leader>j J
 xnoremap <leader>j J
+nnoremap <leader>J :<C-u>join!<CR>
+xnoremap <leader>J :join!<CR>
 
 " Gundo plugin mapping.
 nnoremap <leader>u :GundoToggle<CR>

@@ -297,8 +297,8 @@ nnoremap gl <c-w>l
 " Easy joining of lines, with and without added spaces.
 nnoremap <leader>j J
 xnoremap <leader>j J
-nnoremap <leader>J :<C-u>join!<CR>
-xnoremap <leader>J :join!<CR>
+nnoremap <leader>J :.+1left<CR>gJ
+xnoremap <leader>J :<C-u>'<+1,'>left<CR>gvgJ
 
 " Gundo plugin mapping.
 nnoremap <leader>u :GundoToggle<CR>
@@ -650,6 +650,9 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 " Snipmate
 " =========================================
 
+" Dictionary which contains other Snipmate options.
+let g:snipMate = {}
+
 " A string inserted when no match for a trigger is found.
 " Set it to the empty string to prevent anything from being inserted.
 let g:snipMate['no_match_completion_feedkeys_chars'] = ''
@@ -659,8 +662,12 @@ imap jk <Plug>snipMateNextOrTrigger
 smap jk <Plug>snipMateNextOrTrigger
 
 " Jump to the previous tab stop, if it exists. Use in both insert and select modes.
-imap kj <Plug>snipMateBack
-smap kj <Plug>snipMateBack
+" I have to use uppercase KJ becuase if I use lowercase kj, then snippets such
+" as 'link' cannot be activated smoothly, because to active them I would
+" normally enter 'linkjk', but Snipmate picks up on the 'lin[kj]k' part,
+" and screws up my typing.
+imap KJ <Plug>snipMateBack
+smap KJ <Plug>snipMateBack
 
 " =========================================
 " Yankstack

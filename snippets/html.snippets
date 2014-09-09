@@ -1,57 +1,639 @@
+# Guidelines
+#   + For HTML Tags
+#     - Name the snippet after the tag. <div> becomes 'div'.
+#     - Default snippet aims for the typical indentation use case.
+#       - 'div' expands to three lines with cursor on middle, blank line.
+#       - 'span' expands to same line with cursor inside tag.
+#     - Always set ${0} explicitly to remove ambiguity.
+#     - Same line snippets should never contain ${0} in the middle, for smooth continuation from end after invocation.
+#     - Multi-line snippets with opening and closing tags should always contain ${0} in the middle, for smooth nesting.
+#     - End snippet with # to add id="" attribute.
+#     - End snippet with . to add class="" attribute.
+#     - End snippet with + to force multi-line expansion (e.g. <div>\n\n</div>).
+#     - End snippet with - to force same-line tag (e.g. <div></div>).
+#     - End snippet with ++ for recursive snippet (e.g. <div>\ndiv++\n</div>.
+# General
+snippet doctype
+	<!doctype html>${0}
+snippet html5
+	<!doctype html>
+	<html>
+		<head>
+			<meta charset="utf-8">
+			<title>
+				${1:title}
+			</title>
+		</head>
+		<body>
+			${0:body}
+		</body>
+	</html>
+snippet <!
+	<!-- ${1} -->${0}
 # Attributes
 snippet attr
-	${1:attribute}="${0:property}"
-snippet attr+
-	${1:attribute}="${2:property}" attr+${0}
+	${1:attribute}="${2:property}"${0}
+snippet attr++
+	${1:attribute}="${2:property}" attr++${0}
 snippet alt
-	alt="${0}"
+	alt="${1}"${0}
 snippet charset
-	charset="${0:utf-8}"
+	charset="${1}"${0}
 snippet class
-	class="${0}"
+	class="${1}"${0}
 snippet data
-	data-${1}="${0}"
+	data-${1}="${2}"${0}
 snippet for
-	for="${0}"
+	for="${1}"${0}
 snippet height
-	height="${0}"
+	height="${1}"${0}
 snippet href
-	href="${0}"
+	href="${1}"${0}
 snippet id
-	id="${0}"
+	id="${1}"${0}
 snippet lang
-	lang="${0}"
+	lang="${1}"${0}
 snippet media
-	media="${0}"
+	media="${1}"${0}
 snippet name
-	name="${0}"
+	name="${1}"${0}
 snippet rel
-	rel="${0}"
+	rel="${1}"${0}
 snippet scope
-	scope="${0}"
+	scope="${1}"${0}
 snippet src
-	src="${0}"
-# 'title' would conflict with 'title' tag snippet.
+	src="${1}"${0}
+# 'title' would conflict with '<title>' tag snippet.
 snippet title=
-	title="${0}"
+	title="${1}"${0}
 snippet type
-	type="${0}"
+	type="${1}"${0}
 snippet value
-	value="${0}"
+	value="${1}"${0}
 snippet width
-	width="${0}"
+	width="${1}"${0}
 # Elements
+snippet a
+	<a href="${1}">${0}</a>${0}
+snippet a#
+	<a id="${1}" href="${2}">${3}</a>${0}
+snippet a.
+	<a class="${1}" href="${2}">${3}</a>${0}
+snippet abbr
+	<abbr title="${1}">${2}</abbr>${0}
+snippet address
+	<address>
+		${0}
+	</address>
+snippet area
+	<area shape="${1}" coords="${2}" href="${3}" alt="${4}" />${0}
+snippet article
+	<article>
+		${0}
+	</article>
+snippet article#
+	<article id="${1}">
+		${0}
+	</article>
+snippet article.
+	<article class="${1}">
+		${0}
+	</article>
+snippet aside
+	<aside>
+		${0}
+	</aside>
+snippet aside.
+	<aside class="${1}">
+		${0}
+	</aside>
+snippet aside#
+	<aside id="${1}">
+		${0}
+	</aside>
+snippet audio
+	<audio src="${1}>${2}</audio>${0}
+snippet b
+	<b>${1}</b>${0}
+snippet base
+	<base href="${1}" target="${2}" />${0}
+snippet bdi
+	<bdi>${1}</bdo>${0}
+snippet bdo
+	<bdo dir="${1}">${2}</bdo>${0}
+snippet blockquote
+	<blockquote>
+		${0}
+	</blockquote>
+snippet body
+	<body>
+		${0}
+	</body>
+snippet br
+	<br />
+snippet button
+	<button type="${1:submit}">
+		${0}
+	</button>
+snippet button#
+	<button id="${1}" type="${2:submit}">
+		${0}
+	</button>
+snippet button.
+	<button class="${1}" type="${2:submit}">
+		${0}
+	</button>
+snippet canvas
+	<canvas>
+		${0}
+	</canvas>
+snippet caption
+	<caption>
+		${0}
+	</caption>
+snippet cite
+	<cite>
+		${0}
+	</cite>
+snippet code
+	<code>
+		${0}
+	</code>
+snippet col
+	<col />
+snippet colgroup
+	<colgroup>
+		${0}
+	</colgroup>
+snippet datalist
+	<datalist>
+		${0}
+	</datalist>
+snippet datatemplate
+	<datatemplate>
+		${0}
+	</datatemplate>
+snippet dd
+	<dd>${1}</dd>${0}
+snippet dd#
+	<dd id="${1}">${2}</dd>${0}
+snippet dd.
+	<dd class="${1}">${2}</dd>${0}
+snippet del
+	<del>${1}</del>${0}
+snippet details
+	<details>${1}</details>${0}
+snippet dfn
+	<dfn>${1}</dfn>${0}
 snippet div
 	<div>
 		${0}
 	</div>
+snippet div#
+	<div id="${1}">
+		${0}
+	</div>
+snippet div.
+	<div class="${1}">
+		${0}
+	</div>
+snippet dl
+	<dl>
+		${0}
+	</dl>
+snippet dl#
+	<dl id="${1}">
+		${0}
+	</dl>
+snippet dl.
+	<dl class="${1}">
+		${0}
+	</dl>
+snippet dt
+	<dt>${1}</dt>${0}
+snippet dt#
+	<dt id="${1}">${2}</dt>${0}
+snippet dt.
+	<dt class="${1}">${2}</dt>${0}
+snippet em
+	<em>${1}</em>${0}
+snippet embed
+	<embed src="${1}" type="${2}" />${0}
+snippet fieldset
+	<fieldset>
+		${0}
+	</fieldset>
+snippet fieldset#
+	<fieldset id="${1}">
+		${0}
+	</fieldset>
+snippet fieldset.
+	<fieldset class="${1}">
+		${0}
+	</fieldset>
+snippet figcaption
+	<figcaption>${1}</figcaption>${0}
+snippet figure
+	<figure>${1}</figure>${0}
+snippet footer
+	<footer>
+		${0}
+	</footer>
+snippet footer#
+	<footer id="${1}">
+		${0}
+	</footer>
+snippet footer.
+	<footer class="${1}">
+		${0}
+	</footer>
+snippet form
+	<form action="${1}" method="${2}">
+		${0}
+	</form>
+snippet form#
+	<form id="${1}" action="${2}" method="${3}">
+		${0}
+	</form>
+snippet form.
+	<form class="${1}" action="${2}" method="${3}">
+		${0}
+	</form>
+snippet h1
+	<h1>
+		${0}
+	</h1>
+snippet h1#
+	<h1 id="${1}">
+		${0}
+	</h1>
+snippet h1.
+	<h1 class="${1}">
+		${0}
+	</h1>
+snippet h2
+	<h2>
+		${0}
+	</h2>
+snippet h2#
+	<h2 id="${1}">
+		${0}
+	</h2>
+snippet h2.
+	<h2 class="${1}">
+		${0}
+	</h2>
+snippet h3
+	<h3>
+		${0}
+	</h3>
+snippet h3#
+	<h3 id="${1}">
+		${0}
+	</h3>
+snippet h3.
+	<h3 class="${1}">
+		${0}
+	</h3>
+snippet h4
+	<h4>
+		${0}
+	</h4>
+snippet h4#
+	<h4 id="${1}">
+		${0}
+	</h4>
+snippet h4.
+	<h4 class="${1}">
+		${0}
+	</h4>
+snippet h5
+	<h5>
+		${0}
+	</h5>
+snippet h5#
+	<h5 id="${1}">
+		${0}
+	</h5>
+snippet h5.
+	<h5 class="${1}">
+		${0}
+	</h5>
+snippet h6
+	<h6>
+		${0}
+	</h6>
+snippet h6#
+	<h6 id="${1}">
+		${0}
+	</h6>
+snippet h6.
+	<h6 class="${1}">
+		${0}
+	</h6>
+snippet head
+	<head>
+		${0}
+	</head>
+snippet header
+	<header>
+		${0}
+	</header>
+snippet header#
+	<header id="${1}">
+		${0}
+	</header>
+snippet header.
+	<header class="${1}">
+		${0}
+	</header>
+snippet hgroup
+	<hgroup>
+		${0}
+	</hgroup>
+snippet hgroup#
+	<hgroup id="${1}>
+		${0}
+	</hgroup>
+snippet hgroup.
+	<hgroup class="${1}>
+		${0}
+	</hgroup>
+snippet hr
+	<hr />${0}
+snippet html
+	<html>
+		${0}
+	</html>
+snippet i
+	<i>${1}</i>${0}
+snippet iframe
+	<iframe src="${1}"></iframe>${0}
+snippet iframe#
+	<iframe id="${1}" src="${2}"></iframe>${0}
+snippet iframe.
+	<iframe class="${1}" src="${2}"></iframe>${0}
+snippet img
+	<img src="${1}" />${0}
+snippet img#
+	<img id="${1}" src="${2}" />
+snippet img.
+	<img class="${1}" src="${2}" />${0}
+snippet input
+	<input name="${1}" type="${2}" value="${4}" />${0}
+snippet input#
+	<input id="${1}" name="${2}" type="${3}" value="${4}" />${0}
+snippet input.
+	<input class="${1}" name="${2}" type="${3}" value="${4}" />${0}
+snippet ins
+	<ins>${1}</ins>${0}
+snippet kbd
+	<kbd>${1}</kbd>${0}
+snippet keygen
+	<keygen>${1}</keygen>${0}
+snippet label
+	<label for="${1}">
+		${0}
+	</label>
+snippet legend
+	<legend>${1}</legend>${0}
+snippet li
+	<li>
+		${0}
+	</li>
+snippet li#
+	<li id="${1}">
+		${0}
+	</li>
+snippet li.
+	<li class="${1}">
+		${0}
+	</li>
+snippet link
+	<link rel="${1}" href="${2}" type="${3}" />${0}
+snippet map
+	<map name="${1}">
+		${0}
+	</map>
+snippet map#
+	<map name="${1}" id="${2}>
+		${0}
+	</map>
+snippet map.
+	<map class="${1}" name="${2}">
+		${0}
+	</map>
+snippet mark
+	<mark>${1}</mark>${0}
+snippet menu
+	<menu>
+		${0}
+	</menu>
+snippet meta
+	<meta http-equiv="${1}" content="${2}" />${0}
+snippet meter
+	<meter>${1}</meter>${0}
+snippet nav
+	<nav>
+		${0}
+	</nav>
+snippet nav#
+	<nav id="${1}">
+		${0}
+	</nav>
+snippet nav.
+	<nav class="${1}">
+		${0}
+	</nav>
+snippet noscript
+	<noscript>
+		${0}
+	</noscript>
+snippet object
+	<object data="${1}" type="${2}">
+		${0}
+	</object>
+snippet ol
+	<ol>
+		${0}
+	</ol>
+snippet ol#
+	<ol id="${1}>
+		${0}
+	</ol>
+snippet ol.
+	<ol class="${1}>
+		${0}
+	</ol>
+snippet option
+	<option value="${1}">${2}</option>${0}
+snippet option++
+	<option value="${1}">${2}</option>
+	option++${0}
+snippet optgroup
+	<optgroup>
+		${0}
+	</optgroup>
+snippet output
+	<output>${1}</output>${0}
 snippet p
 	<p>
+		${0}
+	</p>
+snippet p#
+	<p id="${1}">
 		${0}
 	</p>
 snippet p.
 	<p class="${1}">
 		${0}
 	</p>
+snippet param
+	<param name="${1}" value="${2}" />${0}
+snippet pre
+	<pre>
+		${0}
+	</pre>
+snippet progress
+	<progress>${1}</progress>${0}
+snippet q
+	<q>${1}</q>${0}
+snippet rp
+	<rp>${1}</rp>${0}
+snippet rt
+	<rt>${1}</rt>${0}
+snippet ruby
+	<ruby>
+		${0}
+	</ruby>
+snippet s
+	<s>${1}</s>${0}
+snippet samp
+	<samp>
+		${0}
+	</samp>
+snippet script
+	<script src="${1}" type="${2}"></script>${0}
+snippet section
+	<section>
+		${0}
+	</section>
+snippet section#
+	<section id="${1}">
+		${0}
+	</section>
+snippet section.
+	<section class="${1}">
+		${0}
+	</section>
+snippet select
+	<select name="${1}">
+		${0}
+	</select>
+snippet select#
+	<select id="${1}" name="${2}">
+		${0}
+	</select>
+snippet select.
+	<select class="${1}" name="${2}">
+		${0}
+	</select>
+snippet small
+	<small>${1}</small>${0}
+snippet source
+	<source src="${1}" type="${2}" media="${0}" />${0}
 snippet span
-	<span>${0}</span>
+	<span>${1}</span>${0}
+snippet span#
+	<span id="${1}">${2}</span>${0}
+snippet span.
+	<span class="${1}">${2}</span>${0}
+snippet strong
+	<strong>${1}</strong>${0}
+snippet style
+	<style type="text/css">
+		${0}
+	</style>
+snippet style
+	<style type="text/css">
+		${0}
+	</style>
+snippet sub
+	<sub>${1}</sub>${0}
+snippet summary
+	<summary>
+		${0}
+	</summary>
+snippet sup
+	<sup>${1}</sup>${0}
+snippet table
+	<table>
+		${0}
+	</table>
+snippet table#
+	<table id="${1}">
+		${0}
+	</table>
+snippet table.
+	<table class="${1}">
+		${0}
+	</table>
+snippet tbody
+	<tbody>
+		${0}
+	</tbody>
+snippet td
+	<td>${1}</td>${0}
+snippet td++
+	<td>${1}</td>
+	td++${0}
+snippet td#
+	<td id="${1}">${2}</td>${0}
+snippet td.
+	<td class="${1}">${2}</td>${0}
+snippet textarea
+	<textarea name="${1}">${2}</textarea>${0}
+snippet tfoot
+	<tfoot>
+		${0}
+	</tfoot>
+snippet th
+	<th>${1}</th>${0}
+snippet th#
+	<th id="${1}">${2}</th>${0}
+snippet th.
+	<th class="${1}">${2}</th>${0}
+snippet thead
+	<thead>
+		${0}
+	</thead>
+snippet time
+	<time datetime="${1}" pubdate="${2:$1}">${0:$1}</time>${0}
+snippet title
+	<title>
+		${0}
+	</title>
+snippet tr
+	<tr>
+		${0}
+	</tr>
+snippet track
+	<track src="${1}" srclang="${2}" label="${3}" default="${4:default}>${5}</track>${0}
+snippet ul
+	<ul>
+		${0}
+	</ul>
+snippet ul.
+	<ul class="${1}">
+		${0}
+	</ul>
+snippet ul#
+	<ul id="${1}">
+		${0}
+	</ul>
+snippet var
+	<var>${1}</var>${0}
+snippet video
+	<video src="${1} height="${2}" width="${3}" preload="${5:none}" autoplay="${6:autoplay}>${7}</video>${0}
+snippet wbr
+	<wbr />${0}

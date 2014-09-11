@@ -552,6 +552,62 @@ function! QuickfixFilenames()
 endfunction
 command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
 
+function! FixAngularDeclaration()
+  " Collapse entire Angular header into a single line.
+  " Join lines.
+  " ^M is <CR> key.
+  normal! 0v/\v\{:join!
+
+  " Exit visual mode.
+  execute "normal! \<Esc>"
+
+  " Remove all whitespace.
+  silent! substitute/\s//g
+
+  " Line break before every period.
+  silent! substitute/\v\./\r./g
+
+  " Delete ,function( and everything after.
+  silent! substitute/\vfunction.*$//g
+
+  " Add a space after every comma.
+  silent! substitute/\v,/, /g
+
+  " Delete trailing whitespace.
+  silent! substitute/\v\s$//g
+
+  " Copy dependency injection line.
+  normal! YP
+
+  " Move down one line.
+  normal! j
+
+  " Preserving indentation, replace .controller( stuff with function( and
+  " appropriate whitepspae.
+  " ^[ is <Esc> key.
+  normal! Rfunction
+  normal! l
+  normal! vt[
+  execute "normal! r "
+  normal! f[
+  normal! r(
+
+  " Remove trailing comma, if any.
+  silent! substitute/\v,$//
+
+  " Add traling parenthesis.
+  normal! A)
+
+  " Remove commas from function() line, transforming strings into arguments.
+  " Preserve whitespace appropriately.
+  silent! substitute/\v',/, /g
+  silent! substitute/\v'/ /g
+
+  " Add opening brace for function on line below.
+  normal! o{
+endfunction
+command! -nargs=0 FixAngularDeclaration call FixAngularDeclaration()
+
 " =========================================
 " Mappings
 " =========================================

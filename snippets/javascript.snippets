@@ -4,6 +4,9 @@ snippet deb
 # Console log
 snippet con
 	console.log(${1});${0}
+# Alert
+snippet alert
+	alert(${1});${0}
 # Docblock
 snippet /**
 	/**
@@ -12,18 +15,28 @@ snippet /**
 # Brace block
 snippet {
 	{
-		${0}
-	};
+		${1}
+	}${0}
 # Function
 snippet fun
 	function ${1:function_name}(${2:argument}) {
 		${0:// body...}
 	}
-# Anonymous Function
+# Anonymous function
 snippet f
 	function(${1}) {
 		${0}
 	}
+# Method function
+snippet f,
+	function(${1}) {
+		${0}
+	},
+# Callback function, final argument
+snippet f)
+	function(${1}) {
+		${0}
+	});
 # Immediate function
 snippet (f
 	(function(${1}) {

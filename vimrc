@@ -283,9 +283,9 @@ nnoremap gp `[v`]
 " Treat J and K keys as fast incremental cursor up/down.
 " But not in visual mode, because I keep typing VJ when I want Vj.
 nnoremap K 5k
-vnoremap K <nop>
+xnoremap K 5k
 nnoremap J 5j
-vnoremap J <nop>
+xnoremap J 5j
 
 " Easy movement between splits.
 " nnoremap <leader>w <c-w><c-w> " Temporarily disabled to try to force myself to use g-[hjkl].
@@ -329,7 +329,7 @@ let g:ag_apply_qmappings = 0
 " Whiplash plugin configuration.
 let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
-" let g:WhiplashCommandName = 'Project'
+let g:WhiplashCommandName = 'Wh'
 
 " Default Whiplash project when loading Vim.
 augroup vim_enter

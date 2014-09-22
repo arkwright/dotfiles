@@ -390,35 +390,6 @@ nnoremap <leader>L :Lint<CR>
 "   autocmd BufWinEnter quickfix nnoremap <buffer> k k<CR>zz<C-w>p
 " augroup END
 
-" Goyo plugin configuration.
-" https://github.com/junegunn/goyo.vim
-let g:goyo_width = 80
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
-function! s:GoyoBeforeCallback()
-  set wrap
-  set linebreak
-  set norelativenumber
-  set textwidth=80
-  set formatoptions=tca
-  nnoremap j gj
-  xnoremap j gj
-  nnoremap k gk
-  xnoremap k gk
-endfunction
-function! s:GoyoAfterCallback()
-  set nowrap
-  set nolinebreak
-  set relativenumber
-  set textwidth=78
-  set formatoptions=croql
-  nunmap j
-  xunmap j
-  nunmap k
-  xunmap k
-endfunction
-let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
-
 " =========================================
 " Commands
 " =========================================
@@ -680,6 +651,31 @@ let g:airline#extensions#hunks#enabled = 0
 
 " Disable key mappings.
 let g:gitgutter_map_keys = 0
+
+" =========================================
+" Goyo
+" =========================================
+
+let g:goyo_width = 80
+let g:goyo_margin_top = 2
+let g:goyo_margin_bottom = 2
+function! s:GoyoBeforeCallback()
+  set wrap
+  set linebreak
+  nnoremap j gj
+  xnoremap j gj
+  nnoremap k gk
+  xnoremap k gk
+endfunction
+function! s:GoyoAfterCallback()
+  set nowrap
+  set nolinebreak
+  nunmap j
+  xunmap j
+  nunmap k
+  xunmap k
+endfunction
+let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
 
 " =========================================
 " vim-javascript

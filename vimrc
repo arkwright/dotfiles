@@ -653,6 +653,14 @@ let g:airline#extensions#hunks#enabled = 0
 let g:gitgutter_map_keys = 0
 
 " =========================================
+" gitv
+" =========================================
+
+" Truncate commit subjects, where necessary, so that the whole line will fit
+" in one screen width.
+let g:Gitv_TruncateCommitSubjects = 1
+
+" =========================================
 " Goyo
 " =========================================
 

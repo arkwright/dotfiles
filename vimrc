@@ -329,12 +329,12 @@ let g:ag_apply_qmappings = 0
 " Whiplash plugin configuration.
 let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
-let g:WhiplashCommandName = 'Wh'
+" let g:WhiplashCommandName = 'Wh'
 
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
-  autocmd VimEnter * Wh dotfiles
+  autocmd VimEnter * Whiplash dotfiles
 augroup END
 
 " Manhunt plugin configuration.

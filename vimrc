@@ -631,8 +631,13 @@ snoremap <BS> a<BS>
 
 " & is synonym for :&, which repeats the previous :substitute command but does
 " not re-use its flags. :&& does re-use the flags, which is the more intuitive
-" functionality.
-nnoremap & :&&<CR>
+" functionality. So, call :&& whenever I press &, and also make it repeatable
+" (within normal mode) via Tim Pope's repeat.vim plugin.
+"
+" repeat.vim instructions via Drew Neil:
+" http://vimcasts.org/episodes/creating-repeatable-mappings-with-repeat-vim/ 
+nnoremap <Plug>RepeatSubsituteWithFlags :&&<CR>:call repeat#set("\<Plug>RepeatSubsituteWithFlags")<CR>
+nmap & <Plug>RepeatSubsituteWithFlags
 xnoremap & :&&<CR>
 
 " For navigation purpaoes (which is my most common use case for the search

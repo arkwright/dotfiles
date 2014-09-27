@@ -629,6 +629,19 @@ xnoremap <leader>l" "zyo<CR>console.log("<C-r>z");<ESC>F(ll
 " Make backspace actually work as backspace in select mode.
 snoremap <BS> a<BS>
 
+" & is synonym for :&, which repeats the previous :substitute command but does
+" not re-use its flags. :&& does re-use the flags, which is the more intuitive
+" functionality.
+nnoremap & :&&<CR>
+xnoremap & :&&<CR>
+
+" For navigation purpaoes (which is my most common use case for the search
+" commands), a literal text search (invoked via the \V switch) is convenient.
+nnoremap / /\V
+nnoremap ? ?\V
+xnoremap / /\V
+xnoremap ? ?\V
+
 " =========================================
 " Airline
 " =========================================

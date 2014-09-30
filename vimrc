@@ -685,6 +685,7 @@ let g:goyo_margin_bottom = 2
 function! s:GoyoBeforeCallback()
   set wrap
   set linebreak
+  set nocursorline
   nnoremap j gj
   xnoremap j gj
   nnoremap k gk
@@ -693,6 +694,7 @@ endfunction
 function! s:GoyoAfterCallback()
   set nowrap
   set nolinebreak
+  set cursorline
   nunmap j
   xunmap j
   nunmap k

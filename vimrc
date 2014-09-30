@@ -300,9 +300,6 @@ xnoremap <leader>j J
 nnoremap <leader>J :.+1left<CR>gJ
 xnoremap <leader>J :<C-u>'<+1,'>left<CR>gvgJ
 
-" Gundo plugin mapping.
-nnoremap <leader>u :GundoToggle<CR>
-
 " Easy Ag searching for the word under the cursor, or the current visual
 " selection, by pressing _. Just press [Enter] to execute the search.
 " Restricting search via file type is easy. After pressing -, just type, e.g.,
@@ -702,6 +699,13 @@ function! s:GoyoAfterCallback()
   xunmap k
 endfunction
 let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterCallback')]
+
+" =========================================
+" Gundo
+" =========================================
+
+" Easier command for toggling Gundo.
+command! Gundo :GundoToggle
 
 " =========================================
 " vim-javascript

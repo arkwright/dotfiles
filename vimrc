@@ -644,6 +644,11 @@ nnoremap ? ?\V
 xnoremap / /\V
 xnoremap ? ?\V
 
+" Easy insertion of blank lines above or below the cursor line.
+" Like unimpaired.vim.
+nnoremap [<Space> mzO<Esc>`z
+nnoremap ]<Space> mzo<Esc>`z
+
 " =========================================
 " Airline
 " =========================================

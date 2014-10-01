@@ -759,6 +759,11 @@ imap KJ <Plug>snipMateBack
 smap KJ <Plug>snipMateBack
 
 " =========================================
+" Whiteboard
+" =========================================
+let g:whiteboard_command_name = 'Repl'
+
+" =========================================
 " Yankstack
 " =========================================
 

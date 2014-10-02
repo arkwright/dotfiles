@@ -762,6 +762,7 @@ smap KJ <Plug>snipMateBack
 " Whiteboard
 " =========================================
 let g:whiteboard_command_name = 'Repl'
+let g:whiteboard_default_interpreter = 'javascript'
 
 " =========================================
 " Yankstack

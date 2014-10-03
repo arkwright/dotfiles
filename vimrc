@@ -650,22 +650,6 @@ nnoremap [<Space> mzO<Esc>`z
 nnoremap ]<Space> mzo<Esc>`z
 
 " =========================================
-" Airline
-" =========================================
-
-" Set separators used between segmented areas.
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-
-" Turn off 'mixed-indent' warnings, because when collaborating with other
-" developers, the indentation is almost never correct. Keep trailing
-" whitespace warnings, though, because those are useful.
-let g:airline#extensions#whitespace#checks = [ 'trailing' ]
-
-" Disable gitgutter 'hunks' (total additions, deletions, etc.) appearing in airline.
-let g:airline#extensions#hunks#enabled = 0
-
-" =========================================
 " Git Gutter
 " =========================================
 
@@ -713,6 +697,13 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 
 " Easier command for toggling Gundo.
 command! Gundo :GundoToggle
+
+" =========================================
+" Lightline
+" =========================================
+
+let g:lightline = {}
+let g:lightline.colorscheme = 'solarized'
 
 " =========================================
 " vim-javascript

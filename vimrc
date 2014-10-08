@@ -445,6 +445,11 @@ command! -bar -range=% Unique <line1>,<line2>!uniq
 " From: http://pascalprecht.github.io/2014/07/10/pretty-print-json-in-vim/
 command! JsonPrettyPrint :%!python -m json.tool
 
+" A convenience command for initiating and formatting a Goyo session for
+" comfortable replying to someone else's message. This command assumes that
+" the other user's message has already been copied into the default register.
+command! Reply :tabnew | :Goyo | execute "normal o\<CR>===\<CR>\<CR>\<Esc>pggi"
+
 """
 " Make it easy to open or diff a doppleganger file in a similar project.
 "

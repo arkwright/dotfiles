@@ -62,7 +62,6 @@ set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) a
 set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
 set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
 set nonumber                " Never use absolute line numbers.
-set foldminlines=99999      " Disable code folding entirely. I hate that feature!
 set laststatus=2            " Always show the status line, in every window/split.
 set diffopt+=iwhite         " Ignore whitespace changes when diffing. This prevents excessive diff noise.
 set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.

@@ -329,6 +329,10 @@ To search the Git commit history for a commit message containing a particular st
 
   git log --grep="your search term"
 
+To search the Git commit history for any instance of a particular regular expression match (takes a LONG time):
+
+  git grep <regex> $(git rev-list --all)
+
 To revert the effects of a given commit without auto-committing the result (so you can inspect and edit the reverted changes):
 
   git revert -n <commit hash whose changes should be reverted>

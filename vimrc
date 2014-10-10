@@ -710,10 +710,11 @@ let g:lightline = {}
 let g:lightline.colorscheme = 'solarized'
 let g:lightline.component = {}
 let g:lightline.component.fugitive = '%{exists("*fugitive#head")?fugitive#head():""}'
+let g:lightline.component.whiplash = '%{g:WhiplashCurrentProject}'
 let g:lightline.component_visible_condition = {}
 let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head") && ""!=fugitive#head())'
 let g:lightline.active = {}
-let g:lightline.active.left = [['mode', 'paste'], ['fugitive'], ['readonly', 'filename', 'modified']]
+let g:lightline.active.left = [['mode', 'paste'], ['whiplash'], ['fugitive'], ['readonly', 'filename', 'modified']]
 let g:lightline.active.right = [['lineinfo'], ['percent'], ['fileencoding'], ['bufnum']]
 
 " =========================================

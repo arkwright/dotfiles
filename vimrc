@@ -55,7 +55,6 @@ set ruler                   " Show the cursor position all the time
 set showcmd                 " Display incomplete commands
 set incsearch               " Do incremental searching
 set ignorecase              " Searches should be case-insensitive by default
-set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying or working with SVN files.
 set cursorline              " Turn on highlighting of current line.
 set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with YankStack.
 set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
@@ -198,34 +197,8 @@ nnoremap * *:set hlsearch<CR>N
 xnoremap # #:<C-u>set hlsearch<CR>N
 xnoremap * *:<C-u>set hlsearch<CR>
 
-" Invoke Command-T with <Leader>t.
-nnoremap <Leader>t :CommandT<Esc>
-
-" Increase number of files the Command-T will index.
-" If you're wondering why Command-T won't find certain files, make this number bigger.
-let g:CommandTMaxFiles=50000
-
-" Show the best match at the bottom of the Command-T window.
-" It's easier to see it that way.
-let g:CommandTMatchWindowReverse = 1
-
-" Remap the standard Command-T file open command.
-let g:CommandTAcceptSelectionMap='<C-CR>'
-
-" Remap Command-T shortcut for opening files in a horizontal split.
-let g:CommandTAcceptSelectionSplitMap='<C-h>'
-
-" Remap Command-T shortcut for opening files in a vertical split.
-let g:CommandTAcceptSelectionVSplitMap='<C-v>'
-
-" When enter is pressed, Command-T should open files in a new tab.let
-let g:CommandTAcceptSelectionTabMap='<CR>'
-
 " Fix VCSCommand mappings. They conflict with my enjoyable <leader>c mapping.
 let VCSCommandMapPrefix = '<leader>\'
-
-" Use :CC to flush Command-T's cache (so that it can detect new files).
-command! CC execute ":CommandTFlush"
 
 " PHP syntax checking bound to <leader>php
 " nnoremap <leader><leader>php :w !php -l %<CR>
@@ -401,6 +374,9 @@ command! TODO execute ":e ~/projects/work/todo.txt"
 
 " :W should invoke :w, because I always type :W by accident!
 command! W execute ":w"
+
+" Easy clearing of ctlrp cache (so that it can detect new files).
+command! CC execute ":CtrlPClearAllCaches"
 
 " Write mode for easier writing.
 command! WRITE execute ':Goyo'
@@ -652,6 +628,64 @@ xnoremap ? ?\V
 " Like unimpaired.vim.
 nnoremap [<Space> mzO<Esc>`z
 nnoremap ]<Space> mzo<Esc>`z
+
+" =========================================
+" ctrlp
+" =========================================
+" Main ctrlp invocation shortcut.
+let g:ctrlp_map = '<leader>t'
+
+" Set ctrlp working directory selection algorithm.
+" (I have tried to make it as similar as possible to Command-T.)
+let g:ctrlp_working_path_mode = 'rw'
+
+" Increase number of files the ctrlp will index. If you're wondering why ctrlp
+" won't find certain files, try making this number bigger.
+let g:ctrlp_max_files = 50000
+
+" Force ctrlp match list to use the entire screen.
+let g:ctrlp_match_window = 'max:100'
+
+" Force ctrlp to find dotfiles and dotdirs, e.g., .gitignore.
+" I use this to enable detection of dotfiles, and I then
+" hide useless dotdirs via g:ctrlp_custom_ignore.
+let g:ctrlp_show_hidden = 1
+
+" Disable automatic switching of buffers when attempting to open a file that
+" is already open in a buffer. I often want the same file open in multiple
+" buffers.
+let g:ctrlp_switch_buffer = 0
+
+" When opening a file that is not the default selection, open it in a new tab.
+let g:ctrlp_arg_map = 0
+
+" Have ctrlp perform multi-file opens with one file per tab.
+let g:ctrlp_open_multiple_files = 't'
+
+" Custom ctrlp ignoring of files/dotdirs.
+let g:ctrlp_custom_ignore = {
+\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+\ }
+
+" Custom ctrlp shortcut mappings.
+" -------------------------------
+" Navigate selection list via <c-n> and <c-p>.
+" Navigate search string history via <up> and <down>.
+" Open selection in same buffer via <c-cr>.
+" Open seletion in new tab via <cr>.             
+" Disable opening selection in horizontal split. 
+" Disable opening selection in vertical split.   
+" Open multiple files via <c-m>.
+let g:ctrlp_prompt_mappings = {
+\ 'PrtSelectMove("j")':   ['<c-n>'],
+\ 'PrtSelectMove("k")':   ['<c-p>'],
+\ 'PrtHistory(-1)':       ['<down>'],
+\ 'PrtHistory(1)':        ['<up>'],
+\ 'AcceptSelection("e")': ['<c-cr>'],
+\ 'AcceptSelection("t")': ['<cr>'],
+\ 'AcceptSelection("h")': [],
+\ 'AcceptSelection("v")': [],
+\ }
 
 " =========================================
 " Git Gutter

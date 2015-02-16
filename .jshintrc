@@ -52,5 +52,6 @@
   "sub"           : true,
   "supernew"      : true,
   "trailing"      : false,
+  "undef"         : true,
   "unused"        : false
 }

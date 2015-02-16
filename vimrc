@@ -397,8 +397,7 @@ command! HOSTS execute ":e /etc/hosts"
 command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
 command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
-command! TODO execute ":e ~/projects/textfiles/todo.txt"
-command! NOTEPAD execute ":e ~/projects/textfiles/notepad.txt"
+command! TODO execute ":e ~/projects/work/todo.txt"
 
 " :W should invoke :w, because I always type :W by accident!
 command! W execute ":w"

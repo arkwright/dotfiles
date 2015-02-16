@@ -703,6 +703,13 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 command! Gundo :GundoToggle
 
 " =========================================
+" vim-instant-markdown
+" =========================================
+
+" Only refresh on the following events: no keys have been pressed for a while; a while after you leave insert mode; you save the file being edited.
+let g:instant_markdown_slow = 1
+
+" =========================================
 " Lightline
 " =========================================
 

@@ -335,7 +335,7 @@ augroup END
 
 " Manhunt plugin configuration.
 " let g:manhunt_command_name = 'Manhunt'
-" let g:manhunt_default_mode = 'working'
+let g:manhunt_default_mode = 'pair'
 " let g:manhunt_diff_align   = 'center'
 let g:manhunt_key_next_diff = ']c'
 let g:manhunt_key_previous_diff = '[c'

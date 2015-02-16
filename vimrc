@@ -107,6 +107,7 @@ set smartindent
 set number        " Turn on line numbers
 set guioptions-=T " Turn off the toolbar at the top of MacVim
 set shiftwidth=2  " Number of spaces to use for each level of auto indent.
+set tabstop=2     " Number of spaces that a tab should represent. :retab uses this value, which is why I set it to be the same as shiftwidth.
 set expandtab     " Always expand tabs to spaces.
 set nowrap        " Disable word-wrap for long lines of text.
 

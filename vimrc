@@ -621,11 +621,11 @@ nnoremap <leader>l' Iconsole.log('<ESC>A');<ESC>0f(ll
 " Wrap current line in console.log("");
 nnoremap <leader>l" Iconsole.log("<ESC>A");<ESC>0f(ll
 " If visual selection, wrap in console.log() and place on new line beneath.
-xnoremap <leader>ll "zyo<CR>console.log(<C-r>z);<ESC>F(l
+xnoremap <leader>ll "zyoconsole.log(<C-r>z);<ESC>F(l
 " If visual selection, wrap in console.log('') and place on new line beneath.
-xnoremap <leader>l' "zyo<CR>console.log('<C-r>z');<ESC>F(ll
+xnoremap <leader>l' "zyoconsole.log('<C-r>z');<ESC>F(ll
 " If visual selection, wrap in console.log("") and place on new line beneath.
-xnoremap <leader>l" "zyo<CR>console.log("<C-r>z");<ESC>F(ll
+xnoremap <leader>l" "zyoconsole.log("<C-r>z");<ESC>F(ll
 
 " Make backspace actually work as backspace in select mode.
 snoremap <BS> a<BS>

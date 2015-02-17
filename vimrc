@@ -664,7 +664,7 @@ let g:ctrlp_open_multiple_files = 't'
 
 " Custom ctrlp ignoring of files/dotdirs.
 let g:ctrlp_custom_ignore = {
-\ 'dir':  '\v[\/]\.(git|hg|svn)$',
+\ 'dir':  '\v[\/]\.(git|hg|svn|sass-cache)$',
 \ }
 
 " Custom ctrlp shortcut mappings.

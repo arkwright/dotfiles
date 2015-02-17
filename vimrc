@@ -221,6 +221,9 @@ let g:CommandTAcceptSelectionVSplitMap='<C-v>'
 " When enter is pressed, Command-T should open files in a new tab.let
 let g:CommandTAcceptSelectionTabMap='<CR>'
 
+" Use Vim's current working directory as Command-T root.
+let g:CommandTTraverseSCM = 'pwd'
+
 " Fix VCSCommand mappings. They conflict with my enjoyable <leader>c mapping.
 let VCSCommandMapPrefix = '<leader>\'
 

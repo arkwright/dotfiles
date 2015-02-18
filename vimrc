@@ -280,8 +280,8 @@ function! MoveTabRight()
   execute "tabm " . tabnum
 endfunction
 
-" Easy selection of the previously pasted text.
-nnoremap gp `[v`]
+" Easy selection of the previously pasted text via viP.
+xnoremap iP `[o`]
 
 " Treat J and K keys as fast incremental cursor up/down.
 " But not in visual mode, because I keep typing VJ when I want Vj.

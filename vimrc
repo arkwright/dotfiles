@@ -1,6 +1,47 @@
-" Pathogen (easy Vim plugin management)
-call pathogen#infect()
-call pathogen#helptags()
+" Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'DirDiff.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'arkwright/vim-irregular'
+Plugin 'arkwright/vim-manhunt'
+Plugin 'arkwright/vim-radar'
+Plugin 'arkwright/vim-whiplash'
+Plugin 'arkwright/vim-whiteboard'
+Plugin 'elzr/vim-json'
+Plugin 'flazz/vim-colorschemes'
+Plugin 'garbas/vim-snipmate'
+Plugin 'gmarik/Vundle.vim'
+Plugin 'gregsexton/gitv'
+Plugin 'itchyny/lightline.vim'
+Plugin 'junegunn/goyo.vim'
+Plugin 'kana/vim-textobj-function'
+Plugin 'kana/vim-textobj-user'
+Plugin 'marcweber/vim-addon-mw-utils' "Dependency for Snipmate
+Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'michaeljsmith/vim-indent-object'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sgur/vim-textobj-parameter'
+Plugin 'sjl/gundo.vim'
+Plugin 'suan/vim-instant-markdown'
+Plugin 'szw/vim-dict'
+Plugin 'thinca/vim-textobj-function-javascript'
+Plugin 'tmhedberg/matchit'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'tomtom/tlib_vim' "Dependency for Snipmate
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
+Plugin 'vim-scripts/Align'
+Plugin 'wellle/targets.vim'
+Plugin 'whatyouhide/vim-textobj-xmlattr'
+Plugin 'wincent/command-t'
+call vundle#end()
+filetype plugin indent on
 
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -39,14 +80,6 @@ highlight GitGutterChangeDelete guibg=#002b36 guifg=#dc322f
 " Current line color
 " hi CursorLine   guibg=gray18
 " hi CursorColumn guibg=gray18
-
-" Symfony 2's Twig templating framework is a port of Python's Jinja.
-" So we can use Vim jinja syntax highlighting.
-" Requires htmljinja plugin.
-augroup jinja
-  autocmd!
-  autocmd BufRead,BufNewFile *.twig set filetype=htmljinja
-augroup END
 
 set encoding=utf-8          " Necessary to show Unicode glyphs
 set history=50              " Keep 50 lines of command line history
@@ -92,14 +125,6 @@ let mapleader = " "  " Set the all-important <Leader> key
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
-endif
-
-if has("autocmd")
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
 endif
 
 set autoindent
@@ -223,9 +248,6 @@ let g:CommandTAcceptSelectionTabMap='<CR>'
 
 " Use Vim's current working directory as Command-T root.
 let g:CommandTTraverseSCM = 'pwd'
-
-" Fix VCSCommand mappings. They conflict with my enjoyable <leader>c mapping.
-let VCSCommandMapPrefix = '<leader>\'
 
 " Use :CC to flush Command-T's cache (so that it can detect new files).
 command! CC execute ":CommandTFlush"

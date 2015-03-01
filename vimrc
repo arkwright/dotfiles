@@ -10,27 +10,26 @@ Plugin 'arkwright/vim-whiplash'
 Plugin 'arkwright/vim-whiteboard'
 Plugin 'elzr/vim-json'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'garbas/vim-snipmate'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
 Plugin 'itchyny/lightline.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
-Plugin 'marcweber/vim-addon-mw-utils' "Dependency for Snipmate
 Plugin 'maxbrunsfeld/vim-yankstack'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sgur/vim-textobj-parameter'
+Plugin 'Shougo/neocomplete'
+Plugin 'Shougo/neosnippet'
 Plugin 'sjl/gundo.vim'
 Plugin 'suan/vim-instant-markdown'
 Plugin 'szw/vim-dict'
 Plugin 'thinca/vim-textobj-function-javascript'
 Plugin 'tmhedberg/matchit'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'tomtom/tlib_vim' "Dependency for Snipmate
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
@@ -764,34 +763,27 @@ let g:javascript_ignore_javaScriptdoc = 1
 let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal conceallevel=0)
 
 " =========================================
+" Neocomplete
+" =========================================
+
+let g:neocomplete#enable_at_startup = 1
+
+" =========================================
+" Neosnippet
+" =========================================
+
+" let g:neosnippet#disable_runtime_snippets = 1
+let g:neosnippet#snippets_directory = '~/projects/dotfiles/snippets/'
+
+imap jk <Plug>(neosnippet_expand_or_jump)
+smap jk <Plug>(neosnippet_expand_or_jump)
+
+" =========================================
 " Radar
 " =========================================
 
 " Radar plugin configuration.
 " let g:radar_command_name = 'Ra'
-
-" =========================================
-" Snipmate
-" =========================================
-
-" Dictionary which contains other Snipmate options.
-let g:snipMate = {}
-
-" A string inserted when no match for a trigger is found.
-" Set it to the empty string to prevent anything from being inserted.
-let g:snipMate['no_match_completion_feedkeys_chars'] = ''
-
-" Trigger snippet or move to next snippet placeholder.
-imap jk <Plug>snipMateNextOrTrigger
-smap jk <Plug>snipMateNextOrTrigger
-
-" Jump to the previous tab stop, if it exists. Use in both insert and select modes.
-" I have to use uppercase KJ becuase if I use lowercase kj, then snippets such
-" as 'link' cannot be activated smoothly, because to active them I would
-" normally enter 'linkjk', but Snipmate picks up on the 'lin[kj]k' part,
-" and screws up my typing.
-imap KJ <Plug>snipMateBack
-smap KJ <Plug>snipMateBack
 
 " =========================================
 " Whiteboard

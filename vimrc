@@ -773,7 +773,7 @@ let g:neocomplete#enable_at_startup = 1
 " Lock (disable) Neocomplete in files ending with the following extensions. I
 " do this mostly because it's annoying to have the completion popup constantly
 " appear while writing.
-let g:neocomplete#lock_buffer_name_pattern = '\v\.((txt)|(md)|(markdown)|(mkd))$'
+let g:neocomplete#lock_buffer_name_pattern = '\v(\.((txt)|(md)|(markdown)|(mkd)|(git)))|(COMMIT_EDITMSG)$'
 
 " Toggle Neocomplete on/off.
 " This is useful when writing comments on code, to temporarily shut up the

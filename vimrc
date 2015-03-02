@@ -393,7 +393,7 @@ let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 " just not enough for an AngularJS file riddled with invalid elements and
 " attributes.
 let g:syntastic_html_tidy_args = '--show-errors 1000'
-let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_javascript_checkers = ['jshint']                " npm install -g jshint
 let g:syntastic_javascript_jshint_args = "--config ~/.jshintrc" "js_hint_options_are_here:  http://www.jshint.com/docs/options/
 let g:syntastic_json_checkers = ['jsonlint']                    " npm install -g jsonlint
 
@@ -547,7 +547,7 @@ function! QuickfixFilenames()
   endfor
   return join(values(buffer_numbers))
 endfunction
-command! -nargs=0 -bar Qargs execute 'args ' . QuickfixFilenames()
+command! -nargs=0 -bar Qfargs execute 'args ' . QuickfixFilenames()
 
 function! FixAngularDeclaration()
   " Collapse entire Angular header into a single line.

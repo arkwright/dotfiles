@@ -767,16 +767,31 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 " Neocomplete
 " =========================================
 
+" Activates Neocomplete.
 let g:neocomplete#enable_at_startup = 1
+
+" Lock (disable) Neocomplete in files ending with the following extensions. I
+" do this mostly because it's annoying to have the completion popup constantly
+" appear while writing.
+let g:neocomplete#lock_buffer_name_pattern = '\v\.((txt)|(md)|(markdown)|(mkd))$'
+
+" Toggle Neocomplete on/off.
+" This is useful when writing comments on code, to temporarily shut up the
+" completion popup.
+command! NT execute ":NeoCompleteToggle"
 
 " =========================================
 " Neosnippet
 " =========================================
 
-" let g:neosnippet#disable_runtime_snippets = 1
+" Location of snippet files.
 let g:neosnippet#snippets_directory = '~/projects/dotfiles/snippets/'
 
-imap jk <Plug>(neosnippet_expand_or_jump)
+" Mappings for triggering expansion of snippets.
+" The imap one will insert a tab if there is no valid snippet to complete.
+" The tab triggers Neocomplete completion, which enables me to use 'jk' as a
+" universal completion shortcut.
+imap <expr> jk neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
 smap jk <Plug>(neosnippet_expand_or_jump)
 
 " =========================================

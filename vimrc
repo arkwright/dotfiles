@@ -14,6 +14,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
 Plugin 'itchyny/lightline.vim'
 Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
 Plugin 'maxbrunsfeld/vim-yankstack'
@@ -36,7 +37,6 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-scripts/Align'
 Plugin 'wellle/targets.vim'
 Plugin 'whatyouhide/vim-textobj-xmlattr'
 Plugin 'wincent/command-t'
@@ -257,18 +257,6 @@ command! CC execute ":CommandTFlush"
 
 " JS synax checking bound to <leader><leader>js
 " nnoremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
-
-" Align selected lines on = signs.
-xnoremap <leader>a= :Align =<CR>
-
-" Align selected lines on => PHP array key/value arrows.
-xnoremap <leader>a=> :Align =><CR>
-
-" Align selected lines on { and } signs (good for lining up CSS).
-xnoremap <leader>acss :Align { }<CR>
-
-" Align selected lines on colons.
-xnoremap <leader>a: :Align :<CR>
 
 " Easier replay of previous macro in q register.
 " From: http://hashrocket.com/blog/posts/8-great-vim-mappings
@@ -677,6 +665,16 @@ xnoremap ? ?\V
 " Like unimpaired.vim.
 nnoremap [<Space> mzO<Esc>`z
 nnoremap ]<Space> mzo<Esc>`z
+
+" =========================================
+" vim-easy-align
+" =========================================
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
 
 " =========================================
 " Git Gutter

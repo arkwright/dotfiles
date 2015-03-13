@@ -65,21 +65,17 @@ set background=dark
 colorscheme solarized
 
 " Set desired diff colors for Solarized colorscheme.
-highlight DiffAdd guibg=#094901
-highlight DiffChange guibg=#073642
-highlight DiffText guifg=#369be2 guibg=#195565
-highlight DiffDelete guibg=#3e0201
+highlight DiffAdd                  guibg=#094901
+highlight DiffChange               guibg=#073642
+highlight DiffText   guifg=#369be2 guibg=#195565
+highlight DiffDelete               guibg=#3e0201
 
 " To make vim-gitgutter plugin compatible with Solarized colorscheme.
 highlight clear SignColumn
-highlight GitGutterAdd guibg=#002b36 guifg=#859900
-highlight GitGutterChange guibg=#002b36 guifg=#657b83
-highlight GitGutterDelete guibg=#002b36 guifg=#dc322f
-highlight GitGutterChangeDelete guibg=#002b36 guifg=#dc322f
-
-" Current line color
-" hi CursorLine   guibg=gray18
-" hi CursorColumn guibg=gray18
+highlight GitGutterAdd          guifg=#859900 guibg=#002b36
+highlight GitGutterChange       guifg=#657b83 guibg=#002b36
+highlight GitGutterDelete       guifg=#dc322f guibg=#002b36
+highlight GitGutterChangeDelete guifg=#dc322f guibg=#002b36
 
 set encoding=utf-8          " Necessary to show Unicode glyphs
 set history=50              " Keep 50 lines of command line history

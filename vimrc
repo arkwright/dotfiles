@@ -57,6 +57,51 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
+" =========================================
+" Options
+" =========================================
+
+set autoindent
+set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with YankStack.
+set completeopt-=preview    " Disable preview window when auto-completing.
+set cursorline              " Turn on highlighting of current line.
+set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
+set diffopt+=iwhite         " Ignore whitespace changes when diffing. This prevents excessive diff noise.
+set encoding=utf-8          " Necessary to show Unicode glyphs
+set expandtab               " Always expand tabs to spaces.
+set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
+set guioptions-=T           " Turn off the toolbar at the top of MacVim
+set hidden                  " Make a buffer hidden when it is abandoned (no associated window), modified, and unsaved.
+set history=50              " Keep 50 lines of command line history
+set ignorecase              " Searches should be case-insensitive by default
+set incsearch               " Do incremental searching
+set laststatus=2            " Always show the status line, in every window/split.
+set lazyredraw              " Prevents the screen from being redrawn while executing macros, registers and other commands that have not been typed.
+set modelines=0             " According to Steve Losh, this prevents certain security exploits: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
+set nonumber                " Never use absolute line numbers.
+set nosplitbelow            " When opening a new split window, prefer the top.
+set noswapfile              " Disable swap files. They're not very useful.
+set nowrap                  " Disable word-wrap for long lines of text.
+set number                  " Turn on line numbers
+set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
+set ruler                   " Show the cursor position all the time
+set shiftwidth=2            " Number of spaces to use for each level of auto indent.
+set showcmd                 " Display incomplete commands
+set smartindent
+set splitright              " When opening a new split window, prefer the right side.
+set tabstop=2               " Number of spaces that a tab should represent. :retab uses this value, which is why I set it to be the same as shiftwidth.
+set undolevels=200          " Keep 200 undo levels in history
+set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
+set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying or working with SVN files.
+set wildmenu                " Enables hints for command completion on the command line.
+
+let html_no_rendering = 1   " Disable underlining of tabs in HTML documents.
+let mapleader = ' '         " Set the all-important <Leader> key
+
+" =========================================
+" Font and Color Scheme
+" =========================================
+
 " Set the default font
 set guifont=Monaco:h14
 
@@ -77,31 +122,9 @@ highlight GitGutterChange       guifg=#657b83 guibg=#002b36
 highlight GitGutterDelete       guifg=#dc322f guibg=#002b36
 highlight GitGutterChangeDelete guifg=#dc322f guibg=#002b36
 
-set encoding=utf-8          " Necessary to show Unicode glyphs
-set history=50              " Keep 50 lines of command line history
-set undolevels=200          " Keep 200 undo levels in history
-set ruler                   " Show the cursor position all the time
-set showcmd                 " Display incomplete commands
-set incsearch               " Do incremental searching
-set ignorecase              " Searches should be case-insensitive by default
-set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying or working with SVN files.
-set cursorline              " Turn on highlighting of current line.
-set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with YankStack.
-set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.
-set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
-set relativenumber          " Display relative line numbers, rather than absolute ones. (Makes it easier to jump to an exact line, e.g., 17k, 26j.)
-set nonumber                " Never use absolute line numbers.
-set laststatus=2            " Always show the status line, in every window/split.
-set diffopt+=iwhite         " Ignore whitespace changes when diffing. This prevents excessive diff noise.
-set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
-set modelines=0             " According to Steve Losh, this prevents certain security exploits: http://stevelosh.com/blog/2010/09/coming-home-to-vim/#important-vimrc-lines
-set lazyredraw              " Prevents the screen from being redrawn while executing macros, registers and other commands that have not been typed.
-set wildmenu                " Enables hints for command completion on the command line.
-set splitright              " When opening a new split window, prefer the right side.
-set nosplitbelow            " When opening a new split window, prefer the top.
-set noswapfile              " Disable swap files. They're not very useful.
-set hidden                  " Make a buffer hidden when it is abandoned (no associated window), modified, and unsaved.
-set completeopt-=preview    " Disable preview window when auto-completing.
+" =========================================
+" Autocommands
+" =========================================
 
 " Never display absolute line numbers!
 augroup nonumber
@@ -115,23 +138,10 @@ augroup foldcolumn
   autocmd BufEnter * setlocal foldcolumn=0
 augroup END
 
-let html_no_rendering=1    " Disable underlining of tabs in HTML documents.
-
-let mapleader = " "  " Set the all-important <Leader> key
-
 " In many terminal emulators the mouse works just fine, thus enable it.
 if has('mouse')
   set mouse=a
 endif
-
-set autoindent
-set smartindent
-set number        " Turn on line numbers
-set guioptions-=T " Turn off the toolbar at the top of MacVim
-set shiftwidth=2  " Number of spaces to use for each level of auto indent.
-set tabstop=2     " Number of spaces that a tab should represent. :retab uses this value, which is why I set it to be the same as shiftwidth.
-set expandtab     " Always expand tabs to spaces.
-set nowrap        " Disable word-wrap for long lines of text.
 
 " F5 toggles NERDTree
 nnoremap <F5> :NERDTreeToggle<CR>

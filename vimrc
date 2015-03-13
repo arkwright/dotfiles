@@ -105,6 +105,7 @@ set splitright              " When opening a new split window, prefer the right 
 set nosplitbelow            " When opening a new split window, prefer the top.
 set noswapfile              " Disable swap files. They're not very useful.
 set hidden                  " Make a buffer hidden when it is abandoned (no associated window), modified, and unsaved.
+set completeopt-=preview    " Disable preview window when auto-completing.
 
 " Never display absolute line numbers!
 augroup nonumber

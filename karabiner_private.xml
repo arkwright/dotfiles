@@ -1,5 +1,15 @@
 <?xml version="1.0"?>
 <root>
+  <appdef>
+    <appname>MACVIM</appname>
+    <equal>org.vim.MacVim</equal>
+  </appdef>
+
+  <appdef>
+    <appname>TERMINAL</appname>
+    <equal>com.apple.Terminal</equal>
+  </appdef>
+
   <!-- TAB key changed to act as ESC -->
   <item>
     <name>Change Tab to Esc</name>
@@ -22,6 +32,30 @@
       __KeyToKey__
       KeyCode::I, ModifierFlag::CONTROL_L,
       KeyCode::TAB
+    </autogen>
+  </item>
+
+  <!-- CONTROL_P key changed to act as UP -->
+  <item>
+    <name>Change CONTROL_L+p to Up</name>
+    <identifier>private.ctrlpup</identifier>
+    <not>MACVIM, TERMINAL</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::P, ModifierFlag::CONTROL_L,
+      KeyCode::CURSOR_UP
+    </autogen>
+  </item>
+
+  <!-- CONTROL_N key changed to act as DOWN -->
+  <item>
+    <name>Change CONTROL_L+n to Down</name>
+    <identifier>private.ctrlpdown</identifier>
+    <not>MACVIM, TERMINAL</not>
+    <autogen>
+      __KeyToKey__
+      KeyCode::N, ModifierFlag::CONTROL_L,
+      KeyCode::CURSOR_DOWN
     </autogen>
   </item>
 </root>

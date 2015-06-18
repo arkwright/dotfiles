@@ -1,3 +1,6 @@
+" brew install macvim --with-lua --override-system-vim
+" brew linkapps macvim
+
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()

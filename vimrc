@@ -285,20 +285,8 @@ nnoremap <leader>c ~h
 xnoremap <leader>c ~
 
 " Move tabs left and right easily.
-nnoremap <D-[> :<C-u>call MoveTabLeft()<CR>
-nnoremap <D-]> :<C-u>call MoveTabRight()<CR>
-function! MoveTabLeft()
-  let tabnum = tabpagenr()
-
-  if (tabnum != 1)
-    execute "tabm " . (tabnum - 2)
-  endif
-endfunction
-function! MoveTabRight()
-  let tabnum = tabpagenr()
-
-  execute "tabm " . tabnum
-endfunction
+nnoremap <D-[> :-tabmove<CR>
+nnoremap <D-]> :+tabmove<CR>
 
 " Easy selection of the previously pasted text via viP.
 xnoremap iP `[o`]

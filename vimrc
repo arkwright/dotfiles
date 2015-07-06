@@ -15,6 +15,7 @@ Plugin 'elzr/vim-json'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
+Plugin 'haya14busa/incsearch.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
@@ -652,13 +653,6 @@ nnoremap <Plug>RepeatSubsituteWithFlags :&&<CR>:call repeat#set("\<Plug>RepeatSu
 nmap & <Plug>RepeatSubsituteWithFlags
 xnoremap & :&&<CR>
 
-" For navigation purpaoes (which is my most common use case for the search
-" commands), a literal text search (invoked via the \V switch) is convenient.
-nnoremap / /\V
-nnoremap ? ?\V
-xnoremap / /\V
-xnoremap ? ?\V
-
 " Easy insertion of blank lines above or below the cursor line.
 " Like unimpaired.vim.
 nnoremap [<Space> mzO<Esc>`z
@@ -722,6 +716,17 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 
 " Easier command for toggling Gundo.
 command! Gundo :GundoToggle
+
+" =========================================
+" incsearch.vim
+" =========================================
+
+" Basic incsearch mappings. Also, for navigation purpaoes (which is my most
+" common use case for the search commands), a literal text search (invoked via
+" the \V switch) is a more convenient default.
+map /  <Plug>(incsearch-forward)\V
+map ?  <Plug>(incsearch-backward)\V
+map g/ <Plug>(incsearch-stay)\V
 
 " =========================================
 " vim-instant-markdown

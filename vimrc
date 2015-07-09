@@ -323,6 +323,12 @@ xnoremap <leader>J :<C-u>'<+1,'>left<CR>gvgJ
 nnoremap _ yiw:<C-u>tabnew<CR>:Ag <c-r>"
 xnoremap _ y:<C-u>tabnew<CR>:Ag <c-r>"
 
+" Copy filename and filepath quick shortcuts.
+nnoremap <leader>yf :CopyFilename<CR>
+xnoremap <leader>yf :CopyFilename<CR>
+nnoremap <leader>yp :CopyFilepath<CR>
+xnoremap <leader>yp :CopyFilepath<CR>
+
 " Disable Ag quickfix and location list mappings.
 let g:ag_apply_lmappings = 0
 let g:ag_apply_qmappings = 0
@@ -433,6 +439,10 @@ WORK " Default to WORK environment.
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.
 command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
+
+" Copy current file name and file path to clipboard.
+command! CopyFilename :let @* = expand('%:t') | echo 'Copied to clipboard: ' . expand('%:t')
+command! CopyFilepath :let @* = expand('%:p') | echo 'Copied to clipboard: ' . expand('%:p')
 
 " Deletes lines which contain only whitespace.
 command! -range=% Delblank <line1>,<line2>:global/^\s*$/d

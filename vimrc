@@ -329,18 +329,6 @@ xnoremap <leader>yf :CopyFilename<CR>
 nnoremap <leader>yp :CopyFilepath<CR>
 xnoremap <leader>yp :CopyFilepath<CR>
 
-" Disable Ag quickfix and location list mappings.
-let g:ag_apply_lmappings = 0
-let g:ag_apply_qmappings = 0
-
-" ag.vim plugin uses the H key as a shortcut within the quickfix window to open
-" the selected file silently in a new horizontal split. This conflicts with my
-" preferred use of H as a means of moving the cursor up 10 lines. Since the
-" ag.vim plugin does not support shortcut remapping, I have commented out line
-" 81 of ~/.vim/bundle/ag/autoload/ag.vim to disable that shortcut.
-" A pull request is pending which will introduce shortcut remapping:
-" https://github.com/rking/ag.vim/pull/49
-
 " Whiplash plugin configuration.
 let g:WhiplashProjectsDir = '~/projects/'
 " let g:WhiplashConfigDir = '~/projects/dotfiles/whiplash-config/'
@@ -667,6 +655,17 @@ xnoremap & :&&<CR>
 " Like unimpaired.vim.
 nnoremap [<Space> mzO<Esc>`z
 nnoremap ]<Space> mzo<Esc>`z
+
+" =========================================
+" Ag.vim
+" =========================================
+
+" Disable Ag quickfix and location list mappings.
+let g:ag_apply_lmappings = 0
+let g:ag_apply_qmappings = 0
+
+" Default to literal (non-regex) searches.
+let g:ag_prg="ag --literal"
 
 " =========================================
 " vim-easy-align

@@ -147,31 +147,6 @@ if has('mouse')
   set mouse=a
 endif
 
-" F5 toggles NERDTree
-nnoremap <F5> :NERDTreeToggle<CR>
-
-" NERDTree defaults to showing hidden files.
-let NERDTreeShowHidden=1
-
-" Enable all colors for NERDTree
-let NERDChristmasTree=1
-
-" Force NERDTree to default to this width (in columns)
-let NERDTreeWinSize=50
-
-" Tell NERDTree to ignore display of SVN files.
-let NERDTreeIgnore=['\.svn$', '\.svn/']
-
-" Force NERDTree to use pretty arrows
-let NERDTreeDirArrows=1
-
-" By default, NERDTree uses ? as the help key.
-" But ? is the default Vim key for backwards text search.
-" Not good. So I have re-mapped NERDTree help to <Leader>?
-" For me, searching backwards in NERDTree is by far the more common use case
-" for ?.
-let NERDTreeMapHelp='<Leader>?'
-
 " Vim 7.4 has a defect which causes relative line numbers to display
 " incorrectly when undoing a line deletion. This can be easily fixed
 " by forcing Vim to clear and redraw the screen (<C-L>).
@@ -326,8 +301,10 @@ xnoremap _ y:<C-u>tabnew<CR>:Ag <c-r>"
 " Copy filename and filepath quick shortcuts.
 nnoremap <leader>yf :CopyFilename<CR>
 xnoremap <leader>yf :CopyFilename<CR>
-nnoremap <leader>yp :CopyFilepath<CR>
-xnoremap <leader>yp :CopyFilepath<CR>
+nnoremap <leader>yp :CopyPath<CR>
+xnoremap <leader>yp :CopyPath<CR>
+nnoremap <leader>yfp :CopyFilepath<CR>
+xnoremap <leader>yfp :CopyFilepath<CR>
 
 " Whiplash plugin configuration.
 let g:WhiplashProjectsDir = '~/projects/'
@@ -430,6 +407,7 @@ command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
 
 " Copy current file name and file path to clipboard.
 command! CopyFilename :let @* = expand('%:t') | echo 'Copied to clipboard: ' . expand('%:t')
+command! CopyPath     :let @* = expand('%:h') | echo 'Copied to clipboard: ' . expand('%:h')
 command! CopyFilepath :let @* = expand('%:p') | echo 'Copied to clipboard: ' . expand('%:p')
 
 " Deletes lines which contain only whitespace.
@@ -665,7 +643,7 @@ let g:ag_apply_lmappings = 0
 let g:ag_apply_qmappings = 0
 
 " Default to literal (non-regex) searches.
-let g:ag_prg="ag --literal"
+let g:ag_prg="ag --vimgrep --literal"
 
 " =========================================
 " vim-easy-align
@@ -803,6 +781,40 @@ let g:neosnippet#snippets_directory = '~/projects/dotfiles/snippets/'
 " universal completion shortcut.
 imap <expr> jk neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
 smap jk <Plug>(neosnippet_expand_or_jump)
+
+" =========================================
+" NERDTree
+" =========================================
+
+" NERDTree defaults to showing hidden files.
+let NERDTreeShowHidden=1
+
+" Enable all colors for NERDTree
+let NERDChristmasTree=1
+
+" Force NERDTree to default to this width (in columns)
+let NERDTreeWinSize=50
+
+" Tell NERDTree to ignore display of SVN files.
+let NERDTreeIgnore=['\.svn$', '\.svn/']
+
+" Force NERDTree to use pretty arrows
+let NERDTreeDirArrows=1
+
+" By default, NERDTree uses ? as the help key.
+" But ? is the default Vim key for backwards text search.
+" Not good. So I have re-mapped NERDTree help to <Leader>?
+" For me, searching backwards in NERDTree is by far the more common use case
+" for ?.
+let NERDTreeMapHelp='<Leader>?'
+
+" Disable default K and J mappings, because they conflict with my custom
+" down-five-lines and up-five-lines mappings.
+let NERDTreeMapJumpFirstChild=''
+let NERDTreeMapJumpLastChild=''
+
+" F5 toggles NERDTree
+nnoremap <F5> :NERDTreeToggle<CR>
 
 " =========================================
 " Radar

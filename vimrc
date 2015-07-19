@@ -20,7 +20,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
-Plugin 'maxbrunsfeld/vim-yankstack'
+Plugin 'vim-scripts/YankRing.vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'pangloss/vim-javascript'
 Plugin 'rking/ag.vim'
@@ -49,9 +49,6 @@ filetype plugin indent on
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" Must be called before defining any mappings, or else YankStack mappings will not work.
-call yankstack#setup()
-
 " This must come before any :highlight commands to enable them to work.
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -65,7 +62,7 @@ endif
 " =========================================
 
 set autoindent
-set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing! Compatible with YankStack.
+set clipboard=unnamed       " Sets default register to be * register, which is the system clipboard. So Cmd+C and y are now the same thing; Cmd+V and p are now the same thing!
 set completeopt-=preview    " Disable preview window when auto-completing.
 set cursorline              " Turn on highlighting of current line.
 set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
@@ -345,6 +342,9 @@ let g:ag_apply_qmappings = 0
 " 81 of ~/.vim/bundle/ag/autoload/ag.vim to disable that shortcut.
 " A pull request is pending which will introduce shortcut remapping:
 " https://github.com/rking/ag.vim/pull/49
+
+" Anki flashcard "create cloze deletion from visual mode selection" macro.
+xnoremap <leader>x c{{c1::"::}}hi
 
 " Whiplash plugin configuration.
 let g:WhiplashProjectsDir = '~/projects/'
@@ -819,12 +819,8 @@ let g:whiteboard_interpreters = {}
 let g:whiteboard_interpreters.javascript = { 'extension': 'js', 'command': 'node --use_strict --harmony' }
 
 " =========================================
-" Yankstack
+" YankRing
 " =========================================
 
-" Disable YankStack default key bindings.
-let g:yankstack_map_keys = 0
-
-" These mappings must be defined using 'nmap' (not 'nnoremap') in order to work.
-nmap <D-p> <Plug>yankstack_substitute_older_paste
-nmap <D-P> <Plug>yankstack_substitute_newer_paste
+let g:yankring_replace_n_pkey = '<D-P>'
+let g:yankring_replace_n_nkey = '<D-p>'

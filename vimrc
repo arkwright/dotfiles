@@ -15,6 +15,7 @@ Plugin 'elzr/vim-json'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
+Plugin 'haya14busa/incsearch.vim'
 Plugin 'itchyny/lightline.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
@@ -143,31 +144,6 @@ if has('mouse')
   set mouse=a
 endif
 
-" F5 toggles NERDTree
-nnoremap <F5> :NERDTreeToggle<CR>
-
-" NERDTree defaults to showing hidden files.
-let NERDTreeShowHidden=1
-
-" Enable all colors for NERDTree
-let NERDChristmasTree=1
-
-" Force NERDTree to default to this width (in columns)
-let NERDTreeWinSize=50
-
-" Tell NERDTree to ignore display of SVN files.
-let NERDTreeIgnore=['\.svn$', '\.svn/']
-
-" Force NERDTree to use pretty arrows
-let NERDTreeDirArrows=1
-
-" By default, NERDTree uses ? as the help key.
-" But ? is the default Vim key for backwards text search.
-" Not good. So I have re-mapped NERDTree help to <Leader>?
-" For me, searching backwards in NERDTree is by far the more common use case
-" for ?.
-let NERDTreeMapHelp='<Leader>?'
-
 " Vim 7.4 has a defect which causes relative line numbers to display
 " incorrectly when undoing a line deletion. This can be easily fixed
 " by forcing Vim to clear and redraw the screen (<C-L>).
@@ -282,20 +258,8 @@ nnoremap <leader>c ~h
 xnoremap <leader>c ~
 
 " Move tabs left and right easily.
-nnoremap <D-[> :<C-u>call MoveTabLeft()<CR>
-nnoremap <D-]> :<C-u>call MoveTabRight()<CR>
-function! MoveTabLeft()
-  let tabnum = tabpagenr()
-
-  if (tabnum != 1)
-    execute "tabm " . (tabnum - 2)
-  endif
-endfunction
-function! MoveTabRight()
-  let tabnum = tabpagenr()
-
-  execute "tabm " . tabnum
-endfunction
+nnoremap <D-[> :-tabmove<CR>
+nnoremap <D-]> :+tabmove<CR>
 
 " Easy selection of the previously pasted text via viP.
 xnoremap iP `[o`]
@@ -331,17 +295,13 @@ xnoremap <leader>J :<C-u>'<+1,'>left<CR>gvgJ
 nnoremap _ yiw:<C-u>tabnew<CR>:Ag <c-r>"
 xnoremap _ y:<C-u>tabnew<CR>:Ag <c-r>"
 
-" Disable Ag quickfix and location list mappings.
-let g:ag_apply_lmappings = 0
-let g:ag_apply_qmappings = 0
-
-" ag.vim plugin uses the H key as a shortcut within the quickfix window to open
-" the selected file silently in a new horizontal split. This conflicts with my
-" preferred use of H as a means of moving the cursor up 10 lines. Since the
-" ag.vim plugin does not support shortcut remapping, I have commented out line
-" 81 of ~/.vim/bundle/ag/autoload/ag.vim to disable that shortcut.
-" A pull request is pending which will introduce shortcut remapping:
-" https://github.com/rking/ag.vim/pull/49
+" Copy filename and filepath quick shortcuts.
+nnoremap <leader>yf :CopyFilename<CR>
+xnoremap <leader>yf :CopyFilename<CR>
+nnoremap <leader>yp :CopyPath<CR>
+xnoremap <leader>yp :CopyPath<CR>
+nnoremap <leader>yfp :CopyFilepath<CR>
+xnoremap <leader>yfp :CopyFilepath<CR>
 
 " Anki flashcard "create cloze deletion from visual mode selection" macro.
 xnoremap <leader>x c{{c1::"::}}hi
@@ -444,6 +404,11 @@ WORK " Default to WORK environment.
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.
 command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
+
+" Copy current file name and file path to clipboard.
+command! CopyFilename :let @* = expand('%:t') | echo 'Copied to clipboard: ' . expand('%:t')
+command! CopyPath     :let @* = expand('%:h') | echo 'Copied to clipboard: ' . expand('%:h')
+command! CopyFilepath :let @* = expand('%:p') | echo 'Copied to clipboard: ' . expand('%:p')
 
 " Deletes lines which contain only whitespace.
 command! -range=% Delblank <line1>,<line2>:global/^\s*$/d
@@ -664,17 +629,21 @@ nnoremap <Plug>RepeatSubsituteWithFlags :&&<CR>:call repeat#set("\<Plug>RepeatSu
 nmap & <Plug>RepeatSubsituteWithFlags
 xnoremap & :&&<CR>
 
-" For navigation purpaoes (which is my most common use case for the search
-" commands), a literal text search (invoked via the \V switch) is convenient.
-nnoremap / /\V
-nnoremap ? ?\V
-xnoremap / /\V
-xnoremap ? ?\V
-
 " Easy insertion of blank lines above or below the cursor line.
 " Like unimpaired.vim.
 nnoremap [<Space> mzO<Esc>`z
 nnoremap ]<Space> mzo<Esc>`z
+
+" =========================================
+" Ag.vim
+" =========================================
+
+" Disable Ag quickfix and location list mappings.
+let g:ag_apply_lmappings = 0
+let g:ag_apply_qmappings = 0
+
+" Default to literal (non-regex) searches.
+let g:ag_prg="ag --vimgrep --literal"
 
 " =========================================
 " vim-easy-align
@@ -734,6 +703,17 @@ let g:goyo_callbacks = [function('s:GoyoBeforeCallback'), function('s:GoyoAfterC
 
 " Easier command for toggling Gundo.
 command! Gundo :GundoToggle
+
+" =========================================
+" incsearch.vim
+" =========================================
+
+" Basic incsearch mappings. Also, for navigation purpaoes (which is my most
+" common use case for the search commands), a literal text search (invoked via
+" the \V switch) is a more convenient default.
+map /  <Plug>(incsearch-forward)\V
+map ?  <Plug>(incsearch-backward)\V
+map g/ <Plug>(incsearch-stay)\V
 
 " =========================================
 " vim-instant-markdown
@@ -801,6 +781,40 @@ let g:neosnippet#snippets_directory = '~/projects/dotfiles/snippets/'
 " universal completion shortcut.
 imap <expr> jk neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
 smap jk <Plug>(neosnippet_expand_or_jump)
+
+" =========================================
+" NERDTree
+" =========================================
+
+" NERDTree defaults to showing hidden files.
+let NERDTreeShowHidden=1
+
+" Enable all colors for NERDTree
+let NERDChristmasTree=1
+
+" Force NERDTree to default to this width (in columns)
+let NERDTreeWinSize=50
+
+" Tell NERDTree to ignore display of SVN files.
+let NERDTreeIgnore=['\.svn$', '\.svn/']
+
+" Force NERDTree to use pretty arrows
+let NERDTreeDirArrows=1
+
+" By default, NERDTree uses ? as the help key.
+" But ? is the default Vim key for backwards text search.
+" Not good. So I have re-mapped NERDTree help to <Leader>?
+" For me, searching backwards in NERDTree is by far the more common use case
+" for ?.
+let NERDTreeMapHelp='<Leader>?'
+
+" Disable default K and J mappings, because they conflict with my custom
+" down-five-lines and up-five-lines mappings.
+let NERDTreeMapJumpFirstChild=''
+let NERDTreeMapJumpLastChild=''
+
+" F5 toggles NERDTree
+nnoremap <F5> :NERDTreeToggle<CR>
 
 " =========================================
 " Radar

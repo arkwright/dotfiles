@@ -296,12 +296,16 @@ nnoremap _ yiw:<C-u>tabnew<CR>:Ag <c-r>"
 xnoremap _ y:<C-u>tabnew<CR>:Ag <c-r>"
 
 " Copy filename and filepath quick shortcuts.
-nnoremap <leader>yf :CopyFilename<CR>
-xnoremap <leader>yf :CopyFilename<CR>
+nnoremap <leader>yfn :CopyFilename<CR>
+xnoremap <leader>yfn :CopyFilename<CR>
 nnoremap <leader>yp :CopyPath<CR>
 xnoremap <leader>yp :CopyPath<CR>
+nnoremap <leader>yap :CopyAbsolutePath<CR>
+xnoremap <leader>yap :CopyAbsolutePath<CR>
 nnoremap <leader>yfp :CopyFilepath<CR>
 xnoremap <leader>yfp :CopyFilepath<CR>
+nnoremap <leader>yafp :CopyAbsoluteFilepath<CR>
+xnoremap <leader>yafp :CopyAbsoluteFilepath<CR>
 
 " Anki flashcard "create cloze deletion from visual mode selection" macro.
 xnoremap <leader>x c{{c1::"::}}hi
@@ -406,9 +410,11 @@ WORK " Default to WORK environment.
 command! -range=% Clearblank <line1>,<line2>:global/^\s*$/normal 0D
 
 " Copy current file name and file path to clipboard.
-command! CopyFilename :let @* = expand('%:t') | echo 'Copied to clipboard: ' . expand('%:t')
-command! CopyPath     :let @* = expand('%:h') | echo 'Copied to clipboard: ' . expand('%:h')
-command! CopyFilepath :let @* = expand('%:p') | echo 'Copied to clipboard: ' . expand('%:p')
+command! CopyFilename         :let @* = expand('%:t') | echo 'Copied to clipboard: ' . @*
+command! CopyPath             :let @* = expand('%:h') | echo 'Copied to clipboard: ' . @*
+command! CopyAbsolutePath     :let @* = expand('%:p:h') | echo 'Copied to clipboard: ' . @*
+command! CopyFilepath         :let @* = expand('%') | echo 'Copied to clipboard: ' . @*
+command! CopyAbsoluteFilepath :let @* = expand('%:p') | echo 'Copied to clipboard: ' . @*
 
 " Deletes lines which contain only whitespace.
 command! -range=% Delblank <line1>,<line2>:global/^\s*$/d

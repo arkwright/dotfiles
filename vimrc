@@ -438,6 +438,10 @@ command! -bar -range=% Unique <line1>,<line2>!uniq
 " From: http://pascalprecht.github.io/2014/07/10/pretty-print-json-in-vim/
 command! JsonPrettyPrint :%!python -m json.tool
 
+" Pretty-print XML in the current buffer.
+" From: http://stackoverflow.com/questions/16090869/how-to-pretty-print-xml-from-the-command-line
+command! XmlPrettyPrint :%!xmllint --format %
+
 " A convenience command for initiating and formatting a Goyo session for
 " comfortable replying to someone else's message. This command assumes that
 " the other user's message has already been copied into the default register.

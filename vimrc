@@ -447,6 +447,17 @@ command! XmlPrettyPrint :%!xmllint --format %
 " the other user's message has already been copied into the default register.
 command! Reply :tabnew | :Goyo | execute "normal o\<CR>===\<CR>\<CR>\<Esc>pggi"
 
+" Search for project names to determine next actions.
+" Project names must be uppercase, and take up an entire line.
+command! NextActions :normal! /\v\C^[A-Z][^a-z]+$
+
+" Copy current line to top of file.
+command! -range C :let s:startLine = line('.') | <line1>,<line2>:copy 0 | :execute "normal! " . (s:startLine + 1 + (<line2> - <line1>)) . "G"
+command! -range T <line1>,<line2>:C
+
+" Move current line to top of file.
+command! -range M :let s:startLine = line('.') | <line1>,<line2>:move 0 | :execute "normal! " . (s:startLine + 1 + (<line2> - <line1>)) . "G"
+
 """
 " Make it easy to open or diff a doppleganger file in a similar project.
 "

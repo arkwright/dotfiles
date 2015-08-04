@@ -130,7 +130,7 @@ highlight GitGutterChangeDelete guifg=#dc322f guibg=#002b36
 " Never display absolute line numbers!
 augroup nonumber
   autocmd!
-  autocmd BufRead,BufNewFile * setlocal nonumber
+  autocmd BufEnter * setlocal nonumber
 augroup END
 
 " Never display fold column!

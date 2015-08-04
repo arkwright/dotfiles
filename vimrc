@@ -6,7 +6,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'DirDiff.vim'
 Plugin 'airblade/vim-gitgutter'
-Plugin 'arkwright/vim-irregular'
+" Plugin 'arkwright/vim-irregular'
 Plugin 'arkwright/vim-manhunt'
 Plugin 'arkwright/vim-radar'
 Plugin 'arkwright/vim-whiplash'

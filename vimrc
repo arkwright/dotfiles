@@ -612,17 +612,35 @@ nnoremap <leader>z zz
 
 " Find any URL on the current line, and open it in a web browser.
 " Adapted from: http://stackoverflow.com/questions/9458294/open-url-under-cursor-in-vim-with-browser
-function! HandleURL()
-  let l:uri = matchstr(getline('.'), '[a-z]*:\/\/[^ >,;)]*')
+" Add the following environment variable to your shell configuration to enable JIRA ticket support:
+" export VIM_JIRA_URL=https://your-jira-domain-goes-here.com/browse/{0}
+function! BrowserOpen()
+  let l:line = getline('.')
+  let l:urlRegex = '\v\C[a-z]*:\/\/[^ >,;)]*'
+
+  let l:uri = matchstr(l:line, l:urlRegex)
 
   if l:uri != ""
     silent exec "!open '" . shellescape(l:uri, 1) . "'"
-  else
-    echo "No URI found in line."
+    return
   endif
+
+  let l:jiraRegex = '\v\C[A-Z]+-\d+'
+  let l:jiraUrlPlaceholderRegex = '\v\C\{0\}'
+
+  let l:jiraTicket = matchstr(l:line, l:jiraRegex)
+
+  if l:jiraTicket != ""
+    let l:jiraUrl = system('echo $VIM_JIRA_URL')
+    let l:jiraUrl = substitute(l:jiraUrl, l:jiraUrlPlaceholderRegex, l:jiraTicket, 'g')
+    silent exec "!open '" . shellescape(l:jiraUrl, 1) . "'"
+    return
+  endif
+
+  echo "No URI or JIRA ticket number found in line."
 endfunction
-nnoremap gx :call HandleURL()<CR>
-xnoremap gx :call HandleURL()<CR>
+nnoremap gx :call BrowserOpen()<CR>
+xnoremap gx :call BrowserOpen()<CR>
 
 " Wrap current line in console.log();
 nnoremap <leader>ll Iconsole.log(<ESC>A);<ESC>0f(l

@@ -451,6 +451,39 @@ command! Reply :tabnew | :Goyo | execute "normal o\<CR>===\<CR>\<CR>\<Esc>pggi"
 " Project names must be uppercase, and take up an entire line.
 command! NextActions :normal! /\v\C^[A-Z][^a-z]+$
 
+" Easy creation of Github Pull Request for current branch against master.
+function! s:GithubPullRequest()
+  let l:placeholderRegex = '\v\C\{0\}'
+  let l:httpsDomainRegex = '\v\Chttps:\/\/\zs[^\/]+\ze\/.+'
+  let l:httpsRepoRegex   = '\v\Chttps:\/\/.+\/\zs.+\/.+\ze\.git'
+  let l:sshDomainRegex   = '\v\C.+\@\zs[^:]+\ze:.+\/.+\.git'
+  let l:sshRepoRegex     = '\v\C.+\@.+:\zs.+\/.+\ze\.git'
+  let l:urlTemplate      = system('echo $VIM_GITHUB_PR_URL')
+  let l:remotes          = system('cd ' . expand('%:p:h') . '; git remote -v')
+  let l:branch           = substitute(system('cd ' . expand('%:p:h') . '; git symbolic-ref --short -q HEAD'), '\v[\r\n]', '', 'g')
+  let l:urlTemplate      = 'https://{domain}/{repo}/compare/{branch}?expand=1'
+
+  if match(l:remotes, 'https') !=# -1
+    let l:domain = matchstr(l:remotes, l:httpsDomainRegex)
+    let l:repo   = matchstr(l:remotes, l:httpsRepoRegex)
+  else
+    let l:domain = matchstr(l:remotes, l:sshDomainRegex)
+    let l:repo   = matchstr(l:remotes, l:sshRepoRegex)
+  endif
+
+  if l:domain ==# '' || l:repo ==# ''
+    echoe 'Could not determine Git repo name for current file!'
+  endif
+
+  let l:prUrl = l:urlTemplate
+  let l:prUrl = substitute(l:prUrl, '\v\C\{domain\}', l:domain, '')
+  let l:prUrl = substitute(l:prUrl, '\v\C\{repo\}', l:repo, '')
+  let l:prUrl = substitute(l:prUrl, '\v\C\{branch\}', l:branch, '')
+
+  silent exec "!open '" . shellescape(l:prUrl, 1) . "'"
+endfunction
+command! PullRequest :call s:GithubPullRequest()
+
 " Copy current line to top of file.
 command! -range C :let s:startLine = line('.') | <line1>,<line2>:copy 0 | :execute "normal! " . (s:startLine + 1 + (<line2> - <line1>)) . "G"
 command! -range T <line1>,<line2>:C

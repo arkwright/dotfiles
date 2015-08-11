@@ -379,7 +379,7 @@ nnoremap <leader>L :Lint<CR>
 " =========================================
 
 " Make it easy to edit these files.
-command! CHEAT execute ":e ~/projects/dotfiles/textfiles/cheatsheet.txt"
+command! CHEAT execute ":e ~/projects/work/textfiles/cheatsheet.txt"
 command! HOSTS execute ":e /etc/hosts"
 command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
 command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"

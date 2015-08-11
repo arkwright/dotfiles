@@ -747,8 +747,7 @@ let g:Gitv_TruncateCommitSubjects = 1
 " =========================================
 
 let g:goyo_width = 80
-let g:goyo_margin_top = 2
-let g:goyo_margin_bottom = 2
+let g:goyo_height = 95
 function! s:GoyoBeforeCallback()
   set wrap
   set linebreak

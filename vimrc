@@ -123,6 +123,9 @@ highlight GitGutterChange       guifg=#657b83 guibg=#002b36
 highlight GitGutterDelete       guifg=#dc322f guibg=#002b36
 highlight GitGutterChangeDelete guifg=#dc322f guibg=#002b36
 
+" Make first incsearch match bright white, so it stands out.
+highlight IncSearch guifg=#FFFFFF guibg=#000000
+
 " =========================================
 " Autocommands
 " =========================================
@@ -785,6 +788,9 @@ command! Gundo :GundoToggle
 map /  <Plug>(incsearch-forward)\V
 map ?  <Plug>(incsearch-backward)\V
 map g/ <Plug>(incsearch-stay)\V
+
+" Make incsearch cursor bright white, so it stands out.
+highlight IncSearchCursor guifg=#000000 guibg=#FFFFFF
 
 " =========================================
 " vim-instant-markdown

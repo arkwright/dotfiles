@@ -1,0 +1,6 @@
+config defaultToCurrentScreen true
+config nudgePercentOf         screenSize
+config resizePercentOf        screenSize
+
+# Fullscreen window with Ctrl+Cmd+k
+bind k:ctrl,cmd       move screenOriginX;screenOriginY screenSizeX;screenSizeY

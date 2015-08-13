@@ -625,6 +625,7 @@ function! FixAngularDeclaration()
 endfunction
 command! -nargs=0 FixAngularDeclaration call FixAngularDeclaration()
 
+" Easy import of JIRA ticket checklist.
 command! TicketChecklist :r ~/projects/work/textfiles/checklists/jira_ticket.txt
 
 " =========================================

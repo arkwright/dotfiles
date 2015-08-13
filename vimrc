@@ -625,6 +625,8 @@ function! FixAngularDeclaration()
 endfunction
 command! -nargs=0 FixAngularDeclaration call FixAngularDeclaration()
 
+command! TicketChecklist :r ~/projects/work/textfiles/checklists/jira_ticket.txt
+
 " =========================================
 " Mappings
 " =========================================

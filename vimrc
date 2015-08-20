@@ -268,6 +268,34 @@ nnoremap <D-]> :+tabmove<CR>
 " Easy selection of the previously pasted text via viP.
 xnoremap iP `[o`]
 
+" Easy move up to previous line at next lower indentation.
+" Useful for 'stepping up' through nested statements.
+" Adapted from: https://www.reddit.com/r/vim/comments/2tqvp0/is_there_a_motion_for_up_one_indent_level/
+function! UpByIndent()
+    " Pushes the starting cursor position on to the jumplist.
+    normal! mz`z
+
+    normal! ^
+
+    let l:startColumn = col('.')
+    let l:col = l:startColumn
+
+    while l:col >= l:startColumn
+        normal! k^
+
+        if getline('.') =~# '\v\C^\s*$'
+            continue
+        elseif col('.') <= 1
+            return
+        else
+            let l:col = col('.')
+        endif
+    endwhile
+endfun
+
+nnoremap - :call UpByIndent()<CR>
+xnoremap - :call UpByIndent()<CR>
+
 " Treat J and K keys as fast incremental cursor up/down.
 " But not in visual mode, because I keep typing VJ when I want Vj.
 nnoremap K 5k

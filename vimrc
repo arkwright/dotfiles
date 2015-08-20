@@ -95,6 +95,7 @@ set undolevels=200          " Keep 200 undo levels in history
 set virtualedit=block       " Enable selection of empty columns when using visual-block selection mode.
 set wildignore+=*.svn       " Prevent vim and its plugins from ever displaying or working with SVN files.
 set wildmenu                " Enables hints for command completion on the command line.
+set visualbell t_vb=        " Disable bells (e.g. beeping on Esc press).
 
 let html_no_rendering = 1   " Disable underlining of tabs in HTML documents.
 let mapleader = ' '         " Set the all-important <Leader> key

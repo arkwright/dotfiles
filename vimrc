@@ -256,11 +256,6 @@ command! Diffthese :execute 'normal! :diffthis<CR><C-w>w:diffthis<CR><C-w>w'
 " Easy vimdiff getting, putting, updating and navigation.
 nnoremap <Leader>du :diffupdate<CR>
 
-" An easier way to change letter case.
-" In normal mode, after changing case, move cursor left to stay on the character being changed.
-nnoremap <leader>c ~h
-xnoremap <leader>c ~
-
 " Move tabs left and right easily.
 nnoremap <D-[> :-tabmove<CR>
 nnoremap <D-]> :+tabmove<CR>

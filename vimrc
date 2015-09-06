@@ -257,8 +257,8 @@ command! Diffthese :execute 'normal! :diffthis<CR><C-w>w:diffthis<CR><C-w>w'
 nnoremap <Leader>du :diffupdate<CR>
 
 " Move tabs left and right easily.
-nnoremap <D-[> :-tabmove<CR>
-nnoremap <D-]> :+tabmove<CR>
+nnoremap <D-[> :tabmove -1<CR>
+nnoremap <D-]> :tabmove +1<CR>
 
 " Easy selection of the previously pasted text via viP.
 xnoremap iP `[o`]

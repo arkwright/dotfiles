@@ -650,8 +650,50 @@ function! FixAngularDeclaration()
 endfunction
 command! -nargs=0 FixAngularDeclaration call FixAngularDeclaration()
 
-" Easy import of JIRA ticket checklist.
+
 command! TicketChecklist :r ~/projects/work/textfiles/checklists/jira_ticket.txt
+
+" Easy importing of checklists.
+function! ExpandChecklistUnderCursor()
+  normal! yiW
+
+  let l:CHECKLIST_NAME_REGEX = '\v\@\zs[a-zA-Z0-9_-]+\ze'
+  let l:CHECKLIST_FILE_DIRECTORY = '~/projects/work/textfiles/checklists/'
+
+  let l:token = getreg('0')
+
+  let l:name = matchstr(l:token, l:CHECKLIST_NAME_REGEX)
+
+  let l:filePath = expand(l:CHECKLIST_FILE_DIRECTORY . l:name . '*')
+
+  if filereadable(l:filePath)
+    execute 'read ' . l:filePath
+    .-1delete
+  end
+endfun
+nnoremap <leader>c@ :call ExpandChecklistUnderCursor()<CR>
+
+function! ToggleCheckmark()
+  let l:CHECKMARK = '✓'
+  let l:UNCHECKED_SYMBOLS_REGEX = '\v[\*\-\=]'
+
+  let l:characterAboveCursor = matchstr(getline(line('.') - 1), '\%' . col('.') . 'c.')
+  let l:characterUnderCursor = matchstr(getline(line('.')), '\%' . col('.') . 'c.')
+  let l:characterBelowCursor = matchstr(getline(line('.') + 1), '\%' . col('.') . 'c.')
+
+  if l:characterUnderCursor !=# l:CHECKMARK
+    execute 'normal r' . l:CHECKMARK
+  else
+    if match(l:characterBelowCursor, l:UNCHECKED_SYMBOLS_REGEX) ># -1
+      execute 'normal r' . l:characterBelowCursor
+    elseif match(l:characterAboveCursor, l:UNCHECKED_SYMBOLS_REGEX) ># -1
+      execute 'normal r' . l:characterAboveCursor
+    else
+      execute 'normal r*'
+    end
+  end
+endfun
+nnoremap <leader>cc :call ToggleCheckmark()<CR>
 
 " =========================================
 " Mappings
@@ -939,4 +981,3 @@ let g:whiteboard_interpreters.javascript = { 'extension': 'js', 'command': 'node
 " =========================================
 
 let g:yankring_replace_n_pkey = '<D-P>'
-let g:yankring_replace_n_nkey = '<D-p>'

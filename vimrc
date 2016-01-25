@@ -16,6 +16,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
 Plugin 'haya14busa/incsearch.vim'
+" Plugin 'haya14busa/vim-operator-flashy'
 Plugin 'itchyny/lightline.vim'
 Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
@@ -40,6 +41,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-markdown'
+Plugin 'tpope/vim-projectionist'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'wellle/targets.vim'
@@ -142,6 +144,12 @@ augroup END
 augroup foldcolumn
   autocmd!
   autocmd BufEnter * setlocal foldcolumn=0
+augroup END
+
+" Treat JSS files just like JS files, because they are!
+augroup jss
+  autocmd!
+  autocmd BufNewFile,BufRead *.jss set filetype=javascript
 augroup END
 
 " In many terminal emulators the mouse works just fine, thus enable it.

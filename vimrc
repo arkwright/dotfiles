@@ -47,6 +47,7 @@ Plugin 'tpope/vim-surround'
 Plugin 'wellle/targets.vim'
 Plugin 'whatyouhide/vim-textobj-xmlattr'
 Plugin 'wincent/command-t'
+Plugin 'Julian/vim-textobj-variable-segment'
 call vundle#end()
 filetype plugin indent on
 
@@ -234,7 +235,7 @@ let g:CommandTMatchWindowReverse = 1
 let g:CommandTAcceptSelectionMap='<C-CR>'
 
 " Remap Command-T shortcut for opening files in a horizontal split.
-let g:CommandTAcceptSelectionSplitMap='<C-h>'
+let g:CommandTAcceptSelectionSplitMap='<C-s>'
 
 " Remap Command-T shortcut for opening files in a vertical split.
 let g:CommandTAcceptSelectionVSplitMap='<C-v>'

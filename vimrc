@@ -551,6 +551,25 @@ function! s:GithubPullRequest()
 endfunction
 command! PullRequest :call s:GithubPullRequest()
 
+" Easy searching for documentation based on keyword via Google.
+function! s:Search(feelingLucky, prefix)
+  let l:query = expand('<cword>')
+  let l:searchTerm = a:prefix . '%20' . l:query
+
+  let l:feelingLuckyParam = ''
+
+  if a:feelingLucky !=# '!'
+    let l:feelingLuckyParam = '\&btnI'
+  end
+
+  let l:searchUrl = 'https://www.google.ca/search?q=' . l:searchTerm . l:feelingLuckyParam
+
+  echo l:searchUrl
+
+  silent exec "!open '" . shellescape(l:searchUrl, 1) . "'"
+endfunction
+command! -bang -range -nargs=* Search :call s:Search('<bang>', '<args>')
+
 " Copy current line to top of file.
 command! -range C :let s:startLine = line('.') | <line1>,<line2>:copy 0 | :execute "normal! " . (s:startLine + 1 + (<line2> - <line1>)) . "G"
 command! -range T <line1>,<line2>:C

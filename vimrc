@@ -974,6 +974,12 @@ command! NT execute ":NeoCompleteToggle"
 " Neosnippet
 " =========================================
 
+" 'Installing the default snippets is optional.
+" If you choose not to install them, you must set [this].'
+let g:neosnippet#disable_runtime_snippets = {
+\   '_' : 1,
+\ }
+
 " Location of snippet files.
 let g:neosnippet#snippets_directory = '~/projects/dotfiles/snippets/'
 

@@ -906,6 +906,9 @@ command! Gundo :GundoToggle
 " incsearch.vim
 " =========================================
 
+" Consistent n and N direction.
+let g:incsearch#consistent_n_direction = 1
+
 " Basic incsearch mappings. Also, for navigation purpaoes (which is my most
 " common use case for the search commands), a literal text search (invoked via
 " the \V switch) is a more convenient default.

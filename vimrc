@@ -250,12 +250,6 @@ let g:CommandTTraverseSCM = 'pwd'
 " Use :CC to flush Command-T's cache (so that it can detect new files).
 command! CC execute ":CommandTFlush"
 
-" PHP syntax checking bound to <leader>php
-" nnoremap <leader><leader>php :w !php -l %<CR>
-
-" JS synax checking bound to <leader><leader>js
-" nnoremap <leader><leader>js :w !jsl -nologo -nofilelisting -nocontext -nosummary -process %<CR>
-
 " Easier replay of previous macro in q register.
 " From: http://hashrocket.com/blog/posts/8-great-vim-mappings
 nnoremap Q @q

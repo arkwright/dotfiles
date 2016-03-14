@@ -381,7 +381,7 @@ let g:WhiplashCommandName = 'Wh'
 " Default Whiplash project when loading Vim.
 augroup vim_enter
   autocmd!
-  autocmd VimEnter * Whiplash dotfiles
+  autocmd VimEnter * Wh dotfiles
 augroup END
 
 " Manhunt plugin configuration.

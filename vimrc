@@ -1044,3 +1044,52 @@ let g:whiteboard_interpreters.javascript = { 'extension': 'js', 'command': 'node
 " =========================================
 
 let g:yankring_replace_n_pkey = '<D-P>'
+
+" =========================================
+" Unite
+" =========================================
+let g:unite_enable_auto_select = 0
+
+function! WhiplashGetProjectNames()
+  let l:projectNames = system("ls -FP " . '~/projects/')
+
+  " Remove trailing / characters from directory names.
+  let l:projectNames = substitute(l:projectNames, '/', '', 'g')
+
+  " Remove trailing @ characters from symbolic links.
+  " We are assuming that all symbolic links point to directories.
+  let l:projectNames = substitute(l:projectNames, '@', '', 'g')
+
+  " Split into List.
+  let l:projects = split(l:projectNames, '\n')
+
+  return l:projects
+endfunction
+
+let s:whiplash_source = {
+\   "name" : "whiplash",
+\   "description" : "Change whiplash projects.",
+\   "action_table" : {
+\     "whiplash" : {
+\       "is_selectable": 0
+\     },
+\   },
+\   "default_action" : "whiplash"
+\}
+
+function! s:whiplash_source.action_table.whiplash.func(candidate)
+    execute 'Whiplash ' . a:candidate.word
+endfunction
+
+function! s:whiplash_source.gather_candidates(args, context)
+  let items = WhiplashGetProjectNames()
+
+  return map(items, '{
+\   "word" : v:val
+\ }')
+endfunction
+
+call unite#define_source(s:whiplash_source)
+unlet s:whiplash_source
+
+nnoremap <leader>p :Unite -start-insert -winheight=35 -direction=botright -prompt=> whiplash<CR>

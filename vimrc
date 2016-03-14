@@ -376,7 +376,7 @@ xnoremap <leader>x c{{c1::"::}}hi
 " Whiplash plugin configuration.
 let g:WhiplashProjectsDir = '~/projects/'
 let g:WhiplashConfigDir = '~/projects/whiplash-config/'
-" let g:WhiplashCommandName = 'Wh'
+let g:WhiplashCommandName = 'Wh'
 
 " Default Whiplash project when loading Vim.
 augroup vim_enter

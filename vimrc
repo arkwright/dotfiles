@@ -1078,7 +1078,7 @@ let s:whiplash_source = {
 \}
 
 function! s:whiplash_source.action_table.whiplash.func(candidate)
-    execute 'Whiplash ' . a:candidate.word
+    execute 'Wh ' . a:candidate.word
 endfunction
 
 function! s:whiplash_source.gather_candidates(args, context)

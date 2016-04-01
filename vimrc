@@ -441,13 +441,22 @@ nnoremap <leader>L :Lint<CR>
 " =========================================
 
 " Make it easy to edit these files.
-command! CHEAT execute ":e ~/projects/work/textfiles/cheatsheet.txt"
 command! HOSTS execute ":e /etc/hosts"
 command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
 command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command! CALENDAR execute ":e ~/projects/textfiles/calendar.txt"
 command! TODO execute ":e ~/projects/work/todo.txt"
+
+" Dual cheatsheets for better organization.
+function! s:Cheatsheet()
+  vsplit ~/projects/cheatsheet/cheatsheet.txt
+
+  if filereadable(expand('~/projects/work/textfiles/cheatsheet.txt')) > 0
+    vsplit ~/projects/work/textfiles/cheatsheet.txt
+  endif
+endfunction
+command! CHEAT :call s:Cheatsheet()
 
 " :W should invoke :w, because I always type :W by accident!
 command! W execute ":w"

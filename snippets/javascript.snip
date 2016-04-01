@@ -9,8 +9,8 @@ snippet /**
    */
 snippet {
   {
-    ${0}
-  }
+    ${2}
+  }${1}
 snippet function
 options word
 alias   functio, functi, funct, func, fun, fu
@@ -21,6 +21,18 @@ options word
 alias   (functio, (functi, (funct, (func, (fun, (fu
   (function(){
   })
+snippet =>
+  => {
+    ${2}
+  }${1}
+snippet ()
+  () => {
+    ${2}
+  }${1}
+snippet (()
+  () => {
+    ${2}
+  }${1}
 snippet (f
   (function(${1}) {
     ${0}
@@ -65,3 +77,6 @@ snippet do
   do {
     ${1}
   } while (${0});
+snippet describe
+  describe('${0}', () => {
+  });

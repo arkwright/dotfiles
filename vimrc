@@ -1102,3 +1102,6 @@ call unite#define_source(s:whiplash_source)
 unlet s:whiplash_source
 
 nnoremap <leader>p :Unite -start-insert -winheight=35 -direction=botright -prompt=> whiplash<CR>
+
+" Responsive wrapper macro.
+let @r = "'<O  body.responsive & {'>o}>kV'<>>"

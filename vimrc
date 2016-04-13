@@ -448,6 +448,9 @@ command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command! CALENDAR execute ":e ~/projects/textfiles/calendar.txt"
 command! TODO execute ":e ~/projects/work/todo.txt"
 
+" Make it easier to call these commands.
+command! GS :Gstatus
+
 " Dual cheatsheets for better organization.
 function! s:Cheatsheet()
   vsplit ~/projects/cheatsheet/cheatsheet.txt
@@ -572,7 +575,7 @@ function! s:GithubPullRequest()
 
   silent exec "!open '" . shellescape(l:prUrl, 1) . "'"
 endfunction
-command! PullRequest :call s:GithubPullRequest()
+command! PR :call s:GithubPullRequest()
 
 " Easy searching for documentation based on keyword via Google.
 function! s:Search(feelingLucky, prefix)

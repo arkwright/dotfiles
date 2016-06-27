@@ -450,6 +450,7 @@ command! TODO execute ":e ~/projects/work/todo.txt"
 
 " Make it easier to call these commands.
 command! GS :Gstatus
+command! NTF :NERDTreeFind
 
 " Dual cheatsheets for better organization.
 function! s:Cheatsheet()

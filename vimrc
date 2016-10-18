@@ -436,6 +436,19 @@ nnoremap <leader>L :Lint<CR>
 "   autocmd BufWinEnter quickfix nnoremap <buffer> k k<CR>zz<C-w>p
 " augroup END
 
+" Search for the contents of the current line within the current file.
+" Ignore leading/trailing punctuation (except underscore), whitespace.
+" Ignore internal punctuation (except underscore).
+function! FindALine()
+    let l:text = getline('.')
+    let l:text = substitute(l:text, "\\v^\\W+", "", "g")
+    let l:text = substitute(l:text, "\\v\\W+$", "", "g")
+    let l:text = substitute(l:text, "\\v\\/", "\\\\/", "g")
+
+    execute 'normal! $/\c' . l:text . ''
+endfun
+nnoremap g<CR> :call FindALine()<CR>
+
 " =========================================
 " Commands
 " =========================================

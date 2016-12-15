@@ -983,6 +983,23 @@ let g:lightline.active.left = [['mode', 'paste'], ['whiplash'], ['fugitive'], ['
 let g:lightline.active.right = [['lineinfo'], ['percent'], ['fileencoding'], ['bufnum']]
 
 " =========================================
+" vim-fugitive
+" =========================================
+
+" :Gcommit is incompatible with git pre-commit hooks.  "-C %:p:h" replicates
+" :Gcommit behavior of committing to the repo that the current buffer's file
+" resides within. Without this, the Vim current directory would be used, which
+" could be problematic when multiple project directories are being juggled.
+"
+" See: http://vi.stackexchange.com/questions/2544/how-to-manage-fugitive-commit-with-a-git-pre-commit-hook
+"
+" <args> is necessary to allow the passing of arbitrary git CLI arguments from
+" the Vim command line to git.
+"
+" Typical usage: :Commit -m "commit message"
+command! -nargs=* Commit !git -C %:p:h commit <args>
+
+" =========================================
 " vim-javascript
 " =========================================
 

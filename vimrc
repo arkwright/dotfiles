@@ -563,8 +563,8 @@ function! s:GithubPullRequest()
   let l:placeholderRegex = '\v\C\{0\}'
   let l:httpsDomainRegex = '\v\Chttps:\/\/\zs[^\/]+\ze\/.+'
   let l:httpsRepoRegex   = '\v\Chttps:\/\/.+\/\zs.+\/.+\ze\.git'
-  let l:sshDomainRegex   = '\v\C.+\@\zs[^:]+\ze:.+\/.+\.git'
-  let l:sshRepoRegex     = '\v\C.+\@.+:\zs.+\/.+\ze\.git'
+  let l:sshDomainRegex   = '\v\C^.+\@\zs[^:\/]+\ze'
+  let l:sshRepoRegex     = '\v\C^.+\@.[^:\/]+\/\zs.+\ze\.git'
   let l:urlTemplate      = system('echo $VIM_GITHUB_PR_URL')
   let l:remotes          = system('cd ' . expand('%:p:h') . '; git remote -v')
   let l:branch           = substitute(system('cd ' . expand('%:p:h') . '; git symbolic-ref --short -q HEAD'), '\v[\r\n]', '', 'g')
@@ -886,7 +886,7 @@ let g:ag_apply_lmappings = 0
 let g:ag_apply_qmappings = 0
 
 " Default to literal (non-regex) searches.
-let g:ag_prg="ag --vimgrep --literal"
+let g:ag_prg="ag --vimgrep"
 
 " =========================================
 " vim-easy-align

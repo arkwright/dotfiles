@@ -564,7 +564,7 @@ function! s:GithubPullRequest()
   let l:httpsDomainRegex = '\v\Chttps:\/\/\zs[^\/]+\ze\/.+'
   let l:httpsRepoRegex   = '\v\Chttps:\/\/.+\/\zs.+\/.+\ze\.git'
   let l:sshDomainRegex   = '\v\C^.+\@\zs[^:\/]+\ze'
-  let l:sshRepoRegex     = '\v\C^.+\@.[^:\/]+\/\zs.+\ze\.git'
+  let l:sshRepoRegex     = '\v\C^.+\@.[^:\/]+:\zs[^.]+\ze\.git'
   let l:urlTemplate      = system('echo $VIM_GITHUB_PR_URL')
   let l:remotes          = system('cd ' . expand('%:p:h') . '; git remote -v')
   let l:branch           = substitute(system('cd ' . expand('%:p:h') . '; git symbolic-ref --short -q HEAD'), '\v[\r\n]', '', 'g')

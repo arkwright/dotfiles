@@ -484,15 +484,6 @@ command! WRITE execute ':Goyo'
 " Code mode for reverting to coding after writing.
 command! CODE execute  ':Goyo'
 
-" Work mode sets up Vim for use at home.
-" Vim window is resized to fit laptop monitor.
-command! HOME execute ":set lines=62 columns=203"
-
-" Work mode sets up Vim for use at work.
-" Vim window is resized to fit external monitor.
-command! WORK execute ":set lines=88 columns=363"
-WORK " Default to WORK environment.
-
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.

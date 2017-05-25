@@ -419,12 +419,11 @@ let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 " attributes.
 let g:syntastic_html_tidy_args = '--show-errors 1000'
 let g:syntastic_javascript_checkers = ['eslint']      " npm install -g eslint; npm install -g babel-eslint; npm install -g eslint-plugin-react
+let g:syntastic_javascript_eslint_exec = 'node_modules/eslint/bin/eslint.js' " For project-specific versions of eslint.
 let g:syntastic_json_checkers = ['jsonlint']          " npm install -g jsonlint
 
-" Make Syntastic easier to use with a simple toggle command.
-" Closes location list automatically when Syntastic is toggled off.
-command! Lint execute "lcl | SyntasticToggleMode"
-nnoremap <leader>L :Lint<CR>
+" Make Syntastic easier to use.
+nnoremap <leader>L :SyntasticCheck<CR>
 
 " Allow up/down movements and <CR> in quickfix window to preview
 " the file under the cursor, instead of jumping to it immediately.

@@ -422,8 +422,10 @@ let g:syntastic_javascript_checkers = ['eslint']      " npm install -g eslint; n
 let g:syntastic_javascript_eslint_exec = 'node_modules/eslint/bin/eslint.js' " For project-specific versions of eslint.
 let g:syntastic_json_checkers = ['jsonlint']          " npm install -g jsonlint
 
-" Make Syntastic easier to use.
-nnoremap <leader>L :SyntasticCheck<CR>
+" Make Syntastic easier to use with a simple toggle command.
+" Closes location list automatically when Syntastic is toggled off.
+command! Lint execute "lcl | SyntasticToggleMode"
+nnoremap <leader>L :Lint<CR>
 
 " Allow up/down movements and <CR> in quickfix window to preview
 " the file under the cursor, instead of jumping to it immediately.

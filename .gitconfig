@@ -1,2 +1,11 @@
+[user]
+	name = arkwright
 [core]
-pager = cat
+	editor = mvim -f
+  pager = cat
+[merge]
+	tool = mvimdiff
+[mergetool "mvimdiff"]
+	cmd = /usr/local/bin/mvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+[push]
+	default = simple

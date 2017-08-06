@@ -419,6 +419,7 @@ let g:syntastic_html_tidy_quiet_messages = { 'regex': [
 " attributes.
 let g:syntastic_html_tidy_args = '--show-errors 1000'
 let g:syntastic_javascript_checkers = ['eslint']      " npm install -g eslint; npm install -g babel-eslint; npm install -g eslint-plugin-react
+let g:syntastic_javascript_eslint_exec = 'node_modules/eslint/bin/eslint.js' " For project-specific versions of eslint.
 let g:syntastic_json_checkers = ['jsonlint']          " npm install -g jsonlint
 
 " Make Syntastic easier to use with a simple toggle command.
@@ -435,6 +436,19 @@ nnoremap <leader>L :Lint<CR>
 "   autocmd BufWinEnter quickfix nnoremap <buffer> j j<CR>zz<C-w>p
 "   autocmd BufWinEnter quickfix nnoremap <buffer> k k<CR>zz<C-w>p
 " augroup END
+
+" Search for the contents of the current line within the current file.
+" Ignore leading/trailing punctuation (except underscore), whitespace.
+" Ignore internal punctuation (except underscore).
+function! FindALine()
+    let l:text = getline('.')
+    let l:text = substitute(l:text, "\\v^\\W+", "", "g")
+    let l:text = substitute(l:text, "\\v\\W+$", "", "g")
+    let l:text = substitute(l:text, "\\v\\/", "\\\\/", "g")
+
+    execute 'normal! $/\c' . l:text . ''
+endfun
+nnoremap g<CR> :call FindALine()<CR>
 
 " =========================================
 " Commands
@@ -469,16 +483,10 @@ command! W execute ":w"
 command! WRITE execute ':Goyo'
 
 " Code mode for reverting to coding after writing.
-command! CODE execute  ':Goyo'
+command! CODE execute ':Goyo'
 
-" Work mode sets up Vim for use at home.
-" Vim window is resized to fit laptop monitor.
-command! HOME execute ":set lines=62 columns=203"
-
-" Work mode sets up Vim for use at work.
-" Vim window is resized to fit external monitor.
-command! WORK execute ":set lines=88 columns=363"
-WORK " Default to WORK environment.
+" Easy access to reading list.
+command! READ vsplit ~/projects/read/read.txt
 
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
@@ -550,8 +558,8 @@ function! s:GithubPullRequest()
   let l:placeholderRegex = '\v\C\{0\}'
   let l:httpsDomainRegex = '\v\Chttps:\/\/\zs[^\/]+\ze\/.+'
   let l:httpsRepoRegex   = '\v\Chttps:\/\/.+\/\zs.+\/.+\ze\.git'
-  let l:sshDomainRegex   = '\v\C.+\@\zs[^:]+\ze:.+\/.+\.git'
-  let l:sshRepoRegex     = '\v\C.+\@.+:\zs.+\/.+\ze\.git'
+  let l:sshDomainRegex   = '\v\C^.+\@\zs[^:\/]+\ze'
+  let l:sshRepoRegex     = '\v\C^.+\@.[^:\/]+:\zs[^.]+\ze\.git'
   let l:urlTemplate      = system('echo $VIM_GITHUB_PR_URL')
   let l:remotes          = system('cd ' . expand('%:p:h') . '; git remote -v')
   let l:branch           = substitute(system('cd ' . expand('%:p:h') . '; git symbolic-ref --short -q HEAD'), '\v[\r\n]', '', 'g')
@@ -873,7 +881,7 @@ let g:ag_apply_lmappings = 0
 let g:ag_apply_qmappings = 0
 
 " Default to literal (non-regex) searches.
-let g:ag_prg="ag --vimgrep --literal"
+let g:ag_prg="ag --vimgrep"
 
 " =========================================
 " vim-easy-align
@@ -968,6 +976,23 @@ let g:lightline.component_visible_condition.fugitive = '(exists("*fugitive#head"
 let g:lightline.active = {}
 let g:lightline.active.left = [['mode', 'paste'], ['whiplash'], ['fugitive'], ['readonly', 'filename', 'modified']]
 let g:lightline.active.right = [['lineinfo'], ['percent'], ['fileencoding'], ['bufnum']]
+
+" =========================================
+" vim-fugitive
+" =========================================
+
+" :Gcommit is incompatible with git pre-commit hooks.  "-C %:p:h" replicates
+" :Gcommit behavior of committing to the repo that the current buffer's file
+" resides within. Without this, the Vim current directory would be used, which
+" could be problematic when multiple project directories are being juggled.
+"
+" See: http://vi.stackexchange.com/questions/2544/how-to-manage-fugitive-commit-with-a-git-pre-commit-hook
+"
+" <args> is necessary to allow the passing of arbitrary git CLI arguments from
+" the Vim command line to git.
+"
+" Typical usage: :Commit -m "commit message"
+command! -nargs=* Commit !git -C %:p:h commit <args>
 
 " =========================================
 " vim-javascript

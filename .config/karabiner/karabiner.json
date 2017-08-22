@@ -112,8 +112,8 @@
                 "f2": "display_brightness_increment",
                 "f3": "mission_control",
                 "f4": "dashboard",
-                "f5": "illumination_decrement",
-                "f6": "illumination_increment",
+                "f5": "f5",
+                "f6": "f6",
                 "f7": "rewind",
                 "f8": "play_or_pause",
                 "f9": "fastforward"

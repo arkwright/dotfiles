@@ -2,8 +2,12 @@
 " brew linkapps macvim
 
 " Vundle
+set nocompatible
+filetype off " Required for Vundle init. Can be overridden later.
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+
 Plugin 'DirDiff.vim'
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'arkwright/vim-irregular'
@@ -13,7 +17,6 @@ Plugin 'arkwright/vim-whiplash'
 Plugin 'arkwright/vim-whiteboard'
 Plugin 'elzr/vim-json'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
 Plugin 'haya14busa/incsearch.vim'
 " Plugin 'haya14busa/vim-operator-flashy'
@@ -51,9 +54,6 @@ Plugin 'wincent/command-t'
 Plugin 'Julian/vim-textobj-variable-segment'
 call vundle#end()
 filetype plugin indent on
-
-" This must be first, because it changes other options as a side effect.
-set nocompatible
 
 " This must come before any :highlight commands to enable them to work.
 " Switch syntax highlighting on, when the terminal has colors

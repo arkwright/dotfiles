@@ -1,5 +1,6 @@
 [user]
 	name = arkwright
+	email = 1445684+arkwright@users.noreply.github.com
 [core]
 	editor = mvim -f
 	excludesfile = /Users/robertarkwright/.gitignore_global

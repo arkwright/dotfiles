@@ -25,7 +25,11 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
-Plugin 'vim-scripts/YankRing.vim'
+" Using instead of 'vim-scripts/YankRing.vim'.
+" This version removes the macro (@) mapping.
+" YankRing breaks macros which include searches (/?),
+" causing them to hang indefinitely.
+Plugin 'skwp/yankring.vim' 
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
@@ -612,6 +616,9 @@ command! -range T <line1>,<line2>:C
 " Move current line to top of file.
 command! -range M :let s:startLine = line('.') | <line1>,<line2>:move 0 | :execute "normal! " . (s:startLine + 1 + (<line2> - <line1>)) . "G"
 
+" Search for ES Module imports featuring the current file name
+command! Imported :Ag "import.+from.+" . (expand('%:t:r'))
+
 """
 " Make it easy to open or diff a doppleganger file in a similar project.
 "
@@ -879,7 +886,12 @@ let g:ag_apply_lmappings = 0
 let g:ag_apply_qmappings = 0
 
 " Default to literal (non-regex) searches.
-let g:ag_prg="ag --vimgrep"
+let g:ag_prg="ag --vimgrep --multiline --nogroup"
+
+" =========================================
+" Deoplete
+" =========================================
+let g:deoplete#enable_at_startup = 1
 
 " =========================================
 " vim-easy-align
@@ -1148,5 +1160,15 @@ unlet s:whiplash_source
 
 nnoremap <leader>p :Unite -start-insert -winheight=35 -direction=botright -prompt=> whiplash<CR>
 
-" Responsive wrapper macro.
-let @r = "'<O  body.responsive & {'>o}>kV'<>>"
+" =========================================
+" JS Jump To Definition
+" =========================================
+
+function! JsJumpToDefinition()
+  normal! viw"zy?\vimport\s+.*z.*\s+from\s+$hgfgg/\vexport.*z
+endfunction
+
+nnoremap <leader>] :call JsJumpToDefinition()<CR>
+
+
+

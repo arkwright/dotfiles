@@ -1,5 +1,5 @@
 " brew install macvim --with-lua --override-system-vim
-" brew linkapps macvim
+" ln -Fs `find /usr/local -name "MacVim.app"` /Applications/MacVim.app
 
 " Vundle
 set nocompatible
@@ -460,7 +460,7 @@ nnoremap g<CR> :call FindALine()<CR>
 
 " Make it easy to edit these files.
 command! HOSTS execute ":e /etc/hosts"
-command! VIMRC execute ":e ~/projects/dotfiles/vimrc"
+command! VIMRC execute ":e ~/.vimrc"
 command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command! CALENDAR execute ":e ~/projects/textfiles/calendar.txt"

@@ -11,3 +11,7 @@
 	cmd = /usr/local/bin/mvim -d \"$BASE\" \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
 [push]
 	default = simple
+[branch]
+	autosetuprebase = always
+[pull]
+	rebase = true

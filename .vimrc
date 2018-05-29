@@ -470,7 +470,9 @@ command! NTF :NERDTreeFind
 
 " Dual cheatsheets for better organization.
 function! s:Cheatsheet()
-  vsplit ~/projects/cheatsheet/cheatsheet.txt
+  if filereadable(expand('~/projects/cheatsheet/cheatsheet.txt')) > 0
+    vsplit ~/projects/cheatsheet/cheatsheet.txt
+  endif
 
   if filereadable(expand('~/projects/work/textfiles/cheatsheet.txt')) > 0
     vsplit ~/projects/work/textfiles/cheatsheet.txt

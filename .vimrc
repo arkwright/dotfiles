@@ -461,9 +461,7 @@ nnoremap g<CR> :call FindALine()<CR>
 " Make it easy to edit these files.
 command! HOSTS execute ":e /etc/hosts"
 command! VIMRC execute ":e ~/.vimrc"
-command! SOMEDAYMAYBE execute ":e ~/projects/textfiles/somedaymaybe.txt"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
-command! CALENDAR execute ":e ~/projects/textfiles/calendar.txt"
 command! TODO execute ":e ~/projects/work/todo.txt"
 
 " Make it easier to call these commands.

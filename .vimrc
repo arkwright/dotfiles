@@ -481,15 +481,6 @@ command! CHEAT :call s:Cheatsheet()
 " :W should invoke :w, because I always type :W by accident!
 command! W execute ":w"
 
-" Write mode for easier writing.
-command! WRITE execute ':Goyo'
-
-" Code mode for reverting to coding after writing.
-command! CODE execute ':Goyo'
-
-" Easy access to reading list.
-command! READ vsplit ~/projects/read/read.txt
-
 " Removes unnecessary whitespace from otherwise blank lines in the
 " current file. This is necessary to allow { and } commands to jump
 " intuitively to the beginning/end of paragraphs.

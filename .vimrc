@@ -524,28 +524,6 @@ command! XmlPrettyPrint :%!xmllint --format %
 " the other user's message has already been copied into the default register.
 command! Reply :tabnew | :Goyo | execute "normal o\<CR>===\<CR>\<CR>\<Esc>pggi"
 
-" Search through to do items to determine next actions.
-" Hoist copies of next actions to top of file.
-function! s:NextActions()
-  let l:nextActionTag = '#na'
-
-  " Copy next actions to top of file.
-  silent! execute 'global/' . l:nextActionTag . '/t0'
-
-  " Reverse next actions to preserve original order.
-  normal! ggV}k:Reverse
-
-  " Delete #na tags
-  silent! execute 'normal! ggV}k:s/' . l:nextActionTag . '//g'
-
-  " Normalize indentation to two spaces.
-  silent! execute 'normal! ggV}k:s/\v^\s+/  /g'
-
-  " Insert heading at top of file.
-  normal! ggOSTODAY
-endfunction
-command! NextActions :call s:NextActions()
-
 " Easy creation of Github Pull Request for current branch against master.
 function! s:GithubPullRequest()
   let l:placeholderRegex = '\v\C\{0\}'

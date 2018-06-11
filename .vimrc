@@ -25,6 +25,7 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
+Plugin 'prettier/vim-prettier'
 " Using instead of 'vim-scripts/YankRing.vim'.
 " This version removes the macro (@) mapping.
 " YankRing breaks macros which include searches (/?),
@@ -929,6 +930,19 @@ let g:javascript_ignore_javaScriptdoc = 1
 
 " Disable key mappings.
 let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal conceallevel=0)
+
+" =========================================
+" vim-prettier
+" =========================================
+
+" let g:prettier#autoformat = 0
+
+" Prettier inserts error messages into the top of the file when saving,
+" because the local prettier is < 1.9.
+" augroup prettier
+"   autocmd!
+"   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue Prettier
+" augroup END
 
 " =========================================
 " Neocomplete

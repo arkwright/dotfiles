@@ -709,6 +709,9 @@ function! ToggleCheckmark()
 endfun
 nnoremap <leader>cc :call ToggleCheckmark()<CR>
 
+" Easy way to run Prettier on the current file.
+command! P %!../node_modules/.bin/prettier --stdin
+
 " =========================================
 " Mappings
 " =========================================

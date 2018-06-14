@@ -713,6 +713,39 @@ nnoremap <leader>cc :call ToggleCheckmark()<CR>
 " Easy way to run Prettier on the current file.
 command! P %!../node_modules/.bin/prettier --stdin
 
+" Open the complementary file.
+function! s:ComplementaryFile(fileType)
+  let l:path = expand('%:h')
+  let l:filename = expand('%:t:r')
+  let l:extension = expand('%:e')
+
+  let l:containerFilePath = l:path . '/' . l:filename . 'Container.js'
+  let l:containerFileReadable = filereadable(l:containerFilePath)
+
+  let l:cssFilePath = l:path . '/' . l:filename . '.scss'
+  let l:cssFileReadable = filereadable(l:cssFilePath)
+
+  if a:fileType ==# 'container' || a:fileType ==# 'all' && l:containerFileReadable
+    vsplit
+    execute "normal! \<C-w>h"
+    execute "edit " . l:containerFilePath
+    execute "normal! \<C-w>l"
+  endif
+
+  if a:fileType ==# 'css' || a:fileType ==# 'all' && l:cssFileReadable
+    vsplit
+    execute "normal! \<C-w>l"
+    execute "edit " . l:cssFilePath
+    execute "normal! \<C-w>h"
+  endif
+endfunction
+command! All :call s:ComplementaryFile('all')
+nnoremap <leader>ga :All<CR>
+command! Container :call s:ComplementaryFile('container')
+nnoremap <leader>gc :Container<CR>
+command! CSS :call s:ComplementaryFile('css')
+nnoremap <leader>gs :CSS<CR>
+
 " =========================================
 " Mappings
 " =========================================

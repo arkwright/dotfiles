@@ -459,6 +459,9 @@ function! FindALine()
 endfun
 nnoremap g<CR> :call FindALine()<CR>
 
+" Basic implementation of "go to definition" for ES modules.
+nnoremap g? *ggn/from$hhgfgg
+
 " =========================================
 " Commands
 " =========================================

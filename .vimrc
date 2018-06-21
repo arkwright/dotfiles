@@ -1127,15 +1127,3 @@ unlet s:whiplash_source
 
 nnoremap <leader>p :Unite -start-insert -winheight=35 -direction=botright -prompt=> whiplash<CR>
 
-" =========================================
-" JS Jump To Definition
-" =========================================
-
-function! JsJumpToDefinition()
-  normal! viw"zy?\vimport\s+.*z.*\s+from\s+$hgfgg/\vexport.*z
-endfunction
-
-nnoremap <leader>] :call JsJumpToDefinition()<CR>
-
-
-

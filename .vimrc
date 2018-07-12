@@ -82,6 +82,7 @@ set completeopt-=preview    " Disable preview window when auto-completing.
 set cursorline              " Turn on highlighting of current line.
 set diffopt+=filler         " Show filler lines, to keep the text synchronized with a window that has inserted lines at the same position.
 set diffopt+=iwhite         " Ignore whitespace changes when diffing. This prevents excessive diff noise.
+set diffopt+=vertical       " Prefer vertical diff splits in Fugitive and elsewhere.
 set encoding=utf-8          " Necessary to show Unicode glyphs
 set expandtab               " Always expand tabs to spaces.
 set guicursor+=n-v:blinkon0 " Disable cursor blinking (blinkon0) in normal (n) and visual (v) modes, but not in insert (i; omitted) mode.

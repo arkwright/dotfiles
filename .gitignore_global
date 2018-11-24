@@ -1,2 +1,4 @@
 *.swp
 .ignore
+.projections.json
+.formation.json

@@ -9,6 +9,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 Plugin 'DirDiff.vim'
+Plugin 'vim-formation', { 'pinned': 1 }
 Plugin 'airblade/vim-gitgutter'
 " Plugin 'arkwright/vim-irregular'
 Plugin 'arkwright/vim-manhunt'
@@ -717,39 +718,6 @@ nnoremap <leader>cc :call ToggleCheckmark()<CR>
 " Easy way to run Prettier on the current file.
 command! P %!../node_modules/.bin/prettier --stdin
 
-" Open the complementary file.
-function! s:ComplementaryFile(fileType)
-  let l:path = expand('%:h')
-  let l:filename = expand('%:t:r')
-  let l:extension = expand('%:e')
-
-  let l:containerFilePath = l:path . '/' . l:filename . 'Container.js'
-  let l:containerFileReadable = filereadable(l:containerFilePath)
-
-  let l:cssFilePath = l:path . '/' . l:filename . '.scss'
-  let l:cssFileReadable = filereadable(l:cssFilePath)
-
-  if a:fileType ==# 'container' || a:fileType ==# 'all' && l:containerFileReadable
-    vsplit
-    execute "normal! \<C-w>h"
-    execute "edit " . l:containerFilePath
-    execute "normal! \<C-w>l"
-  endif
-
-  if a:fileType ==# 'css' || a:fileType ==# 'all' && l:cssFileReadable
-    vsplit
-    execute "normal! \<C-w>l"
-    execute "edit " . l:cssFilePath
-    execute "normal! \<C-w>h"
-  endif
-endfunction
-command! All :call s:ComplementaryFile('all')
-nnoremap <leader>ga :All<CR>
-command! Container :call s:ComplementaryFile('container')
-nnoremap <leader>gc :Container<CR>
-command! CSS :call s:ComplementaryFile('css')
-nnoremap <leader>gs :CSS<CR>
-
 " =========================================
 " Mappings
 " =========================================
@@ -859,6 +827,19 @@ nmap ga <Plug>(EasyAlign)
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)
+
+" =========================================
+" vim-formation
+" =========================================
+
+let g:formationSplitType = 'vertical'
+nnoremap <leader>ga :Formation all<CR>
+nnoremap <leader>gr :Formation component<CR>
+nnoremap <leader>gc :Formation container<CR>
+nnoremap <leader>gi :Formation index<CR>
+nnoremap <leader>gm :Formation mock<CR>
+nnoremap <leader>gs :Formation css<CR>
+nnoremap <leader>gt :Formation test<CR>
 
 " =========================================
 " Git Gutter
@@ -1127,4 +1108,3 @@ call unite#define_source(s:whiplash_source)
 unlet s:whiplash_source
 
 nnoremap <leader>p :Unite -start-insert -winheight=35 -direction=botright -prompt=> whiplash<CR>
-

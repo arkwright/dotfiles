@@ -26,11 +26,9 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
-" Using release/1.x branch until this issue is merged, and the 1.x release
-" is...  released: https://github.com/prettier/vim-prettier/issues/171
 " Must run `npm install` within vim-prettier directory to complete
 " installation.
-Plugin 'prettier/vim-prettier', { 'pinned': 1 }
+Plugin 'prettier/vim-prettier'
 " Using instead of 'vim-scripts/YankRing.vim'.
 " This version removes the macro (@) mapping.
 " YankRing breaks macros which include searches (/?),

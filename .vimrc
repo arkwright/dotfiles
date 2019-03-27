@@ -26,10 +26,11 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/vim-easy-align'
 Plugin 'kana/vim-textobj-function'
 Plugin 'kana/vim-textobj-user'
-" Using a forked custom version of vim-prettier because the latest
-" vim-prettier is incompatible with versions of Prettier < 1.9.  It will
-" insert warnings into the top of any file that is prettified. :-(
-" Plugin 'arkwright/vim-prettier'
+" Using release/1.x branch until this issue is merged, and the 1.x release
+" is...  released: https://github.com/prettier/vim-prettier/issues/171
+" Must run `npm install` within vim-prettier directory to complete
+" installation.
+Plugin 'prettier/vim-prettier', { 'pinned': 1 }
 " Using instead of 'vim-scripts/YankRing.vim'.
 " This version removes the macro (@) mapping.
 " YankRing breaks macros which include searches (/?),
@@ -961,12 +962,18 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 " vim-prettier
 " =========================================
 
-" let g:prettier#autoformat = 0
-"
-" augroup prettier
-"   autocmd!
-"   autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue 
-" augroup END
+" Disable auto formatting of files that have '@format' tag in a comment at the
+" top of the file.
+let g:prettier#autoformat = 0
+
+" Disable auto-focus within the quickfix window when a parsing error occurs.
+let g:prettier#quickfix_auto_focus = 0
+
+augroup prettier
+  autocmd!
+  " Async lint when saving any prettier-compatible file
+  autocmd BufWritePre *.js,*.scss,*.json PrettierAsync
+augroup END
 
 " =========================================
 " Neocomplete

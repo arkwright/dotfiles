@@ -285,6 +285,9 @@ xnoremap iP `[o`]
 nmap <leader>s vii:sort<CR>
 xmap <leader>s :sort<CR>
 
+" Easy redrawing of the screen.
+nnoremap <CR> :redraw!<CR><CR>
+
 " Easy move up to previous line at next lower indentation.
 " Useful for 'stepping up' through nested statements.
 " Adapted from: https://www.reddit.com/r/vim/comments/2tqvp0/is_there_a_motion_for_up_one_indent_level/

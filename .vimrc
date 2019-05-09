@@ -1007,7 +1007,7 @@ let g:neosnippet#disable_runtime_snippets = {
 \ }
 
 " Location of snippet files.
-let g:neosnippet#snippets_directory = '~/projects/dotfiles/snippets/'
+let g:neosnippet#snippets_directory = '~/projects/work/snippets/'
 
 " Mappings for triggering expansion of snippets.
 " The imap one will insert a tab if there is no valid snippet to complete.

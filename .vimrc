@@ -967,6 +967,9 @@ let g:vim_json_syntax_conceal = 0    " Disable syntax concealing (i.e. :setlocal
 " top of the file.
 let g:prettier#autoformat = 0
 
+" Disable auto-opening of the quickfix window when a parsing error occurs.
+let g:prettier#quickfix_enabled = 0
+
 " Disable auto-focus within the quickfix window when a parsing error occurs.
 let g:prettier#quickfix_auto_focus = 0
 

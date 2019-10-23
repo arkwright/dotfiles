@@ -1,4 +1,4 @@
-" brew install macvim --with-lua --override-system-vim
+" brew install macvim
 " ln -Fs `find /usr/local -name "MacVim.app"` /Applications/MacVim.app
 
 " Vundle

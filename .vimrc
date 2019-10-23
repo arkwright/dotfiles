@@ -55,7 +55,7 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-eunuch'
 " Pinned for compatibility with Manhunt. This is the latest version of
 " fugitive that works with Manhunt.
-Plugin 'tpope/vim-fugitive', { 'pinned': 1 } " 2564c37d0a2ade327d6381fef42d84d9fad1d057
+Plugin 'tpope/vim-fugitive', { 'pinned': 1 } " cd ~/.vim/bundle/; git clone https://github.com/tpope/vim-fugitive.git; git checkout 2564c37d0a2ade327d6381fef42d84d9fad1d057
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-projectionist'
 Plugin 'tpope/vim-repeat'
@@ -450,7 +450,7 @@ nnoremap g? *:tabedit %ggn/from$hhgfgg:nohl
 
 " Make it easy to edit these files.
 command! HOSTS execute ":e /etc/hosts"
-command! VIMRC execute ":e ~/.vimrc"
+command! VIMRC execute ":e ~/projects/dotfiles/.vimrc"
 command! SYSTEM execute ":e ~/projects/textfiles/system.txt"
 command! TODO execute ":e ~/projects/work/todo.txt"
 

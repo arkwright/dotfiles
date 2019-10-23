@@ -847,6 +847,7 @@ xmap ga <Plug>(EasyAlign)
 
 let g:formationSplitType = 'vertical'
 nnoremap <leader>ga :Formation all<CR>
+nnoremap <leader>gd :Formation docs<CR>
 nnoremap <leader>gr :Formation component<CR>
 nnoremap <leader>gc :Formation container<CR>
 nnoremap <leader>gi :Formation index<CR>

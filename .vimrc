@@ -37,6 +37,7 @@ Plugin 'skwp/yankring.vim'
 Plugin 'michaeljsmith/vim-indent-object'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'neoclide/coc.nvim', { 'pinned': 1 } " For other plugin managers, make sure use `release` branch.
 Plugin 'rking/ag.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'

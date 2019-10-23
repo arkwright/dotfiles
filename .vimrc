@@ -53,7 +53,9 @@ Plugin 'thinca/vim-textobj-function-javascript'
 Plugin 'tmhedberg/matchit'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-fugitive'
+" Pinned for compatibility with Manhunt. This is the latest version of
+" fugitive that works with Manhunt.
+Plugin 'tpope/vim-fugitive', { 'pinned': 1 } " 2564c37d0a2ade327d6381fef42d84d9fad1d057
 Plugin 'tpope/vim-markdown'
 Plugin 'tpope/vim-projectionist'
 Plugin 'tpope/vim-repeat'

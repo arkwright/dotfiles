@@ -63,7 +63,10 @@ Plugin 'tpope/vim-rhubarb'
 Plugin 'tpope/vim-surround'
 Plugin 'wellle/targets.vim'
 Plugin 'whatyouhide/vim-textobj-xmlattr'
-Plugin 'wincent/command-t'
+" Version of Ruby used to compile Command-T needs to match Vim's linked
+" version of ruby exactly, otherwise Command-T will fail to compile, or
+" produce an error: command-t.vim could not load the C extension.
+Plugin 'wincent/command-t' " brew install ruby; cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t; $(brew list ruby | grep bin/ruby) extconf.rb; make
 Plugin 'Julian/vim-textobj-variable-segment'
 call vundle#end()
 filetype plugin indent on

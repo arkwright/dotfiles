@@ -238,35 +238,6 @@ nnoremap * *:set hlsearch<CR>N
 xnoremap # #:<C-u>set hlsearch<CR>N
 xnoremap * *:<C-u>set hlsearch<CR>
 
-" Invoke Command-T with <Leader>t.
-nnoremap <Leader>t :CommandT<Esc>
-
-" Increase number of files the Command-T will index.
-" If you're wondering why Command-T won't find certain files, make this number bigger.
-let g:CommandTMaxFiles=50000
-
-" Show the best match at the bottom of the Command-T window.
-" It's easier to see it that way.
-let g:CommandTMatchWindowReverse = 1
-
-" Remap the standard Command-T file open command.
-let g:CommandTAcceptSelectionMap='<C-CR>'
-
-" Remap Command-T shortcut for opening files in a horizontal split.
-let g:CommandTAcceptSelectionSplitMap='<C-s>'
-
-" Remap Command-T shortcut for opening files in a vertical split.
-let g:CommandTAcceptSelectionVSplitMap='<C-v>'
-
-" When enter is pressed, Command-T should open files in a new tab.let
-let g:CommandTAcceptSelectionTabMap='<CR>'
-
-" Use Vim's current working directory as Command-T root.
-let g:CommandTTraverseSCM = 'pwd'
-
-" Use :CC to flush Command-T's cache (so that it can detect new files).
-command! CC execute ":CommandTFlush"
-
 " Easier replay of previous macro in q register.
 " From: http://hashrocket.com/blog/posts/8-great-vim-mappings
 nnoremap Q @q
@@ -826,6 +797,39 @@ let g:ag_prg="ag --vimgrep --multiline --nogroup --hidden"
 " Deoplete
 " =========================================
 let g:deoplete#enable_at_startup = 1
+
+" =========================================
+" Command-T
+" =========================================
+
+" Invoke Command-T with <Leader>t.
+nnoremap <Leader>t :CommandT<Esc>
+
+" Increase number of files the Command-T will index.
+" If you're wondering why Command-T won't find certain files, make this number bigger.
+let g:CommandTMaxFiles=100000
+
+" Show the best match at the bottom of the Command-T window.
+" It's easier to see it that way.
+let g:CommandTMatchWindowReverse = 1
+
+" Remap the standard Command-T file open command.
+let g:CommandTAcceptSelectionMap='<C-CR>'
+
+" Remap Command-T shortcut for opening files in a horizontal split.
+let g:CommandTAcceptSelectionSplitMap='<C-s>'
+
+" Remap Command-T shortcut for opening files in a vertical split.
+let g:CommandTAcceptSelectionVSplitMap='<C-v>'
+
+" When enter is pressed, Command-T should open files in a new tab.let
+let g:CommandTAcceptSelectionTabMap='<CR>'
+
+" Use Vim's current working directory as Command-T root.
+let g:CommandTTraverseSCM = 'pwd'
+
+" Use :CC to flush Command-T's cache (so that it can detect new files).
+command! CC execute ":CommandTFlush"
 
 " =========================================
 " vim-easy-align

@@ -68,6 +68,13 @@ Plugin 'whatyouhide/vim-textobj-xmlattr'
 " produce an error: command-t.vim could not load the C extension.
 Plugin 'wincent/command-t' " brew install ruby; cd ~/.vim/bundle/command-t/ruby/command-t/ext/command-t; $(brew list ruby | grep bin/ruby) extconf.rb; make
 Plugin 'Julian/vim-textobj-variable-segment'
+
+" These two TypeScript highlighting plugins must be installed together.
+Plugin 'leafgarland/typescript-vim'
+Plugin 'peitalin/vim-jsx-typescript'
+
+
+
 call vundle#end()
 filetype plugin indent on
 

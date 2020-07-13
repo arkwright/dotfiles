@@ -814,7 +814,7 @@ nnoremap <Leader>t :CommandT<Esc>
 
 " Increase number of files the Command-T will index.
 " If you're wondering why Command-T won't find certain files, make this number bigger.
-let g:CommandTMaxFiles=100000
+let g:CommandTMaxFiles=200000
 
 " Show the best match at the bottom of the Command-T window.
 " It's easier to see it that way.
